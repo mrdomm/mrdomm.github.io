@@ -5,14 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Michael Domm</title>
   <style>
+    :root {
+      --bg: #f7f3eb;
+      --bg-deep: #efe8db;
+      --text: #161412;
+      --muted: #4a433a;
+      --line: #c4bbb0;
+      --khaki: #e0d2b8;
+      --khaki-edge: #1c1916;
+      --leather: #5c4033;
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, -apple-system, sans-serif; color: #111; background: #fffbeb; line-height: 1.45; font-size: 15px; }
-    header { display: flex; justify-content: space-between; align-items: center; padding: .85rem 1.25rem; border-bottom: 1px solid #111; position: sticky; top: 0; background: #fffbeb; z-index: 1; font-size: .92rem; }
+    body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: linear-gradient(165deg, var(--bg) 0%, var(--bg-deep) 100%); line-height: 1.45; font-size: 15px; min-height: 100vh; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: .85rem 1.25rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(247, 243, 235, .92); backdrop-filter: blur(8px); z-index: 1; font-size: .92rem; }
     header nav { display: flex; gap: 1.1rem; flex-wrap: wrap; }
     a { color: inherit; text-underline-offset: 3px; }
-    a:hover { opacity: .72; }
+    a:hover { color: var(--leather); }
     main { max-width: 32rem; margin: 0 auto; padding: 2.5rem 1.25rem 2rem; text-align: center; }
-    .avatar { width: 7.5rem; height: 7.5rem; border-radius: 50%; border: 2px solid #111; display: block; object-fit: cover; margin: 0 auto 1.1rem; }
+    .avatar { width: 7.5rem; height: 7.5rem; border-radius: 50%; border: 2px solid var(--leather); display: block; object-fit: cover; margin: 0 auto 1.1rem; box-shadow: 0 2px 12px rgba(92, 64, 51, .12); }
     h1 { font-size: clamp(1.5rem, 4.5vw, 1.85rem); font-weight: 650; letter-spacing: -.02em; margin-bottom: .4rem; }
     .tagline { font-size: 1rem; font-weight: 500; margin-bottom: .65rem; opacity: .95; }
     .lede { font-size: .95rem; max-width: 26rem; margin: 0 auto .9rem; opacity: .88; }
@@ -20,11 +30,12 @@
     .meta { font-size: .9rem; opacity: .88; }
     .meta a { text-decoration: underline; }
     .history { padding: 0 1.25rem 2rem; max-width: 36rem; margin: 0 auto; }
-    .history h2, #work h2 { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .85rem; color: #333; }
+    .history h2, #work h2 { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .85rem; color: var(--muted); }
     .logos { display: flex; flex-wrap: wrap; gap: .5rem; }
-    .logos a { min-width: 3rem; padding: .45rem .5rem; border-radius: .45rem; border: 1px solid #111; background: #fff; font-size: .68rem; font-weight: 700; text-decoration: none; text-align: center; letter-spacing: .03em; }
-    #work { scroll-margin-top: 3.5rem; padding: 1.5rem 1.25rem 3.5rem; max-width: 36rem; margin: 0 auto; border-top: 1px solid rgba(17,17,17,.25); }
-    article { padding: 1.1rem 0; border-bottom: 1px solid rgba(17,17,17,.12); scroll-margin-top: 3.5rem; }
+    .logos a { min-width: 3rem; padding: .45rem .5rem; border-radius: .45rem; border: 1px solid var(--khaki-edge); background: var(--khaki); font-size: .68rem; font-weight: 700; text-decoration: none; text-align: center; letter-spacing: .03em; color: var(--text); }
+    .logos a:hover { background: #d4c4a4; color: var(--leather); border-color: var(--leather); }
+    #work { scroll-margin-top: 3.5rem; padding: 1.5rem 1.25rem 3.5rem; max-width: 36rem; margin: 0 auto; border-top: 1px solid var(--line); }
+    article { padding: 1.1rem 0; border-bottom: 1px solid rgba(74, 67, 58, .15); scroll-margin-top: 3.5rem; }
     article:last-child { border-bottom: none; }
     article header { position: static; border: none; padding: 0; background: transparent; display: block; text-align: left; margin-bottom: .45rem; }
     article h3 { font-size: 1rem; font-weight: 650; letter-spacing: -.01em; }
