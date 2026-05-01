@@ -6,33 +6,38 @@
   <title>Michael Domm</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, -apple-system, sans-serif; color: #111; background: #fffbeb; line-height: 1.55; }
-    header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid #111; position: sticky; top: 0; background: #fffbeb; z-index: 1; }
-    header nav { display: flex; gap: 1.25rem; }
-    a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
-    a:hover { opacity: .75; }
-    main { min-height: calc(100vh - 8rem); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.5rem 4rem; text-align: center; }
-    .avatar { width: 9rem; height: 9rem; border-radius: 50%; border: 2px solid #111; background: #fff; margin-bottom: 1.25rem; display: block; object-fit: cover; }
-    h1 { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 650; letter-spacing: -0.02em; margin-bottom: .35rem; }
-    .role { font-size: 1.05rem; margin-bottom: .75rem; opacity: .92; }
-    .bio { max-width: 28rem; margin-bottom: .5rem; }
-    .meta { font-size: .95rem; margin-bottom: .35rem; }
-    .history { padding: 0 1.5rem 3rem; max-width: 44rem; margin: 0 auto; }
-    .history h2 { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; text-align: left; }
-    .logos { display: flex; flex-wrap: wrap; gap: .65rem; justify-content: flex-start; }
-    .logos a { width: 3.1rem; height: 3.1rem; border-radius: .55rem; border: 1px solid #111; background: #fff; display: grid; place-items: center; font-size: .65rem; font-weight: 700; text-decoration: none; flex-shrink: 0; }
-    #work { scroll-margin-top: 4rem; padding: 2rem 1.5rem 4rem; max-width: 36rem; margin: 0 auto; border-top: 1px solid #111; }
-    #work h2 { font-size: 1.1rem; margin-bottom: 1rem; }
-    #work article + article { margin-top: 1.25rem; }
-    #work h3 { font-size: 1rem; margin-bottom: .25rem; }
-    #work p { font-size: .95rem; opacity: .9; }
+    body { font-family: system-ui, -apple-system, sans-serif; color: #111; background: #fffbeb; line-height: 1.45; font-size: 15px; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: .85rem 1.25rem; border-bottom: 1px solid #111; position: sticky; top: 0; background: #fffbeb; z-index: 1; font-size: .92rem; }
+    header nav { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+    a { color: inherit; text-underline-offset: 3px; }
+    a:hover { opacity: .72; }
+    main { max-width: 32rem; margin: 0 auto; padding: 2.5rem 1.25rem 2rem; text-align: center; }
+    .avatar { width: 7.5rem; height: 7.5rem; border-radius: 50%; border: 2px solid #111; display: block; object-fit: cover; margin: 0 auto 1.1rem; }
+    h1 { font-size: clamp(1.5rem, 4.5vw, 1.85rem); font-weight: 650; letter-spacing: -.02em; margin-bottom: .4rem; }
+    .tagline { font-size: 1rem; font-weight: 500; margin-bottom: .65rem; opacity: .95; }
+    .lede { font-size: .95rem; max-width: 26rem; margin: 0 auto .9rem; opacity: .88; }
+    .skills { font-size: .82rem; letter-spacing: .02em; text-transform: uppercase; margin-bottom: 1rem; opacity: .75; }
+    .meta { font-size: .9rem; opacity: .88; }
+    .meta a { text-decoration: underline; }
+    .history { padding: 0 1.25rem 2rem; max-width: 36rem; margin: 0 auto; }
+    .history h2, #work h2 { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .85rem; color: #333; }
+    .logos { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .logos a { min-width: 3rem; padding: .45rem .5rem; border-radius: .45rem; border: 1px solid #111; background: #fff; font-size: .68rem; font-weight: 700; text-decoration: none; text-align: center; letter-spacing: .03em; }
+    #work { scroll-margin-top: 3.5rem; padding: 1.5rem 1.25rem 3.5rem; max-width: 36rem; margin: 0 auto; border-top: 1px solid rgba(17,17,17,.25); }
+    article { padding: 1.1rem 0; border-bottom: 1px solid rgba(17,17,17,.12); scroll-margin-top: 3.5rem; }
+    article:last-child { border-bottom: none; }
+    article header { position: static; border: none; padding: 0; background: transparent; display: block; text-align: left; margin-bottom: .45rem; }
+    article h3 { font-size: 1rem; font-weight: 650; letter-spacing: -.01em; }
+    article .when { font-size: .8rem; font-weight: 500; opacity: .65; margin-top: .15rem; }
+    article ul { margin: .35rem 0 0 1rem; font-size: .88rem; opacity: .9; }
+    article li { margin: .25rem 0; }
   </style>
 </head>
 <body id="top">
   <header>
     <nav>
       <a href="Michael_Domm_Resume_2026.pdf" target="_blank" rel="noopener">resume</a>
-      <a href="mailto:you@example.com">contact</a>
+      <a href="mailto:mdomm@uwaterloo.ca">contact</a>
     </nav>
     <nav>
       <a href="#top">Home</a>
@@ -40,23 +45,74 @@
     </nav>
   </header>
   <main>
-    <img class="avatar" src="assets/profile.jpg" width="144" height="144" alt="Michael Domm">
+    <img class="avatar" src="assets/profile.jpg" width="120" height="120" alt="Michael Domm">
     <h1>Michael Domm</h1>
-    <p class="role">Your title</p>
-    <p class="bio">Short line about what you do and what you care about.</p>
-    <p class="meta">US &amp; Canada</p>
-    <p class="meta"><a href="mailto:you@example.com">you@example.com</a></p>
+    <p class="tagline">M.Sc. Physics · IQC, University of Waterloo</p>
+    <p class="lede">Quantum photonics &amp; nanofabrication—dots, detectors, metasurfaces, and optical systems.</p>
+    <p class="skills">Nanofab · photonics · Python · MATLAB · Lumerical</p>
+    <p class="meta">Waterloo, ON · U.S. citizen · <a href="mailto:mdomm@uwaterloo.ca">mdomm@uwaterloo.ca</a></p>
   </main>
   <section class="history" aria-label="Work history">
-    <h2>Work history</h2>
+    <h2>Where I’ve worked</h2>
     <div class="logos">
-      <a href="#work">Co</a><a href="#work">Co</a><a href="#work">Co</a><a href="#work">Co</a>
-      <a href="#work">Co</a><a href="#work">Co</a><a href="#work">Co</a>
+      <a href="#iqc">IQC</a>
+      <a href="#harvard">Harvard</a>
+      <a href="#strickland">Strickland</a>
+      <a href="#ppo">PPO</a>
+      <a href="#teledyne">Teledyne</a>
     </div>
   </section>
-  <section id="work">
+  <section id="work" aria-label="Experience">
     <h2>Experience</h2>
-    <article><h3>Company — Role</h3><p>What you did.</p></article>
+    <article id="iqc">
+      <header>
+        <h3>IQC · Quantum Photonic Devices Lab</h3>
+        <p class="when">M.Sc. researcher · 2025 — 2027</p>
+      </header>
+      <ul>
+        <li>Quantum-dot entangled photon sources &amp; single-photon detectors.</li>
+        <li>Cleanroom fabrication &amp; device characterization.</li>
+      </ul>
+    </article>
+    <article id="harvard">
+      <header>
+        <h3>Harvard · Capasso Group</h3>
+        <p class="when">Research intern · May 2023 — Jan 2024</p>
+      </header>
+      <ul>
+        <li>Metasurfaces &amp; QCL wavefront engineering; multi-hologram limits.</li>
+        <li>FDTD at scale (Lumerical) + automated optical characterization.</li>
+      </ul>
+    </article>
+    <article id="strickland">
+      <header>
+        <h3>UWaterloo · Strickland Lab</h3>
+        <p class="when">Research intern · Jan — May 2024</p>
+      </header>
+      <ul>
+        <li>Nonlinear optical materials—spectra analysis &amp; thin-film transfer-matrix models.</li>
+      </ul>
+    </article>
+    <article id="ppo">
+      <header>
+        <h3>P&amp;P Optica</h3>
+        <p class="when">Optics technician · 2021 — 2022</p>
+      </header>
+      <ul>
+        <li>Spectrometer assembly &amp; alignment—major cycle-time reduction.</li>
+        <li>Lighting &amp; optics for imaging + onsite QA for Texas deployments.</li>
+      </ul>
+    </article>
+    <article id="teledyne">
+      <header>
+        <h3>Teledyne DALSA</h3>
+        <p class="when">Image sensor technician · 2021</p>
+      </header>
+      <ul>
+        <li>Python test automation; MATLAB lens-distortion correction.</li>
+        <li>Custom test bench for pre-ship camera qualification.</li>
+      </ul>
+    </article>
   </section>
 </body>
 </html>
