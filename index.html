@@ -14,24 +14,43 @@
       --khaki: #e0d2b8;
       --khaki-edge: #1c1916;
       --leather: #5c4033;
+      --content: 42rem;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: linear-gradient(165deg, var(--bg) 0%, var(--bg-deep) 100%); line-height: 1.45; font-size: 15px; min-height: 100vh; }
-    header { display: flex; justify-content: space-between; align-items: center; padding: .85rem 1.25rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(247, 243, 235, .92); backdrop-filter: blur(8px); z-index: 1; font-size: .92rem; }
-    header nav { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+    body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: linear-gradient(165deg, var(--bg) 0%, var(--bg-deep) 100%); line-height: 1.5; font-size: 15px; min-height: 100vh; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(247, 243, 235, .92); backdrop-filter: blur(8px); z-index: 2; font-size: 1.472rem; }
+    header nav { display: flex; gap: 1.35rem; flex-wrap: wrap; align-items: center; }
+    header a { text-transform: capitalize; }
+    .nav-dropdown { position: relative; align-self: stretch; display: flex; align-items: center; }
+    .nav-dropdown-main { text-decoration: underline; }
+    .nav-dropdown-flyout { position: absolute; left: 0; top: 100%; padding-top: .4rem; opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .15s ease, visibility .15s ease, transform .15s ease; z-index: 20; }
+    .nav-dropdown:hover .nav-dropdown-flyout,
+    .nav-dropdown:focus-within .nav-dropdown-flyout { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-dropdown-flyout a { display: block; padding: .4rem .85rem; background: var(--bg); border: 1px solid var(--line); border-radius: .4rem; box-shadow: 0 6px 16px rgba(0,0,0,.1); text-decoration: none; text-transform: none; white-space: nowrap; }
+    .nav-dropdown-flyout a:hover { color: var(--leather); }
     a { color: inherit; text-underline-offset: 3px; }
     a:hover { color: var(--leather); }
-    main { max-width: 32rem; margin: 0 auto; padding: 3.75rem 1.25rem 2rem; text-align: center; }
-    .avatar { width: min(15rem, 82vw); height: min(15rem, 82vw); border-radius: 50%; border: 2px solid var(--leather); display: block; object-fit: cover; margin: 0 auto 1.35rem; box-shadow: 0 2px 12px rgba(92, 64, 51, .12); }
-    h1 { font-size: clamp(1.5rem, 4.5vw, 1.85rem); font-weight: 650; letter-spacing: -.02em; margin-bottom: .4rem; }
-    .tagline { font-size: 1rem; font-weight: 500; margin-bottom: .65rem; opacity: .95; }
-    .lede { font-size: .95rem; max-width: 26rem; margin: 0 auto .9rem; opacity: .88; }
-    .skills { font-size: .82rem; letter-spacing: .02em; text-transform: uppercase; margin-bottom: 1rem; opacity: .75; }
-    .meta { font-size: .9rem; opacity: .88; }
-    .meta a { text-decoration: underline; }
+    .content { max-width: var(--content); margin: 0 auto; padding: 0 1.25rem; }
+    main.hero { max-width: var(--content); margin: 0 auto; padding: 3.75rem 1.25rem 0; text-align: center; }
+    .avatar { width: min(15rem, 82vw); height: min(15rem, 82vw); border-radius: 0; border: 2px solid var(--leather); display: block; object-fit: cover; object-position: center 28%; margin: 0 auto 1.35rem; box-shadow: 0 2px 12px rgba(92, 64, 51, .12); }
+    .hero h1 { font-size: clamp(1.65rem, 4.5vw, 2rem); font-weight: 650; letter-spacing: -.02em; margin-bottom: .5rem; }
+    .hero .role-line { font-size: 1.02rem; font-weight: 500; margin-bottom: 1rem; opacity: .95; line-height: 1.4; }
+    .hero .lede { font-size: 1rem; max-width: 36rem; margin: 0 auto 1.15rem; opacity: .9; text-align: center; }
+    .hero .current { font-size: .92rem; text-align: left; max-width: 34rem; margin: 0 auto 1.25rem; padding: .9rem 1rem; border-radius: .5rem; border: 1px solid var(--line); background: rgba(255,255,255,.45); }
+    .hero .current p + p { margin-top: .5rem; }
+    .hero .current strong { font-weight: 650; }
+    .meta { font-size: .9rem; opacity: .88; margin-bottom: 0; }
+    .divider { text-align: center; margin: 2.25rem 0; color: var(--muted); opacity: .55; letter-spacing: .35em; font-size: .75rem; }
+    .section-title { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin: 2.35rem 0 1rem; color: var(--muted); scroll-margin-top: 4rem; }
+    .highlights-title { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin: 1.15rem 0 .75rem; color: var(--muted); }
+    .prose { font-size: .95rem; }
+    .prose p { margin-bottom: .85rem; opacity: .92; }
+    .prose ul { margin: .4rem 0 1rem 1.15rem; opacity: .92; }
+    .prose li { margin: .35rem 0; }
+    .prose .sub { font-weight: 650; margin: 1.1rem 0 .35rem; font-size: .95rem; }
     .history { padding: 2.75rem 0 2rem; max-width: 36rem; margin: 0 auto; }
     .history > h2 { padding: 0 1.25rem; }
-    .history h2, #work h2 { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .85rem; color: var(--muted); }
+    .history h2 { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .85rem; color: var(--muted); }
     .logos-marquee { overflow: hidden; width: 100vw; max-width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding-block: .15rem; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
     .logos-track { display: flex; width: max-content; animation: logos-marquee 38s linear infinite; }
     .logos-marquee:hover .logos-track, .logos-marquee:focus-within .logos-track { animation-play-state: paused; }
@@ -50,29 +69,45 @@
     .logos a.logos-dark:hover { border-color: var(--leather); }
     .logos a.logos-wide { min-width: 5.75rem; padding-inline: .55rem; }
     .logos a.logos-wide img { max-height: 1.75rem; max-width: 6.75rem; }
-    #work { scroll-margin-top: 3.5rem; padding: 1.5rem 1.25rem 3.5rem; max-width: 36rem; margin: 0 auto; border-top: 1px solid var(--line); }
-    article { padding: 1.1rem 0; border-bottom: 1px solid rgba(74, 67, 58, .15); scroll-margin-top: 3.5rem; }
-    article:last-child { border-bottom: none; }
-    article header.job-head { position: static; border: none; padding: 0; background: transparent; display: flex; gap: .85rem; align-items: flex-start; text-align: left; margin-bottom: .45rem; }
-    article .logo-slot { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: .35rem .45rem; border-radius: .45rem; border: 1px solid var(--line); background: #fff; min-height: 2.85rem; max-width: 7.5rem; }
-    article .logo-slot img { max-width: 100%; max-height: 2.35rem; width: auto; height: auto; object-fit: contain; }
-    article .logo-slot--dark { background: #22201e; border-color: #22201e; }
-    article .logo-slot--square { max-width: 3.35rem; min-width: 3.35rem; padding: .3rem; }
-    article .logo-slot--square img { max-height: 2.6rem; }
-    article .logo-slot--bar { max-width: 9rem; min-width: 7rem; }
-    article .logo-slot--bar img { max-height: 1.65rem; }
-    article .job-titles { flex: 1; min-width: 0; }
-    article h3 { font-size: 1rem; font-weight: 650; letter-spacing: -.01em; }
-    article .when { font-size: .8rem; font-weight: 500; opacity: .65; margin-top: .15rem; }
-    article ul { margin: .35rem 0 0 1rem; font-size: .88rem; opacity: .9; }
-    article li { margin: .25rem 0; }
+    #research { scroll-margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--line); }
+    #research > h2, #skills h2, #publications h2, #leadership h2, #looking h2 { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; color: var(--muted); scroll-margin-top: 4rem; }
+    article.job { padding: 1.35rem 0; border-bottom: 1px solid rgba(74, 67, 58, .15); scroll-margin-top: 3.5rem; }
+    article.job:last-child { border-bottom: none; }
+    article.job header.job-head { position: static; border: none; padding: 0; background: transparent; display: flex; gap: .85rem; align-items: flex-start; text-align: left; margin-bottom: .55rem; }
+    article.job .logo-slot { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: .35rem .45rem; border-radius: .45rem; border: 1px solid var(--line); background: #fff; min-height: 2.85rem; max-width: 7.5rem; }
+    article.job .logo-slot img { max-width: 100%; max-height: 2.35rem; width: auto; height: auto; object-fit: contain; }
+    article.job .logo-slot--dark { background: #22201e; border-color: #22201e; }
+    article.job .logo-slot--square { max-width: 3.35rem; min-width: 3.35rem; padding: .3rem; }
+    article.job .logo-slot--square img { max-height: 2.6rem; }
+    article.job .logo-slot--bar { max-width: 9rem; min-width: 7rem; }
+    article.job .logo-slot--bar img { max-height: 1.65rem; }
+    article.job .job-titles { flex: 1; min-width: 0; }
+    article.job h3 { font-size: 1.05rem; font-weight: 650; letter-spacing: -.01em; }
+    article.job .when { font-size: .82rem; font-weight: 500; opacity: .68; margin-top: .2rem; }
+    article.job .summary { font-size: .92rem; opacity: .88; margin: .45rem 0 .5rem; }
+    article.job ul { margin: .35rem 0 0 1rem; font-size: .9rem; opacity: .92; }
+    article.job li { margin: .3rem 0; }
+    .project { padding: 1.25rem 0; border-bottom: 1px solid rgba(74, 67, 58, .12); }
+    .project:last-child { border-bottom: none; }
+    .project h3 { font-size: 1rem; font-weight: 650; margin-bottom: .45rem; }
+    .skill-grid { display: grid; gap: 1.1rem; }
+    @media (min-width: 34em) { .skill-grid { grid-template-columns: 1fr 1fr; } }
+    .skill-block h3 { font-size: .82rem; font-weight: 650; margin-bottom: .35rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .skill-block p { font-size: .9rem; opacity: .9; }
+    #looking { padding-bottom: 3.5rem; }
+    #looking .prose strong { font-weight: 650; }
   </style>
 </head>
 <body id="top">
   <header>
     <nav>
-      <a href="Michael_Domm_Resume_2026.pdf" target="_blank" rel="noopener">resume</a>
-      <a href="mailto:mdomm@uwaterloo.ca">contact</a>
+      <div class="nav-dropdown">
+        <a class="nav-dropdown-main" href="Michael_Domm_Resume_2026.pdf" target="_blank" rel="noopener">resume</a>
+        <div class="nav-dropdown-flyout" role="group" aria-label="Resume file options">
+          <a href="Michael_Domm_Resume_2026.pdf" target="_blank" rel="noopener">CV</a>
+        </div>
+      </div>
+      <a href="mailto:mdomm@uwaterloo.ca">contact me</a>
       <a href="https://scholar.google.ca/citations?user=C4fVWxsAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
     </nav>
     <nav>
@@ -80,14 +115,49 @@
       <a href="personal.html">personal</a>
     </nav>
   </header>
-  <main>
+
+  <main class="hero">
     <img class="avatar" src="assets/profile.jpg" width="240" height="240" alt="Michael Domm">
     <h1>Michael Domm</h1>
-    <p class="tagline">M.Sc. Physics · IQC, University of Waterloo</p>
-    <p class="lede">Quantum photonics &amp; nanofabrication—dots, detectors, metasurfaces, and optical systems.</p>
-    <p class="skills">Nanofab · photonics · Python · MATLAB · Lumerical</p>
-    <p class="meta">Waterloo, ON · U.S. citizen · Canadian citizen · <a href="mailto:mdomm@uwaterloo.ca">mdomm@uwaterloo.ca</a></p>
+    <p class="role-line">Quantum Photonics Researcher <span aria-hidden="true">|</span> Metasurfaces <span aria-hidden="true">|</span> Nanofabrication</p>
+    <p class="lede">Building next-generation quantum light sources and photonic systems through simulation, fabrication, and experiment.</p>
+    <div class="current">
+      <p><strong>Currently:</strong> M.Sc. Physics @ University of Waterloo (Institute for Quantum Computing)</p>
+      <p><strong>Focus:</strong> Quantum dot entangled photon sources, metasurfaces, and integrated photonics</p>
+    </div>
+    <p class="meta">U.S. citizen · Canadian citizen</p>
   </main>
+
+  <div class="divider" aria-hidden="true">⸻</div>
+
+  <section id="about" class="content prose" aria-labelledby="about-heading">
+    <h2 id="about-heading" class="section-title">About</h2>
+    <h3 id="highlights-heading" class="highlights-title">Quick highlights</h3>
+    <ul>
+      <li>Designed metasurfaces using FDTD simulations (90,000+ nanopillars)</li>
+      <li>Built and automated optical setups for publication-grade experiments</li>
+      <li>Research experience at Harvard (Capasso Lab) and University of Waterloo (Strickland Lab)</li>
+      <li>Contributed to multiple upcoming photonics publications</li>
+      <li>Presented research at CLEO 2025</li>
+    </ul>
+    <p>I am a graduate researcher in quantum photonics focused on designing and building optical systems that push the limits of light–matter interaction and information control.</p>
+    <p class="sub">My work spans:</p>
+    <ul>
+      <li>Simulation (FDTD, transfer matrix methods)</li>
+      <li>Fabrication (cleanroom nanofabrication tools)</li>
+      <li>Experimental optics (laser systems, alignment, measurement)</li>
+    </ul>
+    <p class="sub">I am particularly interested in scalable quantum photonic systems, including:</p>
+    <ul>
+      <li>On-demand entangled photon sources</li>
+      <li>Integrated photonics platforms</li>
+      <li>Metasurface-based optical control</li>
+      <li>Quantum light–matter interactions</li>
+    </ul>
+  </section>
+
+  <div class="divider" aria-hidden="true">⸻</div>
+
   <section class="history" aria-label="Work history">
     <h2>Where I’ve worked</h2>
     <div class="logos-marquee">
@@ -109,72 +179,189 @@
       </div>
     </div>
   </section>
-  <section id="work" aria-label="Experience">
-    <h2>Experience</h2>
-    <article id="iqc">
+
+  <section id="research" class="content" aria-labelledby="research-heading">
+    <h2 id="research-heading" class="section-title">Research experience</h2>
+
+    <article id="iqc" class="job">
       <header class="job-head">
-        <div class="logo-slot logo-slot--dark logo-slot--bar" title="Institute for Quantum Computing"><img src="assets/logos/iqc.png" alt="IQC logo"></div>
+        <div class="logo-slot logo-slot--dark logo-slot--bar" title="Institute for Quantum Computing"><img src="assets/logos/iqc.png" alt=""></div>
         <div class="job-titles">
-          <h3>IQC · Quantum Photonic Devices Lab</h3>
-          <p class="when">M.Sc. researcher · 2025 — 2027</p>
+          <h3>Quantum Photonic Devices Lab — University of Waterloo</h3>
+          <p class="when">M.Sc. researcher · 2025 — present</p>
         </div>
       </header>
+      <p class="summary">Working on quantum dot entangled photon sources and single-photon detection systems.</p>
       <ul>
-        <li>Quantum-dot entangled photon sources &amp; single-photon detectors.</li>
-        <li>Cleanroom fabrication &amp; device characterization.</li>
+        <li>Designing and optimizing nanophotonic structures</li>
+        <li>Using cleanroom fabrication techniques (e-beam, PECVD, deposition)</li>
+        <li>Characterizing quantum optical devices</li>
       </ul>
     </article>
-    <article id="harvard">
+
+    <article id="harvard" class="job">
       <header class="job-head">
-        <div class="logo-slot logo-slot--square" title="Harvard University"><img src="assets/logos/harvard.png" alt="Harvard logo"></div>
+        <div class="logo-slot logo-slot--square" title="Harvard University"><img src="assets/logos/harvard.png" alt=""></div>
         <div class="job-titles">
-          <h3>Harvard · Capasso Group</h3>
-          <p class="when">Research intern · May 2023 — Jan 2024</p>
+          <h3>Capasso Lab — Harvard University</h3>
+          <p class="when">Photonics research intern · May 2023 — Jan 2024</p>
         </div>
       </header>
+      <p class="summary">Worked on metasurfaces and wavefront engineering at the nanoscale.</p>
       <ul>
-        <li>Metasurfaces &amp; QCL wavefront engineering; multi-hologram limits.</li>
-        <li>FDTD at scale (Lumerical) + automated optical characterization.</li>
+        <li>Designed metasurfaces using FDTD simulations (Lumerical, MATLAB)</li>
+        <li>Modeled and optimized structures with ~90,000 nanopillars</li>
+        <li>Built and automated optical setups for characterization</li>
+        <li>Investigated nonlinear optical materials for wavelength selection</li>
+        <li>Contributed to multiple upcoming academic publications</li>
       </ul>
     </article>
-    <article id="strickland">
+
+    <article id="strickland" class="job">
       <header class="job-head">
-        <div class="logo-slot logo-slot--bar" title="University of Waterloo"><img src="assets/logos/uwaterloo-science.png" alt="Waterloo Science logo"></div>
+        <div class="logo-slot logo-slot--bar" title="University of Waterloo"><img src="assets/logos/uwaterloo-science.png" alt=""></div>
         <div class="job-titles">
-          <h3>UWaterloo · Strickland Lab</h3>
+          <h3>Strickland Lab — University of Waterloo</h3>
           <p class="when">Research intern · Jan — May 2024</p>
         </div>
       </header>
+      <p class="summary">Worked on nonlinear optical materials and thin-film systems.</p>
       <ul>
-        <li>Nonlinear optical materials—spectra analysis &amp; thin-film transfer-matrix models.</li>
+        <li>Developed transfer-matrix simulations for multilayer thin films</li>
+        <li>Analyzed experimental optical data</li>
+        <li>Modeled transmission spectra for complex structures</li>
       </ul>
     </article>
-    <article id="ppo">
+
+    <article id="ppo" class="job">
       <header class="job-head">
-        <div class="logo-slot logo-slot--bar" title="P&amp;P Optica"><img src="assets/logos/ppo.jpg" alt="P&amp;P Optica logo"></div>
+        <div class="logo-slot logo-slot--bar" title="P&amp;P Optica"><img src="assets/logos/ppo.jpg" alt=""></div>
         <div class="job-titles">
           <h3>P&amp;P Optica</h3>
           <p class="when">Optics technician · 2021 — 2022</p>
         </div>
       </header>
+      <p class="summary">Spectrometer systems, optical design, and field deployment for imaging platforms.</p>
       <ul>
-        <li>Spectrometer assembly &amp; alignment—major cycle-time reduction.</li>
-        <li>Lighting &amp; optics for imaging + onsite QA for Texas deployments.</li>
+        <li>Reduced spectrometer assembly and alignment time through mechanical design improvements</li>
+        <li>Led development of a lighting subsystem to improve data quality for AI pipelines</li>
+        <li>Onsite supervisor for QA and imaging systems with clients in Texas</li>
       </ul>
     </article>
-    <article id="teledyne">
+
+    <article id="teledyne" class="job">
       <header class="job-head">
-        <div class="logo-slot logo-slot--bar" title="Teledyne DALSA"><img src="assets/logos/teledyne.png" alt="Teledyne DALSA logo"></div>
+        <div class="logo-slot logo-slot--bar" title="Teledyne DALSA"><img src="assets/logos/teledyne.png" alt=""></div>
         <div class="job-titles">
           <h3>Teledyne DALSA</h3>
           <p class="when">Image sensor technician · 2021</p>
         </div>
       </header>
+      <p class="summary">Sensor validation, automation, and test hardware for camera products.</p>
       <ul>
-        <li>Python test automation; MATLAB lens-distortion correction.</li>
-        <li>Custom test bench for pre-ship camera qualification.</li>
+        <li>Python test automation and MATLAB lens-distortion correction</li>
+        <li>Built a versatile test bench for pre-ship qualification of camera lines</li>
       </ul>
     </article>
+  </section>
+
+  <div class="divider" aria-hidden="true">⸻</div>
+
+  <section id="projects" class="content prose" aria-labelledby="projects-heading">
+    <h2 id="projects-heading" class="section-title">Selected projects</h2>
+
+    <div class="project">
+      <h3>High-capacity metasurface design</h3>
+      <p>Designed metasurfaces capable of producing multiple holographic outputs.</p>
+      <ul>
+        <li>Large-scale FDTD simulations</li>
+        <li>Wavefront engineering at subwavelength scale</li>
+        <li>Optimization of optical response across wavelengths</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <h3>Nonlinear optical material integration</h3>
+      <p>Explored nonlinear materials coupled with resonant photonic structures.</p>
+      <ul>
+        <li>Investigated tunable wavelength selection mechanisms</li>
+        <li>Combined simulation and experimental validation</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <h3>Thin film optical modeling</h3>
+      <p>Built simulation tools for multilayer optical systems.</p>
+      <ul>
+        <li>Transfer matrix modeling</li>
+        <li>Spectral response prediction</li>
+        <li>Comparison with experimental data</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">⸻</div>
+
+  <section id="skills" class="content" aria-labelledby="skills-heading">
+    <h2 id="skills-heading" class="section-title">Technical skills</h2>
+    <div class="skill-grid">
+      <div class="skill-block">
+        <h3>Simulation &amp; software</h3>
+        <p>Python, MATLAB, Lumerical, MEEP, S4, LabVIEW, SolidWorks, LaTeX</p>
+      </div>
+      <div class="skill-block">
+        <h3>Experimental &amp; lab</h3>
+        <p>Optical setup design, lasers, detectors, oscilloscopes, power meters</p>
+      </div>
+      <div class="skill-block">
+        <h3>Fabrication</h3>
+        <p>E-beam lithography, UV lithography, PECVD, deposition, wet benches</p>
+      </div>
+      <div class="skill-block">
+        <h3>Machining</h3>
+        <p>Mills, lathes, welding, precision fabrication</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">⸻</div>
+
+  <section id="publications" class="content prose" aria-labelledby="pub-heading">
+    <h2 id="pub-heading" class="section-title">Publications &amp; presentations</h2>
+    <p class="sub">Publications (in preparation)</p>
+    <ul>
+      <li><em>Expanding the Capacity Limit of Metasurface Zero Order Jones Matrices</em></li>
+      <li><em>Nonlinear Tuning and Coupling of Metasurface Resonances</em></li>
+    </ul>
+    <p class="sub">Conference</p>
+    <ul>
+      <li>CLEO 2025 — <em>BaTiO<sub>3</sub>/TiO<sub>2</sub> Hybrid Metasurface for Free-space Electro-optic Modulators</em></li>
+    </ul>
+  </section>
+
+  <div class="divider" aria-hidden="true">⸻</div>
+
+  <section id="leadership" class="content prose" aria-labelledby="lead-heading">
+    <h2 id="lead-heading" class="section-title">Leadership &amp; activities</h2>
+    <ul>
+      <li>Board Chair — Graduate Student Association</li>
+      <li>Quantum Startup Accelerator Network (QuSAN) — Advancement Lead</li>
+      <li>Faculty Committee on Student Appeals — Graduate Member</li>
+      <li>Varsity rowing athlete (3+ years, national-level competition)</li>
+    </ul>
+  </section>
+
+  <div class="divider" aria-hidden="true">⸻</div>
+
+  <section id="looking" class="content prose" aria-labelledby="looking-heading">
+    <h2 id="looking-heading" class="section-title">What I’m looking for</h2>
+    <p>I am seeking opportunities in:</p>
+    <ul>
+      <li>Quantum photonics and optical engineering</li>
+      <li>Nanophotonics and metasurface design</li>
+      <li>Research and development (industry or national labs)</li>
+    </ul>
+    <p>Open to internships and full-time roles, particularly in high-impact research environments.</p>
   </section>
 </body>
 </html>
