@@ -29,15 +29,39 @@
     .skills { font-size: .82rem; letter-spacing: .02em; text-transform: uppercase; margin-bottom: 1rem; opacity: .75; }
     .meta { font-size: .9rem; opacity: .88; }
     .meta a { text-decoration: underline; }
-    .history { padding: 0 1.25rem 2rem; max-width: 36rem; margin: 0 auto; }
+    .history { padding: 0 0 2rem; max-width: 36rem; margin: 0 auto; }
+    .history > h2 { padding: 0 1.25rem; }
     .history h2, #work h2 { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .85rem; color: var(--muted); }
-    .logos { display: flex; flex-wrap: wrap; gap: .5rem; }
-    .logos a { min-width: 3rem; padding: .45rem .5rem; border-radius: .45rem; border: 1px solid var(--khaki-edge); background: var(--khaki); font-size: .68rem; font-weight: 700; text-decoration: none; text-align: center; letter-spacing: .03em; color: var(--text); }
-    .logos a:hover { background: #d4c4a4; color: var(--leather); border-color: var(--leather); }
+    .logos-marquee { overflow: hidden; width: 100vw; max-width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding-block: .15rem; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+    .logos-track { display: flex; width: max-content; animation: logos-marquee 38s linear infinite; }
+    .logos-marquee:hover .logos-track, .logos-marquee:focus-within .logos-track { animation-play-state: paused; }
+    @keyframes logos-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+      .logos-marquee { mask-image: none; -webkit-mask-image: none; width: 100%; margin-left: 0; margin-right: 0; }
+      .logos-track { animation: none; transform: none; width: 100%; max-width: 36rem; margin: 0 auto; padding: 0 1.25rem; justify-content: center; }
+      .logos-track .logos[aria-hidden="true"] { display: none; }
+      .logos { flex-wrap: wrap; justify-content: center; padding-right: 0; }
+    }
+    .logos { display: flex; flex-wrap: nowrap; gap: .5rem; align-items: center; padding-right: 2rem; flex-shrink: 0; }
+    .logos a { display: grid; place-items: center; min-width: 3rem; height: 3rem; padding: .35rem .5rem; border-radius: .45rem; border: 1px solid var(--khaki-edge); background: var(--khaki); text-decoration: none; }
+    .logos a:hover { background: #d4c4a4; border-color: var(--leather); }
+    .logos a img { max-width: 100%; max-height: 2.15rem; width: auto; height: auto; object-fit: contain; }
+    .logos a.logos-dark { background: #22201e; border-color: #22201e; }
+    .logos a.logos-dark:hover { border-color: var(--leather); }
+    .logos a.logos-wide { min-width: 5.75rem; padding-inline: .55rem; }
+    .logos a.logos-wide img { max-height: 1.75rem; max-width: 6.75rem; }
     #work { scroll-margin-top: 3.5rem; padding: 1.5rem 1.25rem 3.5rem; max-width: 36rem; margin: 0 auto; border-top: 1px solid var(--line); }
     article { padding: 1.1rem 0; border-bottom: 1px solid rgba(74, 67, 58, .15); scroll-margin-top: 3.5rem; }
     article:last-child { border-bottom: none; }
-    article header { position: static; border: none; padding: 0; background: transparent; display: block; text-align: left; margin-bottom: .45rem; }
+    article header.job-head { position: static; border: none; padding: 0; background: transparent; display: flex; gap: .85rem; align-items: flex-start; text-align: left; margin-bottom: .45rem; }
+    article .logo-slot { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: .35rem .45rem; border-radius: .45rem; border: 1px solid var(--line); background: #fff; min-height: 2.85rem; max-width: 7.5rem; }
+    article .logo-slot img { max-width: 100%; max-height: 2.35rem; width: auto; height: auto; object-fit: contain; }
+    article .logo-slot--dark { background: #22201e; border-color: #22201e; }
+    article .logo-slot--square { max-width: 3.35rem; min-width: 3.35rem; padding: .3rem; }
+    article .logo-slot--square img { max-height: 2.6rem; }
+    article .logo-slot--bar { max-width: 9rem; min-width: 7rem; }
+    article .logo-slot--bar img { max-height: 1.65rem; }
+    article .job-titles { flex: 1; min-width: 0; }
     article h3 { font-size: 1rem; font-weight: 650; letter-spacing: -.01em; }
     article .when { font-size: .8rem; font-weight: 500; opacity: .65; margin-top: .15rem; }
     article ul { margin: .35rem 0 0 1rem; font-size: .88rem; opacity: .9; }
@@ -65,20 +89,34 @@
   </main>
   <section class="history" aria-label="Work history">
     <h2>Where I’ve worked</h2>
-    <div class="logos">
-      <a href="#iqc">IQC</a>
-      <a href="#harvard">Harvard</a>
-      <a href="#strickland">Strickland</a>
-      <a href="#ppo">PPO</a>
-      <a href="#teledyne">Teledyne</a>
+    <div class="logos-marquee">
+      <div class="logos-track">
+        <div class="logos">
+          <a class="logos-dark logos-wide" href="#iqc" aria-label="IQC"><img src="assets/logos/iqc.png" alt=""></a>
+          <a href="#harvard" aria-label="Harvard University"><img src="assets/logos/harvard.png" alt=""></a>
+          <a class="logos-wide" href="#strickland" aria-label="University of Waterloo Faculty of Science"><img src="assets/logos/uwaterloo-science.png" alt=""></a>
+          <a class="logos-wide" href="#ppo" aria-label="P&amp;P Optica"><img src="assets/logos/ppo.jpg" alt=""></a>
+          <a class="logos-wide" href="#teledyne" aria-label="Teledyne DALSA"><img src="assets/logos/teledyne.png" alt=""></a>
+        </div>
+        <div class="logos" aria-hidden="true">
+          <a class="logos-dark logos-wide" href="#iqc" tabindex="-1"><img src="assets/logos/iqc.png" alt=""></a>
+          <a href="#harvard" tabindex="-1"><img src="assets/logos/harvard.png" alt=""></a>
+          <a class="logos-wide" href="#strickland" tabindex="-1"><img src="assets/logos/uwaterloo-science.png" alt=""></a>
+          <a class="logos-wide" href="#ppo" tabindex="-1"><img src="assets/logos/ppo.jpg" alt=""></a>
+          <a class="logos-wide" href="#teledyne" tabindex="-1"><img src="assets/logos/teledyne.png" alt=""></a>
+        </div>
+      </div>
     </div>
   </section>
   <section id="work" aria-label="Experience">
     <h2>Experience</h2>
     <article id="iqc">
-      <header>
-        <h3>IQC · Quantum Photonic Devices Lab</h3>
-        <p class="when">M.Sc. researcher · 2025 — 2027</p>
+      <header class="job-head">
+        <div class="logo-slot logo-slot--dark logo-slot--bar" title="Institute for Quantum Computing"><img src="assets/logos/iqc.png" alt="IQC logo"></div>
+        <div class="job-titles">
+          <h3>IQC · Quantum Photonic Devices Lab</h3>
+          <p class="when">M.Sc. researcher · 2025 — 2027</p>
+        </div>
       </header>
       <ul>
         <li>Quantum-dot entangled photon sources &amp; single-photon detectors.</li>
@@ -86,9 +124,12 @@
       </ul>
     </article>
     <article id="harvard">
-      <header>
-        <h3>Harvard · Capasso Group</h3>
-        <p class="when">Research intern · May 2023 — Jan 2024</p>
+      <header class="job-head">
+        <div class="logo-slot logo-slot--square" title="Harvard University"><img src="assets/logos/harvard.png" alt="Harvard logo"></div>
+        <div class="job-titles">
+          <h3>Harvard · Capasso Group</h3>
+          <p class="when">Research intern · May 2023 — Jan 2024</p>
+        </div>
       </header>
       <ul>
         <li>Metasurfaces &amp; QCL wavefront engineering; multi-hologram limits.</li>
@@ -96,18 +137,24 @@
       </ul>
     </article>
     <article id="strickland">
-      <header>
-        <h3>UWaterloo · Strickland Lab</h3>
-        <p class="when">Research intern · Jan — May 2024</p>
+      <header class="job-head">
+        <div class="logo-slot logo-slot--bar" title="University of Waterloo"><img src="assets/logos/uwaterloo-science.png" alt="Waterloo Science logo"></div>
+        <div class="job-titles">
+          <h3>UWaterloo · Strickland Lab</h3>
+          <p class="when">Research intern · Jan — May 2024</p>
+        </div>
       </header>
       <ul>
         <li>Nonlinear optical materials—spectra analysis &amp; thin-film transfer-matrix models.</li>
       </ul>
     </article>
     <article id="ppo">
-      <header>
-        <h3>P&amp;P Optica</h3>
-        <p class="when">Optics technician · 2021 — 2022</p>
+      <header class="job-head">
+        <div class="logo-slot logo-slot--bar" title="P&amp;P Optica"><img src="assets/logos/ppo.jpg" alt="P&amp;P Optica logo"></div>
+        <div class="job-titles">
+          <h3>P&amp;P Optica</h3>
+          <p class="when">Optics technician · 2021 — 2022</p>
+        </div>
       </header>
       <ul>
         <li>Spectrometer assembly &amp; alignment—major cycle-time reduction.</li>
@@ -115,9 +162,12 @@
       </ul>
     </article>
     <article id="teledyne">
-      <header>
-        <h3>Teledyne DALSA</h3>
-        <p class="when">Image sensor technician · 2021</p>
+      <header class="job-head">
+        <div class="logo-slot logo-slot--bar" title="Teledyne DALSA"><img src="assets/logos/teledyne.png" alt="Teledyne DALSA logo"></div>
+        <div class="job-titles">
+          <h3>Teledyne DALSA</h3>
+          <p class="when">Image sensor technician · 2021</p>
+        </div>
       </header>
       <ul>
         <li>Python test automation; MATLAB lens-distortion correction.</li>
