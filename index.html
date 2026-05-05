@@ -18,7 +18,7 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: linear-gradient(165deg, var(--bg) 0%, var(--bg-deep) 100%); line-height: 1.5; font-size: 15px; min-height: 100vh; }
-    header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(247, 243, 235, .92); backdrop-filter: blur(8px); z-index: 2; font-size: 1.472rem; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 1.25rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(255,255,255,.45); backdrop-filter: blur(8px); z-index: 2; font-size: 1.472rem; }
     header nav { display: flex; gap: 1.35rem; flex-wrap: wrap; align-items: center; }
     header a { text-transform: capitalize; }
     .nav-dropdown { position: relative; align-self: stretch; display: flex; align-items: center; }
@@ -31,18 +31,32 @@
     a { color: inherit; text-underline-offset: 3px; }
     a:hover { color: var(--leather); }
     .content { max-width: var(--content); margin: 0 auto; padding: 0 1.25rem; }
-    main.hero { max-width: var(--content); margin: 0 auto; padding: 3.75rem 1.25rem 0; text-align: center; }
-    .avatar { width: min(15rem, 82vw); height: min(15rem, 82vw); border-radius: 0; border: 2px solid var(--leather); display: block; object-fit: cover; object-position: center 28%; margin: 0 auto 1.35rem; box-shadow: 0 2px 12px rgba(92, 64, 51, .12); }
-    .hero h1 { font-size: clamp(1.65rem, 4.5vw, 2rem); font-weight: 650; letter-spacing: -.02em; margin-bottom: .5rem; }
-    .hero .role-line { font-size: 1.02rem; font-weight: 500; margin-bottom: 1rem; opacity: .95; line-height: 1.4; }
-    .hero .lede { font-size: 1rem; max-width: 36rem; margin: 0 auto 1.15rem; opacity: .9; text-align: center; }
-    .hero .current { font-size: .92rem; text-align: left; max-width: 34rem; margin: 0 auto 1.25rem; padding: .9rem 1rem; border-radius: .5rem; border: 1px solid var(--line); background: rgba(255,255,255,.45); }
-    .hero .current p + p { margin-top: .5rem; }
-    .hero .current strong { font-weight: 650; }
-    .meta { font-size: .9rem; opacity: .88; margin-bottom: 0; }
+    main.hero { max-width: var(--content); margin: 0 auto; padding: 3.75rem 1.25rem 0; }
+    .hero-layout { display: grid; grid-template-columns: 1fr minmax(14rem, 15rem); align-items: stretch; gap: 2rem; }
+    .hero-copy { flex: 1; min-width: 0; text-align: left; }
+    .avatar { width: 100%; height: 100%; min-height: 17.5rem; border-radius: 0; border: 2px solid var(--leather); display: block; object-fit: cover; object-position: center 28%; margin: 0; box-shadow: 0 2px 12px rgba(92, 64, 51, .12); }
+    .hero h1 { font-size: clamp(1.65rem, 4.5vw, 2rem); font-weight: 650; letter-spacing: -.02em; margin: 0 0 .35rem; max-width: 34rem; text-align: center; }
+    .hero .role-line { font-size: 1.02rem; font-weight: 500; margin-bottom: .8rem; opacity: .95; line-height: 1.4; }
+    .hero .lede { font-size: 1rem; margin: 0 0 1rem; opacity: .9; text-align: left; }
+    .hero .current,
+    .about-box { font-size: .92rem; text-align: left; max-width: 34rem; padding: .9rem 1rem; border-radius: .5rem; border: 1px solid var(--line); background: rgba(255,255,255,.45); }
+    .hero .current { margin: .85rem 0 0; }
+    .about-box { margin: 0 auto; }
+    .hero .current p + p,
+    .about-box p + p { margin-top: .5rem; }
+    .hero .current strong,
+    .about-box strong { font-weight: 650; }
+    .about-box .highlights-title { margin-top: 0; }
+    .about-box .section-title { margin-top: 1.1rem; margin-bottom: .85rem; scroll-margin-top: 4rem; }
+    .meta { font-size: .9rem; opacity: .88; margin-bottom: 0; max-width: 34rem; text-align: center; }
+    @media (max-width: 46em) {
+      .hero-layout { grid-template-columns: 1fr; gap: 1.25rem; }
+      .hero-copy { width: 100%; }
+      .avatar { width: min(15rem, 82vw); height: min(15rem, 82vw); min-height: 0; margin: 0 auto; }
+    }
     .divider { text-align: center; margin: 2.25rem 0; color: var(--muted); opacity: .55; letter-spacing: .35em; font-size: .75rem; }
     .section-title { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin: 2.35rem 0 1rem; color: var(--muted); scroll-margin-top: 4rem; }
-    .highlights-title { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin: 1.15rem 0 .75rem; color: var(--muted); }
+    .highlights-title { font-size: .95rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin: 1.15rem 0 .75rem; color: var(--muted); }
     .prose { font-size: .95rem; }
     .prose p { margin-bottom: .85rem; opacity: .92; }
     .prose ul { margin: .4rem 0 1rem 1.15rem; opacity: .92; }
@@ -70,7 +84,7 @@
     .logos a.logos-wide { min-width: 5.75rem; padding-inline: .55rem; }
     .logos a.logos-wide img { max-height: 1.75rem; max-width: 6.75rem; }
     #research { scroll-margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--line); }
-    #research > h2, #skills h2, #publications h2, #leadership h2, #looking h2 { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; color: var(--muted); scroll-margin-top: 4rem; }
+    #research > h2, #skills h2, #publications h2, #leadership h2, #looking-heading { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; color: var(--muted); scroll-margin-top: 4rem; }
     article.job { padding: 1.35rem 0; border-bottom: 1px solid rgba(74, 67, 58, .15); scroll-margin-top: 3.5rem; }
     article.job:last-child { border-bottom: none; }
     article.job header.job-head { position: static; border: none; padding: 0; background: transparent; display: flex; gap: .85rem; align-items: flex-start; text-align: left; margin-bottom: .55rem; }
@@ -94,8 +108,7 @@
     @media (min-width: 34em) { .skill-grid { grid-template-columns: 1fr 1fr; } }
     .skill-block h3 { font-size: .82rem; font-weight: 650; margin-bottom: .35rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
     .skill-block p { font-size: .9rem; opacity: .9; }
-    #looking { padding-bottom: 3.5rem; }
-    #looking .prose strong { font-weight: 650; }
+    #leadership { padding-bottom: 3.5rem; }
   </style>
 </head>
 <body id="top">
@@ -107,7 +120,7 @@
           <a href="Michael_Domm_Resume_2026.pdf" target="_blank" rel="noopener">CV</a>
         </div>
       </div>
-      <a href="mailto:mdomm@uwaterloo.ca">contact me</a>
+      <a href="mailto:mdomm@uwaterloo.ca">email me</a>
       <a href="https://scholar.google.ca/citations?user=C4fVWxsAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
     </nav>
     <nav>
@@ -117,36 +130,47 @@
   </header>
 
   <main class="hero">
-    <img class="avatar" src="assets/profile.jpg" width="240" height="240" alt="Michael Domm">
-    <h1>Michael Domm</h1>
-    <p class="role-line">Quantum Photonics Researcher <span aria-hidden="true">|</span> Metasurfaces <span aria-hidden="true">|</span> Nanofabrication</p>
-    <p class="lede">Building next-generation quantum light sources and photonic systems through simulation, fabrication, and experiment.</p>
-    <div class="current">
-      <p><strong>Currently:</strong> M.Sc. Physics @ University of Waterloo (Institute for Quantum Computing)</p>
-      <p><strong>Focus:</strong> Quantum dot entangled photon sources, metasurfaces, and integrated photonics</p>
+    <div class="hero-layout">
+      <div class="hero-copy">
+        <h1>Michael Domm</h1>
+        <p class="meta">U.S. citizen · Canadian citizen</p>
+        <div class="current">
+          <p class="role-line">Quantum Photonics Researcher <span aria-hidden="true">|</span> Metasurfaces <span aria-hidden="true">|</span> Nanofabrication</p>
+          <p class="lede">Building next-generation quantum light sources and photonic systems through simulation, fabrication, and experiment.</p>
+          <p><strong>Currently:</strong> M.Sc. Physics @ University of Waterloo (Institute for Quantum Computing)</p>
+          <p><strong>Focus:</strong> Entangled photon sources by quantum dot and integrated photonics</p>
+        </div>
+      </div>
+      <img class="avatar" src="assets/profile.jpg" width="240" height="240" alt="Michael Domm">
     </div>
-    <p class="meta">U.S. citizen · Canadian citizen</p>
   </main>
 
   <div class="divider" aria-hidden="true">⸻</div>
 
-  <section id="about" class="content prose" aria-labelledby="about-heading">
-    <h2 id="about-heading" class="section-title">About</h2>
-    <h3 id="highlights-heading" class="highlights-title">Quick highlights</h3>
-    <ul>
-      <li>Designed metasurfaces using FDTD simulations (90,000+ nanopillars)</li>
-      <li>Built and automated optical setups for publication-grade experiments</li>
-      <li>Research experience at Harvard (Capasso Lab) and University of Waterloo (Strickland Lab)</li>
-      <li>Contributed to multiple upcoming photonics publications</li>
-      <li>Presented research at CLEO 2025</li>
-    </ul>
-    <p>I am a graduate researcher in quantum photonics focused on designing and building optical systems that push the limits of light–matter interaction and information control.</p>
-    <p class="sub">My work spans:</p>
-    <ul>
-      <li>Simulation (FDTD, transfer matrix methods)</li>
-      <li>Fabrication (cleanroom nanofabrication tools)</li>
-      <li>Experimental optics (laser systems, alignment, measurement)</li>
-    </ul>
+  <section id="about" class="content prose" aria-labelledby="highlights-heading">
+    <div class="about-box">
+      <h3 id="highlights-heading" class="highlights-title">Quick highlights</h3>
+      <ul>
+        <li>Current research at the Institute for Quantum Computing</li>
+        <li>Past researcher at Harvard (Capasso Lab) and University of Waterloo (Strickland Lab)</li>
+        <li>2+ years of industry experience</li>
+        <li>Board member of a nonprofit managing a seven-figure budget</li>
+      </ul>
+      <h2 id="looking-heading" class="section-title">What I’m looking for</h2>
+      <p>I am seeking opportunities in:</p>
+      <ul>
+        <li>Quantum photonics and optical engineering</li>
+        <li>Nanophotonics and metasurface design</li>
+        <li>Research and development (industry or national labs)</li>
+      </ul>
+      <p>Open to internships and full-time roles, particularly in high-impact research environments.</p>
+      <p class="sub">My work spans:</p>
+      <ul>
+        <li>Simulation (FDTD, transfer matrix methods)</li>
+        <li>Fabrication (cleanroom nanofabrication tools)</li>
+        <li>Experimental optics (laser systems, alignment, measurement)</li>
+      </ul>
+    </div>
     <p class="sub">I am particularly interested in scalable quantum photonic systems, including:</p>
     <ul>
       <li>On-demand entangled photon sources</li>
@@ -351,17 +375,5 @@
     </ul>
   </section>
 
-  <div class="divider" aria-hidden="true">⸻</div>
-
-  <section id="looking" class="content prose" aria-labelledby="looking-heading">
-    <h2 id="looking-heading" class="section-title">What I’m looking for</h2>
-    <p>I am seeking opportunities in:</p>
-    <ul>
-      <li>Quantum photonics and optical engineering</li>
-      <li>Nanophotonics and metasurface design</li>
-      <li>Research and development (industry or national labs)</li>
-    </ul>
-    <p>Open to internships and full-time roles, particularly in high-impact research environments.</p>
-  </section>
 </body>
 </html>
