@@ -57,8 +57,9 @@
     .hero .lede { font-size: 1rem; margin: 0 0 1rem; opacity: .9; text-align: left; }
     .hero .current,
     .about-box { font-size: .92rem; text-align: left; max-width: 34rem; padding: .9rem 1rem; border-radius: .5rem; border: 1px solid var(--line); background: rgba(255,255,255,.45); }
-    .hero .current { margin: .85rem 0 0; }
-    .about-box { margin: 0 auto; }
+    .hero .current { margin: .85rem 0 0; text-align: center; }
+    .hero .current .lede { text-align: center; }
+    .about-box { margin: 0 auto; max-width: 40rem; }
     .hero .current p + p,
     .about-box p + p { margin-top: .5rem; }
     .hero .current strong,
@@ -103,9 +104,10 @@
     .logos a.logos-wide img { max-height: 3.5rem; max-width: 13.5rem; }
     .logos a.logos-lg { min-width: 13.5rem; }
     .logos a.logos-lg img { max-height: 5rem; max-width: 15.5rem; }
-    #research { scroll-margin-top: 6.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--line); }
+    #research { scroll-margin-top: 6.5rem; padding: 1.5rem 0 3rem; }
     article.job#epfl { scroll-margin-top: 6.5rem; }
-    #research > h2, #skills h2, #publications h2, #leadership h2 { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; color: var(--muted); scroll-margin-top: 6.5rem; }
+    #skills h2, #publications h2, #leadership h2 { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; color: var(--muted); scroll-margin-top: 6.5rem; }
+    #research > h2 { font-size: 1.5rem; font-weight: 650; letter-spacing: .02em; text-transform: uppercase; margin-bottom: 1.1rem; color: var(--text); scroll-margin-top: 6.5rem; }
     .about-box #looking-heading { margin-top: 1.25rem; }
     article.job { padding: 1.35rem 0; border-bottom: 1px solid rgba(74, 67, 58, .15); scroll-margin-top: 3.5rem; }
     article.job:last-child { border-bottom: none; }
@@ -173,7 +175,7 @@
         <div class="current">
           <p class="role-line">Quantum Photonics Researcher <span aria-hidden="true">|</span> Metasurfaces <span aria-hidden="true">|</span> Nanofabrication</p>
           <p class="lede">Building next-generation quantum light sources and photonic systems through simulation, fabrication, and experiment.</p>
-          <p><strong>Currently:</strong> M.Sc. Physics @ University of Waterloo (<a href="https://uwaterloo.ca/institute-for-quantum-computing/" target="_blank" rel="noopener noreferrer">Institute for Quantum Computing</a>)</p>
+          <p><strong>Currently:</strong> M.Sc. Physics @ <a href="https://uwaterloo.ca/institute-for-quantum-computing/" target="_blank" rel="noopener noreferrer">Institute for Quantum Computing</a> (<a href="https://www.qpdlab.com" target="_blank" rel="noopener noreferrer">Quantum Photonic Devices Lab</a>)</p>
           <p><strong>Incoming:</strong> Research intern @ <a href="https://www.epfl.ch/labs/hylab/" target="_blank" rel="noopener noreferrer">EPFL (HYLAB)</a>, Switzerland, starting October 15, 2026</p>
           <p><strong>Focus:</strong> Entangled photon sources by quantum dot and integrated photonics</p>
         </div>
@@ -182,8 +184,7 @@
     </div>
   </main>
 
-  <section class="history" aria-label="Work history">
-    <h2>Where I’ve worked</h2>
+  <section class="history" aria-label="Where I’ve worked">
     <div class="logos-marquee">
       <div class="logos-track">
         <div class="logos">
@@ -214,41 +215,35 @@
     </div>
   </section>
 
-  <section id="about" class="content prose" aria-labelledby="about-heading">
-    <h2 id="about-heading" class="section-title">About</h2>
+  <section id="about" class="content prose" aria-label="About">
     <div class="about-box">
       <h3 class="highlights-title">Quick highlights</h3>
       <ul>
-        <li>Current research at the Institute for Quantum Computing</li>
-        <li>Past researcher at Harvard (Capasso Lab) and University of Waterloo (Strickland Lab)</li>
-        <li>2+ years of industry experience</li>
+        <li>Current research at the <a href="https://uwaterloo.ca/institute-for-quantum-computing/" target="_blank" rel="noopener noreferrer">Institute for Quantum Computing</a></li>
+        <li>Incoming research intern at <a href="https://www.epfl.ch/labs/hylab/" target="_blank" rel="noopener noreferrer">EPFL (HYLAB)</a> in Switzerland</li>
+        <li>Past researcher at Harvard (Capasso Lab) and the Nobel laureate Strickland Lab</li>
+        <li>2+ years of industry experience in optics</li>
         <li>Board member of a nonprofit managing a seven-figure budget</li>
       </ul>
-      <h3 id="looking-heading" class="highlights-title">What I’m looking for</h3>
-      <p>I am seeking opportunities in:</p>
+
+      <h3 class="highlights-title">What I work on</h3>
+      <p>I work across the full photonics stack:</p>
+      <ul>
+        <li>Cleanroom fabrication</li>
+        <li>Experimental optics</li>
+        <li>Simulation</li>
+      </ul>
+
+      <h3 id="looking-heading" class="highlights-title">Always open to new opportunities</h3>
+      <p>I’m happily busy with my current research, but I’m always interested in what’s out there for down the road, especially in research and development, whether in industry or at national labs, around:</p>
       <ul>
         <li>Quantum photonics and optical engineering</li>
         <li>Nanophotonics and metasurface design</li>
-        <li>Research and development (industry or national labs)</li>
+        <li>Integrated and scalable photonic systems</li>
       </ul>
-      <p>Open to internships and full-time roles, particularly in high-impact research environments.</p>
-      <p class="sub">My work spans:</p>
-      <ul>
-        <li>Simulation (FDTD, transfer matrix methods)</li>
-        <li>Fabrication (cleanroom nanofabrication tools)</li>
-        <li>Experimental optics (laser systems, alignment, measurement)</li>
-      </ul>
+      <p>If you’re working on something exciting and think I’d be a good fit for the future, I’d love to hear about it — <a href="mailto:mdomm@uwaterloo.ca">send me an email</a>.</p>
     </div>
-    <p class="sub">I am particularly interested in scalable quantum photonic systems, including:</p>
-    <ul>
-      <li>On-demand entangled photon sources</li>
-      <li>Integrated photonics platforms</li>
-      <li>Metasurface-based optical control</li>
-      <li>Quantum light–matter interactions</li>
-    </ul>
   </section>
-
-  <div class="divider" aria-hidden="true">⸻</div>
 
   <section id="research" class="content" aria-labelledby="research-heading">
     <h2 id="research-heading" class="section-title">Research experience</h2>
