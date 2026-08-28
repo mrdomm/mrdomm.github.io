@@ -4,16 +4,139 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Personal — Michael Domm</title>
-  <meta name="description" content="Personal page for Michael Domm. Coming soon.">
+  <meta name="description" content="A more personal look at Michael Domm — rowing, building things, community, and the interests outside the lab.">
+  <meta name="author" content="Michael Domm">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Personal — Michael Domm">
+  <meta property="og:description" content="Life outside the lab: rowing, building things, and community.">
+  <meta property="og:image" content="assets/profile.jpg">
+
+  <!-- Favicon: inline SVG, no extra file needed -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%235c4033'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='18' font-weight='700' fill='%23f7f3eb' text-anchor='middle'%3EMD%3C/text%3E%3C/svg%3E">
   <style>
-    * { box-sizing: border-box; margin: 0; }
-    body { font-family: system-ui, sans-serif; color: #161412; background: linear-gradient(165deg, #f7f3eb 0%, #efe8db 100%); min-height: 100vh; display: grid; place-items: center; padding: 1.5rem; text-align: center; line-height: 1.5; }
-    a { color: inherit; }
-    a:hover { color: #5c4033; }
+    :root {
+      --bg: #f7f3eb;
+      --bg-deep: #efe8db;
+      --text: #161412;
+      --muted: #4a433a;
+      --line: #c4bbb0;
+      --khaki: #e0d2b8;
+      --leather: #5c4033;
+      --content: 46rem;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: linear-gradient(165deg, var(--bg) 0%, var(--bg-deep) 100%); line-height: 1.5; font-size: 15px; min-height: 100vh; }
+    a { color: inherit; text-underline-offset: 3px; }
+    a:hover { color: var(--leather); }
+
+    header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.85rem 1.5rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(255,255,255,.55); backdrop-filter: blur(8px); z-index: 2; }
+    header nav { display: flex; gap: 1.15rem; flex-wrap: wrap; align-items: center; }
+    header a { font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; color: var(--muted); opacity: .9; }
+    header a:hover { opacity: 1; color: var(--leather); }
+
+    .content { max-width: var(--content); margin: 0 auto; padding: 0 1.25rem; }
+
+    main { padding: 3.25rem 0 1rem; }
+    .intro h1 { font-size: clamp(1.65rem, 4.5vw, 2rem); font-weight: 650; letter-spacing: -.02em; margin-bottom: .5rem; }
+    .intro .role-line { font-size: 1.02rem; font-weight: 500; opacity: .95; margin-bottom: 1rem; }
+    .intro .bio { font-size: 1rem; opacity: .92; max-width: 40rem; }
+    .intro .bio p + p { margin-top: .85rem; }
+
+    .divider { text-align: center; margin: 2.5rem 0; color: var(--muted); opacity: .55; letter-spacing: .35em; font-size: .75rem; }
+
+    .section-title { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1.15rem; color: var(--muted); }
+
+    .cards { display: grid; gap: 1.1rem; grid-template-columns: 1fr; }
+    @media (min-width: 34em) { .cards { grid-template-columns: 1fr 1fr; } }
+    .card { padding: 1.15rem 1.2rem; border: 1px solid var(--line); border-radius: .6rem; background: rgba(255,255,255,.5); box-shadow: 0 2px 10px rgba(92, 64, 51, .06); transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(92, 64, 51, .12); border-color: var(--leather); }
+    .card h3 { font-size: 1rem; font-weight: 650; margin-bottom: .4rem; }
+    .card p { font-size: .92rem; opacity: .9; }
+    .card .card-tag { display: inline-block; font-size: .68rem; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; color: var(--leather); margin-bottom: .5rem; }
+
+    .now-box { padding: 1.1rem 1.25rem; border: 1px solid var(--line); border-radius: .6rem; background: rgba(255,255,255,.5); }
+    .now-box p { font-size: .95rem; opacity: .92; }
+    .now-box p + p { margin-top: .55rem; }
+
+    footer { border-top: 1px solid var(--line); background: rgba(255,255,255,.4); padding: 2rem 0 2.5rem; text-align: center; margin-top: 2.5rem; }
+    footer .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem 1.35rem; font-size: .92rem; }
+    footer a { text-decoration: none; opacity: .9; }
+    footer a:hover { opacity: 1; text-decoration: underline; }
   </style>
 </head>
-<body>
-  <p>Coming soon. <a href="index.html">← Home</a></p>
+<body id="top">
+  <header>
+    <nav>
+      <a href="mailto:mdomm@uwaterloo.ca">email me</a>
+      <a href="https://www.linkedin.com/in/mike-domm" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://mrdomm.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </nav>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="personal.html">personal</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <section class="intro">
+      <h1>Beyond the lab</h1>
+      <p class="role-line">Rower · builder · community organizer</p>
+      <div class="bio">
+        <p>Physics is what I do, but it isn't the whole story. Away from the cleanroom I'm usually on the water, tinkering with a side project, or helping run something that matters to the people around me.</p>
+        <p>This page is a slower, more personal look at the things I care about outside of research. It's a work in progress, much like everything worth doing.</p>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true">⸻</div>
+
+    <section aria-labelledby="interests-heading">
+      <h2 id="interests-heading" class="section-title">What I get up to</h2>
+      <div class="cards">
+        <div class="card">
+          <span class="card-tag">On the water</span>
+          <h3>Rowing</h3>
+          <p>Varsity rower with several years of national-level competition. Early mornings, hard intervals, and the kind of team trust that only comes from suffering together in a boat.</p>
+        </div>
+        <div class="card">
+          <span class="card-tag">Building</span>
+          <h3>Side projects</h3>
+          <p>I like making things — hardware, small tools, and the occasional over-engineered solution to a very minor problem. Curiosity first, polish second.</p>
+        </div>
+        <div class="card">
+          <span class="card-tag">Community</span>
+          <h3>Leadership &amp; service</h3>
+          <p>Board Chair of the Graduate Student Association and involved in the quantum startup community. I care about leaving the rooms I'm in a little better than I found them.</p>
+        </div>
+        <div class="card">
+          <span class="card-tag">Always learning</span>
+          <h3>Reading &amp; ideas</h3>
+          <p>A steady diet of physics, engineering, and the odd detour into economics or design. I enjoy first-principles thinking and figuring out how things really work.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true">⸻</div>
+
+    <section aria-labelledby="now-heading">
+      <h2 id="now-heading" class="section-title">Right now</h2>
+      <div class="now-box">
+        <p>Based in Waterloo, wrapping up an M.Sc. in Physics at the Institute for Quantum Computing.</p>
+        <p>Training, building, and always up for a good conversation about photonics, startups, or what to row next.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <nav class="footer-links" aria-label="Contact and social links">
+      <a href="mailto:mdomm@uwaterloo.ca">Email</a>
+      <a href="index.html">Home</a>
+      <a href="https://www.linkedin.com/in/mike-domm" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://mrdomm.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </nav>
+  </footer>
 </body>
 </html>

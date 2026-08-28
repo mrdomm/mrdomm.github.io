@@ -34,10 +34,17 @@
       --content: 42rem;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: linear-gradient(165deg, var(--bg) 0%, var(--bg-deep) 100%); line-height: 1.5; font-size: 15px; min-height: 100vh; }
-    header { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 1.25rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(255,255,255,.45); backdrop-filter: blur(8px); z-index: 2; font-size: 1.472rem; }
-    header nav { display: flex; gap: 1.35rem; flex-wrap: wrap; align-items: center; }
-    header a { text-transform: capitalize; }
+    .section-nav { position: sticky; top: 3.4rem; z-index: 1; background: rgba(255,255,255,.35); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+    .section-nav-inner { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; justify-content: center; padding-top: .55rem; padding-bottom: .55rem; }
+    .section-nav a { font-size: .74rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-decoration: none; opacity: .85; }
+    .section-nav a:hover { opacity: 1; color: var(--leather); text-decoration: underline; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.85rem 1.5rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(255,255,255,.55); backdrop-filter: blur(8px); z-index: 2; }
+    header nav { display: flex; gap: 1.15rem; flex-wrap: wrap; align-items: center; }
+    header a { font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; color: var(--muted); opacity: .9; }
+    header a:hover { opacity: 1; color: var(--leather); }
     a { color: inherit; text-underline-offset: 3px; }
     a:hover { color: var(--leather); }
     .content { max-width: var(--content); margin: 0 auto; padding: 0 1.25rem; }
@@ -65,36 +72,38 @@
       .avatar { width: min(15rem, 82vw); height: min(15rem, 82vw); min-height: 0; margin: 0 auto; }
     }
     .divider { text-align: center; margin: 2.25rem 0; color: var(--muted); opacity: .55; letter-spacing: .35em; font-size: .75rem; }
-    .section-title { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin: 2.35rem 0 1rem; color: var(--muted); scroll-margin-top: 4rem; }
+    .section-title { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin: 2.35rem 0 1rem; color: var(--muted); scroll-margin-top: 6.5rem; }
     .highlights-title { font-size: .95rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin: 1.15rem 0 .75rem; color: var(--muted); }
     .prose { font-size: .95rem; }
     .prose p { margin-bottom: .85rem; opacity: .92; }
     .prose ul { margin: .4rem 0 1rem 1.15rem; opacity: .92; }
     .prose li { margin: .35rem 0; }
     .prose .sub { font-weight: 650; margin: 1.1rem 0 .35rem; font-size: .95rem; }
-    .history { padding: 2.75rem 0 2rem; max-width: 36rem; margin: 0 auto; }
+    .history { padding: 1.75rem 0 1.5rem; max-width: 36rem; margin: 0 auto; }
     .history > h2 { padding: 0 1.25rem; }
     .history h2 { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .85rem; color: var(--muted); }
     .logos-marquee { overflow: hidden; width: 100vw; max-width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding-block: .15rem; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
     .logos-track { display: flex; width: max-content; animation: logos-marquee 38s linear infinite; }
     .logos-marquee:hover .logos-track, .logos-marquee:focus-within .logos-track { animation-play-state: paused; }
-    @keyframes logos-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes logos-marquee { from { transform: translateX(0); } to { transform: translateX(-33.333%); } }
     @media (prefers-reduced-motion: reduce) {
       .logos-marquee { mask-image: none; -webkit-mask-image: none; width: 100%; margin-left: 0; margin-right: 0; }
       .logos-track { animation: none; transform: none; width: 100%; max-width: 36rem; margin: 0 auto; padding: 0 1.25rem; justify-content: center; }
       .logos-track .logos[aria-hidden="true"] { display: none; }
       .logos { flex-wrap: wrap; justify-content: center; padding-right: 0; }
     }
-    .logos { display: flex; flex-wrap: nowrap; gap: .5rem; align-items: center; padding-right: 2rem; flex-shrink: 0; }
-    .logos a { display: grid; place-items: center; min-width: 3rem; height: 3rem; padding: .35rem .5rem; border-radius: .45rem; border: 1px solid var(--khaki-edge); background: var(--khaki); text-decoration: none; }
+    .logos { display: flex; flex-wrap: nowrap; gap: .6rem; align-items: center; flex-shrink: 0; justify-content: flex-start; padding-right: .6rem; }
+    .logos a { display: grid; place-items: center; min-width: 6rem; height: 6rem; padding: .7rem 1rem; border-radius: .45rem; border: 1px solid var(--khaki-edge); background: var(--khaki); text-decoration: none; }
     .logos a:hover { background: #d4c4a4; border-color: var(--leather); }
-    .logos a img { max-width: 100%; max-height: 2.15rem; width: auto; height: auto; object-fit: contain; }
+    .logos a img { max-width: 100%; max-height: 4.3rem; width: auto; height: auto; object-fit: contain; }
     .logos a.logos-dark { background: #22201e; border-color: #22201e; }
     .logos a.logos-dark:hover { border-color: var(--leather); }
-    .logos a.logos-wide { min-width: 5.75rem; padding-inline: .55rem; }
-    .logos a.logos-wide img { max-height: 1.75rem; max-width: 6.75rem; }
-    #research { scroll-margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--line); }
-    #research > h2, #skills h2, #publications h2, #leadership h2, #looking-heading { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; color: var(--muted); scroll-margin-top: 4rem; }
+    .logos a.logos-wide { min-width: 11.5rem; padding-inline: 1.1rem; }
+    .logos a.logos-wide img { max-height: 3.5rem; max-width: 13.5rem; }
+    #research { scroll-margin-top: 6.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--line); }
+    article.job#epfl { scroll-margin-top: 6.5rem; }
+    #research > h2, #skills h2, #publications h2, #leadership h2 { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; color: var(--muted); scroll-margin-top: 6.5rem; }
+    .about-box #looking-heading { margin-top: 1.25rem; }
     article.job { padding: 1.35rem 0; border-bottom: 1px solid rgba(74, 67, 58, .15); scroll-margin-top: 3.5rem; }
     article.job:last-child { border-bottom: none; }
     article.job header.job-head { position: static; border: none; padding: 0; background: transparent; display: flex; gap: .85rem; align-items: flex-start; text-align: left; margin-bottom: .55rem; }
@@ -118,6 +127,7 @@
     @media (min-width: 34em) { .skill-grid { grid-template-columns: 1fr 1fr; } }
     .skill-block h3 { font-size: .82rem; font-weight: 650; margin-bottom: .35rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
     .skill-block p { font-size: .9rem; opacity: .9; }
+    #projects, #skills, #publications, #leadership { scroll-margin-top: 6.5rem; }
     #leadership { padding-bottom: 2.5rem; }
     .site-footer { border-top: 1px solid var(--line); background: rgba(255,255,255,.4); padding: 2.25rem 0 2.5rem; text-align: center; }
     .site-footer .footer-name { font-size: 1rem; font-weight: 650; letter-spacing: -.01em; margin-bottom: .85rem; }
@@ -133,12 +143,24 @@
       <a href="Michael_Domm_Resume_2026.pdf" target="_blank" rel="noopener">resume</a>
       <a href="mailto:mdomm@uwaterloo.ca">email me</a>
       <a href="https://scholar.google.ca/citations?user=C4fVWxsAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+      <a href="https://www.linkedin.com/in/mike-domm" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://mrdomm.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
     <nav>
       <a href="#top">Home</a>
       <a href="personal.html">personal</a>
     </nav>
   </header>
+
+  <nav class="section-nav" aria-label="Jump to section">
+    <div class="content section-nav-inner">
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#publications">Publications</a>
+      <a href="#leadership">Leadership</a>
+    </div>
+  </nav>
 
   <main class="hero">
     <div class="hero-layout">
@@ -156,18 +178,49 @@
     </div>
   </main>
 
-  <div class="divider" aria-hidden="true">⸻</div>
+  <section class="history" aria-label="Work history">
+    <h2>Where I’ve worked</h2>
+    <div class="logos-marquee">
+      <div class="logos-track">
+        <div class="logos">
+          <a class="logos-wide" href="#epfl" aria-label="EPFL HYLAB"><img src="assets/logos/EPFL.png" alt=""></a>
+          <a class="logos-dark logos-wide" href="#iqc" aria-label="IQC"><img src="assets/logos/iqc.png" alt=""></a>
+          <a href="#harvard" aria-label="Harvard University"><img src="assets/logos/harvard.jpg" alt=""></a>
+          <a class="logos-wide" href="#strickland" aria-label="University of Waterloo Faculty of Science"><img src="assets/logos/uwaterloo-science.png" alt=""></a>
+          <a class="logos-wide" href="#ppo" aria-label="P&amp;P Optica"><img src="assets/logos/ppo.jpg" alt=""></a>
+          <a class="logos-wide" href="#teledyne" aria-label="Teledyne DALSA"><img src="assets/logos/teledyne.png" alt=""></a>
+        </div>
+        <div class="logos" aria-hidden="true">
+          <a class="logos-wide" href="#epfl" tabindex="-1"><img src="assets/logos/EPFL.png" alt=""></a>
+          <a class="logos-dark logos-wide" href="#iqc" tabindex="-1"><img src="assets/logos/iqc.png" alt=""></a>
+          <a href="#harvard" tabindex="-1"><img src="assets/logos/harvard.jpg" alt=""></a>
+          <a class="logos-wide" href="#strickland" tabindex="-1"><img src="assets/logos/uwaterloo-science.png" alt=""></a>
+          <a class="logos-wide" href="#ppo" tabindex="-1"><img src="assets/logos/ppo.jpg" alt=""></a>
+          <a class="logos-wide" href="#teledyne" tabindex="-1"><img src="assets/logos/teledyne.png" alt=""></a>
+        </div>
+        <div class="logos" aria-hidden="true">
+          <a class="logos-wide" href="#epfl" tabindex="-1"><img src="assets/logos/EPFL.png" alt=""></a>
+          <a class="logos-dark logos-wide" href="#iqc" tabindex="-1"><img src="assets/logos/iqc.png" alt=""></a>
+          <a href="#harvard" tabindex="-1"><img src="assets/logos/harvard.jpg" alt=""></a>
+          <a class="logos-wide" href="#strickland" tabindex="-1"><img src="assets/logos/uwaterloo-science.png" alt=""></a>
+          <a class="logos-wide" href="#ppo" tabindex="-1"><img src="assets/logos/ppo.jpg" alt=""></a>
+          <a class="logos-wide" href="#teledyne" tabindex="-1"><img src="assets/logos/teledyne.png" alt=""></a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <section id="about" class="content prose" aria-labelledby="highlights-heading">
+  <section id="about" class="content prose" aria-labelledby="about-heading">
+    <h2 id="about-heading" class="section-title">About</h2>
     <div class="about-box">
-      <h3 id="highlights-heading" class="highlights-title">Quick highlights</h3>
+      <h3 class="highlights-title">Quick highlights</h3>
       <ul>
         <li>Current research at the Institute for Quantum Computing</li>
         <li>Past researcher at Harvard (Capasso Lab) and University of Waterloo (Strickland Lab)</li>
         <li>2+ years of industry experience</li>
         <li>Board member of a nonprofit managing a seven-figure budget</li>
       </ul>
-      <h2 id="looking-heading" class="section-title">What I’m looking for</h2>
+      <h3 id="looking-heading" class="highlights-title">What I’m looking for</h3>
       <p>I am seeking opportunities in:</p>
       <ul>
         <li>Quantum photonics and optical engineering</li>
@@ -193,36 +246,30 @@
 
   <div class="divider" aria-hidden="true">⸻</div>
 
-  <section class="history" aria-label="Work history">
-    <h2>Where I’ve worked</h2>
-    <div class="logos-marquee">
-      <div class="logos-track">
-        <div class="logos">
-          <a class="logos-dark logos-wide" href="#iqc" aria-label="IQC"><img src="assets/logos/iqc.png" alt=""></a>
-          <a href="#harvard" aria-label="Harvard University"><img src="assets/logos/harvard.png" alt=""></a>
-          <a class="logos-wide" href="#strickland" aria-label="University of Waterloo Faculty of Science"><img src="assets/logos/uwaterloo-science.png" alt=""></a>
-          <a class="logos-wide" href="#ppo" aria-label="P&amp;P Optica"><img src="assets/logos/ppo.jpg" alt=""></a>
-          <a class="logos-wide" href="#teledyne" aria-label="Teledyne DALSA"><img src="assets/logos/teledyne.png" alt=""></a>
-        </div>
-        <div class="logos" aria-hidden="true">
-          <a class="logos-dark logos-wide" href="#iqc" tabindex="-1"><img src="assets/logos/iqc.png" alt=""></a>
-          <a href="#harvard" tabindex="-1"><img src="assets/logos/harvard.png" alt=""></a>
-          <a class="logos-wide" href="#strickland" tabindex="-1"><img src="assets/logos/uwaterloo-science.png" alt=""></a>
-          <a class="logos-wide" href="#ppo" tabindex="-1"><img src="assets/logos/ppo.jpg" alt=""></a>
-          <a class="logos-wide" href="#teledyne" tabindex="-1"><img src="assets/logos/teledyne.png" alt=""></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section id="research" class="content" aria-labelledby="research-heading">
     <h2 id="research-heading" class="section-title">Research experience</h2>
+
+    <article id="epfl" class="job">
+      <header class="job-head">
+        <div class="logo-slot logo-slot--bar" title="EPFL — Hybrid Photonics Laboratory (HYLAB)"><img src="assets/logos/EPFL.png" alt=""></div>
+        <div class="job-titles">
+          <h3><a href="https://www.epfl.ch/labs/hylab/" target="_blank" rel="noopener noreferrer">Hybrid Photonics Laboratory (HYLAB)</a> — EPFL</h3>
+          <p class="when">Research intern · upcoming</p>
+        </div>
+      </header>
+      <p class="summary">Incoming research intern working on hybrid electronic-photonic chips that interface millimeterwave and terahertz signals with optics.</p>
+      <ul>
+        <li>Hybrid electronic-photonic integrated circuits</li>
+        <li>Millimeterwave and terahertz to optical transduction</li>
+        <li>Applications in high-capacity communications and quantum circuits</li>
+      </ul>
+    </article>
 
     <article id="iqc" class="job">
       <header class="job-head">
         <div class="logo-slot logo-slot--dark logo-slot--bar" title="Institute for Quantum Computing"><img src="assets/logos/iqc.png" alt=""></div>
         <div class="job-titles">
-          <h3>Quantum Photonic Devices Lab — University of Waterloo</h3>
+          <h3><a href="https://www.qpdlab.com" target="_blank" rel="noopener noreferrer">Quantum Photonic Devices Lab</a> — University of Waterloo</h3>
           <p class="when">M.Sc. researcher · 2025 — present</p>
         </div>
       </header>
@@ -236,9 +283,9 @@
 
     <article id="harvard" class="job">
       <header class="job-head">
-        <div class="logo-slot logo-slot--square" title="Harvard University"><img src="assets/logos/harvard.png" alt=""></div>
+        <div class="logo-slot logo-slot--square" title="Harvard University"><img src="assets/logos/harvard.jpg" alt=""></div>
         <div class="job-titles">
-          <h3>Capasso Lab — Harvard University</h3>
+          <h3><a href="https://capasso.seas.harvard.edu" target="_blank" rel="noopener noreferrer">Capasso Lab</a> — Harvard University</h3>
           <p class="when">Photonics research intern · May 2023 — Jan 2024</p>
         </div>
       </header>
@@ -393,10 +440,8 @@
         <a href="mailto:mdomm@uwaterloo.ca">Email</a>
         <a href="Michael_Domm_Resume_2026.pdf" target="_blank" rel="noopener">Resume</a>
         <a href="https://scholar.google.ca/citations?user=C4fVWxsAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
-        <!-- TODO: replace the # placeholders below with your real profile URLs -->
-        <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="#" target="_blank" rel="noopener noreferrer">ORCID</a>
+        <a href="https://www.linkedin.com/in/mike-domm" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://mrdomm.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
       </nav>
       <p class="footer-note">Quantum photonics · metasurfaces · nanofabrication</p>
     </div>
