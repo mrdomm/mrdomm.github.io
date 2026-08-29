@@ -104,21 +104,18 @@
     .logos a.logos-wide img { max-height: 3.5rem; max-width: 13.5rem; }
     .logos a.logos-lg { min-width: 13.5rem; }
     .logos a.logos-lg img { max-height: 5rem; max-width: 15.5rem; }
-    #research { scroll-margin-top: 6.5rem; padding: 1.5rem 0 3rem; }
+    #research { scroll-margin-top: 6.5rem; padding: 1.5rem 0 0; }
     article.job#epfl { scroll-margin-top: 6.5rem; }
-    #skills h2, #publications h2, #leadership h2 { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; color: var(--muted); scroll-margin-top: 6.5rem; }
-    #research > h2 { font-size: 1.5rem; font-weight: 650; letter-spacing: .02em; text-transform: uppercase; margin-bottom: 1.1rem; color: var(--text); scroll-margin-top: 6.5rem; }
+    #research > h2, #skills h2, #publications h2, #leadership h2 { font-size: 1.5rem; font-weight: 650; letter-spacing: .02em; text-transform: uppercase; margin: 0 0 1.1rem; color: var(--text); scroll-margin-top: 6.5rem; }
     .about-box #looking-heading { margin-top: 1.25rem; }
     article.job { padding: 1.35rem 0; border-bottom: 1px solid rgba(74, 67, 58, .15); scroll-margin-top: 3.5rem; }
     article.job:last-child { border-bottom: none; }
     article.job header.job-head { position: static; border: none; padding: 0; background: transparent; display: flex; gap: .85rem; align-items: flex-start; text-align: left; margin-bottom: .55rem; }
-    article.job .logo-slot { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: .35rem .45rem; border-radius: .45rem; border: 1px solid var(--line); background: #fff; min-height: 2.85rem; max-width: 7.5rem; }
+    article.job .logo-slot { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: .35rem .45rem; border-radius: .45rem; border: 1px solid var(--line); background: #fff; min-height: 2.85rem; width: 9rem; }
     article.job .logo-slot img { max-width: 100%; max-height: 2.35rem; width: auto; height: auto; object-fit: contain; }
     article.job .logo-slot--dark { background: #22201e; border-color: #22201e; }
-    article.job .logo-slot--square { max-width: 3.35rem; min-width: 3.35rem; padding: .3rem; }
     article.job .logo-slot--square img { max-height: 2.6rem; }
-    article.job .logo-slot--bar { max-width: 9rem; min-width: 7rem; }
-    article.job .logo-slot--bar img { max-height: 1.65rem; }
+    article.job .logo-slot--bar img { max-height: 2rem; max-width: 100%; }
     article.job .job-titles { flex: 1; min-width: 0; }
     article.job h3 { font-size: 1.05rem; font-weight: 650; letter-spacing: -.01em; }
     article.job .when { font-size: .82rem; font-weight: 500; opacity: .68; margin-top: .2rem; }
@@ -160,8 +157,7 @@
 
   <nav class="section-nav" aria-label="Jump to section">
     <div class="content section-nav-inner">
-      <a href="#research">Research</a>
-      <a href="#projects">Projects</a>
+      <a href="#research">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#publications">Publications</a>
       <a href="#leadership">Leadership</a>
@@ -178,7 +174,6 @@
           <p class="lede">Building next-generation quantum light sources and photonic systems through simulation, fabrication, and experiment.</p>
           <p><strong>Currently:</strong> M.Sc. Physics @ <a href="https://uwaterloo.ca/institute-for-quantum-computing/" target="_blank" rel="noopener noreferrer">Institute for Quantum Computing</a> (<a href="https://www.qpdlab.com" target="_blank" rel="noopener noreferrer">Quantum Photonic Devices Lab</a>)</p>
           <p><strong>Incoming:</strong> Research intern @ <a href="https://www.epfl.ch/labs/hylab/" target="_blank" rel="noopener noreferrer">EPFL (HYLAB)</a>, Switzerland, starting October 15, 2026</p>
-          <p><strong>Focus:</strong> Entangled photon sources by quantum dot and integrated photonics</p>
         </div>
       </div>
       <img class="avatar" src="assets/profile.jpg" width="240" height="240" alt="Michael Domm">
@@ -247,7 +242,7 @@
   </section>
 
   <section id="research" class="content" aria-labelledby="research-heading">
-    <h2 id="research-heading" class="section-title">Research experience</h2>
+    <h2 id="research-heading" class="section-title">Experience</h2>
 
     <article id="epfl" class="job">
       <header class="job-head">
@@ -349,41 +344,6 @@
 
   <div class="divider" aria-hidden="true">⸻</div>
 
-  <section id="projects" class="content prose" aria-labelledby="projects-heading">
-    <h2 id="projects-heading" class="section-title">Selected projects</h2>
-
-    <div class="project">
-      <h3>High-capacity metasurface design</h3>
-      <p>Designed metasurfaces capable of producing multiple holographic outputs.</p>
-      <ul>
-        <li>Large-scale FDTD simulations</li>
-        <li>Wavefront engineering at subwavelength scale</li>
-        <li>Optimization of optical response across wavelengths</li>
-      </ul>
-    </div>
-
-    <div class="project">
-      <h3>Nonlinear optical material integration</h3>
-      <p>Explored nonlinear materials coupled with resonant photonic structures.</p>
-      <ul>
-        <li>Investigated tunable wavelength selection mechanisms</li>
-        <li>Combined simulation and experimental validation</li>
-      </ul>
-    </div>
-
-    <div class="project">
-      <h3>Thin film optical modeling</h3>
-      <p>Built simulation tools for multilayer optical systems.</p>
-      <ul>
-        <li>Transfer matrix modeling</li>
-        <li>Spectral response prediction</li>
-        <li>Comparison with experimental data</li>
-      </ul>
-    </div>
-  </section>
-
-  <div class="divider" aria-hidden="true">⸻</div>
-
   <section id="skills" class="content" aria-labelledby="skills-heading">
     <h2 id="skills-heading" class="section-title">Technical skills</h2>
     <div class="skill-grid">
@@ -397,7 +357,7 @@
       </div>
       <div class="skill-block">
         <h3>Fabrication</h3>
-        <p>E-beam lithography, UV lithography, PECVD, deposition, wet benches</p>
+        <p>E-beam lithography, UV lithography, PECVD, EBPVD, SEM, RIE, wet benches</p>
       </div>
       <div class="skill-block">
         <h3>Machining</h3>
