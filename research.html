@@ -76,6 +76,8 @@
     .person h3 { font-size: .96rem; font-weight: 650; margin-bottom: .2rem; }
     .person .role { font-size: .8rem; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; color: var(--leather); margin-bottom: .3rem; }
     .person p { font-size: .85rem; opacity: .9; }
+    .person p + p { margin-top: .4rem; }
+    .person .affil { font-size: .78rem; opacity: .75; }
     .person a { text-decoration: none; }
     .person a:hover { text-decoration: underline; }
 
@@ -187,8 +189,8 @@
     </section>
 
     <section id="committee" class="block">
-      <h2>Committee &amp; collaborators</h2>
-      <p>The people I work with and who guide the research.</p>
+      <h2>Research supervision &amp; advisory committee</h2>
+      <p>My M.Sc. advisory committee provides guidance on my research and progress throughout the degree. It consists of my supervisor, one faculty member from the Department of Physics and Astronomy, and one faculty member from another University of Waterloo department. Alongside my formal committee, I work closely with a postdoctoral researcher in the group who provides day-to-day research supervision.</p>
       <div class="people">
         <div class="person">
           <!-- TODO: replace initials placeholder with photo once a valid image is added:
@@ -196,24 +198,38 @@
           <div class="person-initials" aria-hidden="true">MR</div>
           <div class="person-body">
             <h3><a href="https://uwaterloo.ca/electrical-computer-engineering/profile/mreimer" target="_blank" rel="noopener noreferrer">Michael E. Reimer</a></h3>
-            <p class="role">Advisor</p>
-            <p>Quantum Photonic Devices Lab · Institute for Quantum Computing, University of Waterloo</p>
+            <p class="role">Supervisor</p>
+            <p class="affil">Quantum Photonic Devices Lab · Institute for Quantum Computing · University of Waterloo</p>
+            <p>My M.Sc. supervisor and lead of the Quantum Photonic Devices Lab, where my research focuses on quantum-dot sources of entangled photons.</p>
           </div>
         </div>
         <div class="person">
-          <img src="assets/committee/francois-sfigakis.jpg" alt="François Sfigakis">
+          <!-- TODO: replace initials placeholder with photo once a valid image is added:
+               <img src="assets/committee/stephen-harrigan.jpg" alt="Stephen Harrigan"> -->
+          <div class="person-initials" aria-hidden="true">SH</div>
           <div class="person-body">
-            <h3><a href="https://uwaterloo.ca/institute-for-quantum-computing/profiles/francois-sfigakis" target="_blank" rel="noopener noreferrer">François Sfigakis</a></h3>
-            <p class="role">Committee member</p>
-            <p>Institute for Quantum Computing, University of Waterloo</p>
+            <h3>Stephen Harrigan</h3>
+            <p class="role">Day-to-day research supervisor</p>
+            <p class="affil">Quantum Photonic Devices Lab · Institute for Quantum Computing · University of Waterloo</p>
+            <p>My day-to-day research supervisor in the group. His work focuses on a novel all-electrical single-photon source based on single-electron pumps in III–V semiconductor heterostructures. He earned his BSc in Physics–Mathematics from the University of Ottawa in 2019 and joined IQC that year.</p>
           </div>
         </div>
         <div class="person">
           <img src="assets/committee/kazi-rajibul-islam.jpg" alt="Kazi Rajibul Islam">
           <div class="person-body">
             <h3><a href="https://uwaterloo.ca/institute-for-quantum-computing/profiles/kazi-rajibul-islam" target="_blank" rel="noopener noreferrer">Kazi Rajibul Islam</a></h3>
-            <p class="role">Committee member</p>
-            <p><a href="https://qiti.iqc.uwaterloo.ca" target="_blank" rel="noopener noreferrer">QITI Lab</a> · Institute for Quantum Computing, University of Waterloo</p>
+            <p class="role">Committee member · Physics &amp; Astronomy</p>
+            <p class="affil"><a href="https://qiti.iqc.uwaterloo.ca" target="_blank" rel="noopener noreferrer">QITI Lab</a> · Institute for Quantum Computing · University of Waterloo</p>
+            <p>A member of my advisory committee and a faculty member in the Department of Physics and Astronomy.<!-- TODO: optionally add a sentence on his research focus --></p>
+          </div>
+        </div>
+        <div class="person">
+          <img src="assets/committee/francois-sfigakis.jpg" alt="François Sfigakis">
+          <div class="person-body">
+            <h3><a href="https://uwaterloo.ca/institute-for-quantum-computing/profiles/francois-sfigakis" target="_blank" rel="noopener noreferrer">François Sfigakis</a></h3>
+            <p class="role">Committee member · University of Waterloo</p>
+            <p class="affil">Institute for Quantum Computing · University of Waterloo</p>
+            <p>A member of my advisory committee and a faculty member at the University of Waterloo.<!-- TODO: optionally add a sentence on his research focus --></p>
           </div>
         </div>
       </div>
