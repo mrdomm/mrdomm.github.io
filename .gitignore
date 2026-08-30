@@ -1,1 +1,13 @@
+# macOS
+.DS_Store
+
+# Python virtual env
+.venv/
+
+# Local notes / scratch
 notes.txt
+
+# Private / sensitive source material (kept outside the repo)
+assets/master info to read/
+School ID.pdf
+School_ID.pdf
