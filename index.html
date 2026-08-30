@@ -41,10 +41,20 @@
     .section-nav-inner { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; justify-content: center; padding-top: .55rem; padding-bottom: .55rem; }
     .section-nav a { font-size: .74rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-decoration: none; opacity: .85; }
     .section-nav a:hover { opacity: 1; color: var(--leather); text-decoration: underline; }
-    header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.85rem 1.5rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(255,255,255,.55); backdrop-filter: blur(8px); z-index: 2; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.85rem 1.5rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(255,255,255,.55); backdrop-filter: blur(8px); z-index: 20; }
     header nav { display: flex; gap: 1.15rem; flex-wrap: wrap; align-items: center; }
     header a { font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; color: var(--muted); opacity: .9; }
     header a:hover { opacity: 1; color: var(--leather); }
+    .navdrop { position: relative; display: inline-flex; align-items: center; }
+    .navdrop > .navdrop-toggle { display: inline-flex; align-items: center; gap: .3rem; background: none; border: 0; cursor: pointer; font: inherit; font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); opacity: .9; padding: 0; }
+    .navdrop > .navdrop-toggle:hover, .navdrop > .navdrop-toggle[aria-expanded="true"] { opacity: 1; color: var(--leather); }
+    .navdrop-toggle .caret { width: .5rem; height: .5rem; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-1px); transition: transform .15s ease; }
+    .navdrop-toggle[aria-expanded="true"] .caret { transform: rotate(-135deg) translateY(-1px); }
+    .navdrop-menu { position: absolute; top: calc(100% + .5rem); right: 0; min-width: 12.5rem; background: #fbf7ef; border: 1px solid var(--line); border-radius: .5rem; box-shadow: 0 10px 30px rgba(92,64,51,.16); padding: .35rem; display: none; flex-direction: column; z-index: 30; }
+    .navdrop-menu.open { display: flex; }
+    .navdrop-menu a { display: block; padding: .5rem .65rem; border-radius: .35rem; font-size: .78rem; letter-spacing: .03em; text-transform: none; opacity: .95; white-space: nowrap; }
+    .navdrop-menu a:hover, .navdrop-menu a:focus-visible { background: var(--khaki); color: var(--leather); }
+    @media (hover: hover) { .navdrop:hover .navdrop-menu { display: flex; } }
     a { color: inherit; text-underline-offset: 3px; }
     a:hover { color: var(--leather); }
     .content { max-width: var(--content); margin: 0 auto; padding: 0 1.25rem; }
@@ -148,9 +158,16 @@
       <a href="https://www.linkedin.com/in/mike-domm" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://mrdomm.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
-    <nav>
+    <nav aria-label="Primary">
       <a href="#top">Home</a>
-      <a href="research.html">research</a>
+      <span class="navdrop" data-navdrop>
+        <button type="button" class="navdrop-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="research-menu">Research <span class="caret" aria-hidden="true"></span></button>
+        <span class="navdrop-menu" id="research-menu" role="menu">
+          <a href="research.html" role="menuitem">Research Overview</a>
+          <a href="masters-research.html" role="menuitem">Master&rsquo;s Research</a>
+          <a href="undergraduate-research.html" role="menuitem">Undergraduate Research</a>
+        </span>
+      </span>
       <a href="personal.html">personal</a>
     </nav>
   </header>
@@ -407,5 +424,33 @@
     </div>
   </footer>
 
+  <script>
+  (function () {
+    document.querySelectorAll("[data-navdrop]").forEach(function (drop) {
+      const toggle = drop.querySelector(".navdrop-toggle");
+      const menu = drop.querySelector(".navdrop-menu");
+      if (!toggle || !menu) return;
+      function open() { menu.classList.add("open"); toggle.setAttribute("aria-expanded", "true"); }
+      function close() { menu.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); }
+      function isOpen() { return menu.classList.contains("open"); }
+      toggle.addEventListener("click", function (e) { e.preventDefault(); isOpen() ? close() : open(); });
+      toggle.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+          e.preventDefault(); open();
+          const first = menu.querySelector("a"); if (first) first.focus();
+        }
+      });
+      menu.addEventListener("keydown", function (e) {
+        const items = Array.prototype.slice.call(menu.querySelectorAll("a"));
+        const idx = items.indexOf(document.activeElement);
+        if (e.key === "Escape") { close(); toggle.focus(); }
+        else if (e.key === "ArrowDown") { e.preventDefault(); items[(idx + 1) % items.length].focus(); }
+        else if (e.key === "ArrowUp") { e.preventDefault(); items[(idx - 1 + items.length) % items.length].focus(); }
+      });
+      drop.addEventListener("focusout", function (e) { if (!drop.contains(e.relatedTarget)) close(); });
+      document.addEventListener("click", function (e) { if (!drop.contains(e.target)) close(); });
+    });
+  })();
+  </script>
 </body>
 </html>

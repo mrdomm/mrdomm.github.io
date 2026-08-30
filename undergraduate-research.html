@@ -4,16 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Undergraduate Research — Michael Domm</title>
-  <meta name="description" content="Michael Domm's undergraduate research projects in metasurfaces, nonlinear optics, and thin-film optical modeling, including work at Harvard (Capasso Lab) and the Strickland Lab.">
+  <meta name="description" content="Michael Domm's undergraduate research: metasurfaces and wavefront engineering at Harvard's Capasso Lab, and nonlinear optical materials with transfer-matrix modelling at the University of Waterloo's Strickland Lab.">
   <meta name="author" content="Michael Domm">
 
-  <!-- Open Graph / social sharing -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Undergraduate Research — Michael Domm">
-  <meta property="og:description" content="Undergraduate research in metasurfaces, nonlinear optics, and thin-film optical modeling.">
+  <meta property="og:description" content="Metasurfaces and wavefront engineering at Harvard's Capasso Lab; nonlinear optics at Waterloo's Strickland Lab.">
   <meta property="og:image" content="assets/profile.jpg">
 
-  <!-- Favicon: inline SVG, no extra file needed -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%235c4033'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='18' font-weight='700' fill='%23f7f3eb' text-anchor='middle'%3EMD%3C/text%3E%3C/svg%3E">
   <style>
     :root {
@@ -32,31 +30,65 @@
     body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: linear-gradient(165deg, var(--bg) 0%, var(--bg-deep) 100%); line-height: 1.5; font-size: 15px; min-height: 100vh; }
     a { color: inherit; text-underline-offset: 3px; }
     a:hover { color: var(--leather); }
+    :focus-visible { outline: 2px solid var(--leather); outline-offset: 2px; border-radius: .2rem; }
 
-    header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.85rem 1.5rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(255,255,255,.55); backdrop-filter: blur(8px); z-index: 2; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.85rem 1.5rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(255,255,255,.55); backdrop-filter: blur(8px); z-index: 20; }
     header nav { display: flex; gap: 1.15rem; flex-wrap: wrap; align-items: center; }
     header a { font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; color: var(--muted); opacity: .9; }
     header a:hover { opacity: 1; color: var(--leather); }
+    header a[aria-current="page"] { color: var(--leather); opacity: 1; }
+
+    .navdrop { position: relative; display: inline-flex; align-items: center; }
+    .navdrop > .navdrop-toggle { display: inline-flex; align-items: center; gap: .3rem; background: none; border: 0; cursor: pointer; font: inherit; font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--leather); opacity: 1; padding: 0; }
+    .navdrop-toggle .caret { width: .5rem; height: .5rem; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-1px); transition: transform .15s ease; }
+    .navdrop-toggle[aria-expanded="true"] .caret { transform: rotate(-135deg) translateY(-1px); }
+    .navdrop-menu { position: absolute; top: calc(100% + .5rem); right: 0; min-width: 12.5rem; background: #fbf7ef; border: 1px solid var(--line); border-radius: .5rem; box-shadow: 0 10px 30px rgba(92,64,51,.16); padding: .35rem; display: none; flex-direction: column; z-index: 30; }
+    .navdrop-menu.open { display: flex; }
+    .navdrop-menu a { display: block; padding: .5rem .65rem; border-radius: .35rem; font-size: .78rem; letter-spacing: .03em; text-transform: none; opacity: .95; white-space: nowrap; }
+    .navdrop-menu a:hover, .navdrop-menu a:focus-visible { background: var(--khaki); color: var(--leather); }
+    .navdrop-menu a[aria-current="page"] { color: var(--leather); font-weight: 650; }
+    @media (hover: hover) { .navdrop:hover .navdrop-menu { display: flex; } }
 
     .content { max-width: var(--content); margin: 0 auto; padding: 0 1.25rem; }
+    .wide { max-width: 54rem; }
 
-    .intro { padding: 3rem 0 1rem; }
-    .intro h1 { font-size: clamp(1.7rem, 5vw, 2.1rem); font-weight: 650; letter-spacing: -.02em; margin-bottom: .55rem; }
-    .intro .lede { font-size: 1.02rem; opacity: .92; max-width: 40rem; }
+    .section-nav { position: sticky; top: 2.9rem; z-index: 10; background: rgba(255,255,255,.35); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+    .section-nav-inner { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; justify-content: center; padding-top: .55rem; padding-bottom: .55rem; }
+    .section-nav a { font-size: .72rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); text-decoration: none; opacity: .85; }
+    .section-nav a:hover { opacity: 1; color: var(--leather); text-decoration: underline; }
+
+    .breadcrumb { font-size: .78rem; color: var(--muted); opacity: .8; margin-bottom: .8rem; }
+    .breadcrumb a { text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    .intro { padding: 2.5rem 0 1.25rem; }
+    .intro h1 { font-size: clamp(1.7rem, 5vw, 2.15rem); font-weight: 650; letter-spacing: -.02em; margin-bottom: .55rem; }
+    .intro .lede { font-size: 1.02rem; opacity: .92; max-width: 44rem; }
     .intro .lede p + p { margin-top: .7rem; }
 
-    section.block { padding: 2rem 0 2.5rem; scroll-margin-top: 4rem; }
-    .block h2 { font-size: 1.5rem; font-weight: 650; letter-spacing: .02em; text-transform: uppercase; margin-bottom: 1.15rem; }
+    section.block { padding: 2.1rem 0; border-top: 1px solid var(--line); scroll-margin-top: 5.5rem; }
+    .block h2 { font-size: 1.4rem; font-weight: 650; letter-spacing: .01em; margin-bottom: .35rem; }
+    .block .lab-meta { font-size: .82rem; color: var(--muted); margin-bottom: 1rem; }
+    .block .lab-meta strong { font-weight: 650; color: var(--text); }
+    .block h3 { font-size: 1rem; font-weight: 650; margin: 1.2rem 0 .35rem; }
+    .block p { font-size: .96rem; opacity: .92; max-width: 44rem; }
+    .block p + p { margin-top: .7rem; }
+    .block ul { margin: .5rem 0 0 1.15rem; max-width: 44rem; }
+    .block li { font-size: .93rem; opacity: .92; margin: .3rem 0; }
+    .term { font-weight: 600; }
 
-    .projects { display: grid; gap: 1.1rem; grid-template-columns: 1fr; margin-top: .5rem; }
-    @media (min-width: 40em) { .projects { grid-template-columns: 1fr 1fr; } }
-    .project { padding: 1.15rem 1.2rem; border: 1px solid var(--line); border-radius: .6rem; background: rgba(255,255,255,.5); transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
-    .project:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(92,64,51,.12); border-color: var(--leather); }
-    .project h3 { font-size: 1.02rem; font-weight: 650; margin-bottom: .4rem; }
-    .project > p { font-size: .9rem; opacity: .9; margin-bottom: .55rem; }
-    .project ul { margin: 0 0 0 1rem; font-size: .86rem; opacity: .9; }
-    .project li { margin: .25rem 0; }
-    .project .affil { font-size: .78rem; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; color: var(--leather); margin-top: .6rem; }
+    .project-card { border: 1px solid var(--line); border-radius: .6rem; background: rgba(255,255,255,.5); padding: 1.1rem 1.2rem; margin-top: 1rem; max-width: 44rem; }
+    .project-card h3 { margin-top: 0; }
+    .project-card .tags { font-size: .76rem; color: var(--muted); margin-top: .6rem; }
+
+    .techniques { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; max-width: 44rem; }
+    .techniques span { font-size: .74rem; font-weight: 600; padding: .28rem .65rem; border: 1px solid var(--line); border-radius: 1rem; background: rgba(255,255,255,.5); color: var(--muted); }
+
+    /* Progression strip */
+    .progression { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: 1rem; }
+    .progression .step { font-size: .82rem; font-weight: 600; padding: .4rem .8rem; border: 1px solid var(--line); border-radius: .45rem; background: rgba(255,255,255,.5); }
+    .progression .step.now { border-color: var(--leather); color: var(--leather); }
+    .progression .arrow { color: var(--leather); font-weight: 700; }
 
     .site-footer { border-top: 1px solid var(--line); background: rgba(255,255,255,.4); padding: 2.25rem 0 2.5rem; text-align: center; margin-top: 1rem; }
     .site-footer .footer-name { font-size: 1rem; font-weight: 650; letter-spacing: -.01em; margin-bottom: .85rem; }
@@ -75,74 +107,143 @@
       <a href="https://www.linkedin.com/in/mike-domm" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://mrdomm.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
-    <nav>
+    <nav aria-label="Primary">
       <a href="index.html">Home</a>
-      <a href="research.html">research</a>
+      <span class="navdrop" data-navdrop>
+        <button type="button" class="navdrop-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="research-menu">Research <span class="caret" aria-hidden="true"></span></button>
+        <span class="navdrop-menu" id="research-menu" role="menu">
+          <a href="research.html" role="menuitem">Research Overview</a>
+          <a href="masters-research.html" role="menuitem">Master&rsquo;s Research</a>
+          <a href="undergraduate-research.html" role="menuitem" aria-current="page">Undergraduate Research</a>
+        </span>
+      </span>
       <a href="personal.html">personal</a>
     </nav>
   </header>
 
-  <main class="content">
+  <nav class="section-nav" aria-label="Jump to section">
+    <div class="content wide section-nav-inner">
+      <a href="#harvard">Harvard — Capasso Lab</a>
+      <a href="#strickland">Waterloo — Strickland Lab</a>
+      <a href="#progression">Progression</a>
+    </div>
+  </nav>
+
+  <main class="content wide">
     <section class="intro">
-      <h1>Undergraduate research</h1>
+      <p class="breadcrumb"><a href="research.html">Research</a> &rsaquo; Undergraduate Research</p>
+      <h1>Undergraduate Research</h1>
       <div class="lede">
-        <p>Before my master's, I worked on optics and photonics across several research groups, including Harvard's Capasso Lab and the Strickland Lab at the University of Waterloo. These projects spanned metasurface design, nonlinear optics, and optical modeling.</p>
+        <p>Before my master's, I spent my undergraduate years working in optics and photonics research groups — first on metasurfaces and wavefront engineering at Harvard's Capasso Lab, then on nonlinear optical materials at the University of Waterloo's Strickland Lab. These projects built my experience across simulation, fabrication, and hands-on optical experiments, and shaped my path toward quantum photonics.</p>
       </div>
     </section>
 
-    <section id="projects" class="block">
-      <h2>Selected projects</h2>
-      <div class="projects">
-        <article class="project">
-          <h3>High-capacity metasurface design</h3>
-          <p>Designed metasurfaces capable of producing multiple holographic outputs.</p>
-          <ul>
-            <li>Large-scale FDTD simulations</li>
-            <li>Wavefront engineering at subwavelength scale</li>
-            <li>Optimization of optical response across wavelengths</li>
-          </ul>
-          <!-- TODO: adjust affiliation if needed -->
-          <p class="affil">Capasso Lab, Harvard</p>
-        </article>
+    <section id="harvard" class="block" aria-labelledby="harvard-h">
+      <h2 id="harvard-h">Harvard University — Capasso Lab</h2>
+      <p class="lab-meta">
+        <strong>Research internship</strong> · May 2023 – January 2024 · Department of Applied Physics ·
+        <a href="https://capasso.seas.harvard.edu" target="_blank" rel="noopener noreferrer">Federico Capasso's research group</a>
+      </p>
+      <p>I joined the Capasso group as a visiting undergraduate research intern for eight months, working on <span class="term">metasurfaces</span> — flat optical elements patterned with subwavelength nanostructures that shape light in ways bulk lenses and mirrors can't. My work spanned two main projects and the full pipeline behind them: design, simulation, fabrication files, and experiment.</p>
 
-        <article class="project">
-          <h3>Nonlinear optical material integration</h3>
-          <p>Explored nonlinear materials coupled with resonant photonic structures.</p>
-          <ul>
-            <li>Investigated tunable wavelength selection mechanisms</li>
-            <li>Combined simulation and experimental validation</li>
-          </ul>
-          <!-- TODO: adjust affiliation if needed -->
-          <p class="affil">Strickland Lab, University of Waterloo</p>
-        </article>
-
-        <article class="project">
-          <h3>Thin film optical modeling</h3>
-          <p>Built simulation tools for multilayer optical systems.</p>
-          <ul>
-            <li>Transfer matrix modeling</li>
-            <li>Spectral response prediction</li>
-            <li>Comparison with experimental data</li>
-          </ul>
-        </article>
+      <div class="project-card">
+        <h3>Multiplexed metasurface holography</h3>
+        <p>I contributed to designing a metasurface capable of producing six distinct dual-color holographic images from a single device — exploring how much independent information can be encoded into, and reconstructed from, one flat optic through careful <span class="term">wavefront engineering</span>.</p>
+        <p class="tags">Metasurfaces · holography · wavefront engineering</p>
       </div>
+
+      <div class="project-card">
+        <h3>Electrically tunable metasurfaces</h3>
+        <p>The second project integrated <span class="term">nonlinear electro-optic materials</span> with metasurface <span class="term">guided-mode resonances</span> to make metasurfaces whose optical response can be actively tuned with an applied electric field — a step toward reconfigurable flat optics.</p>
+        <p class="tags">Nonlinear optics · guided-mode resonance · active tuning</p>
+      </div>
+
+      <h3>How I worked</h3>
+      <p>I arrived with limited hands-on optics experience and learned fast. On the computational side, I helped develop custom <span class="term">FDTD</span> (finite-difference time-domain) simulations in Lumerical, evaluating over 90,000 nanostructures to build a comprehensive design library, then used MATLAB filtering algorithms to select the best structures and generate the GDS files used for cleanroom fabrication. On the experimental side, I built and aligned a broadband free-space optical setup spanning the visible to the infrared, and automated the entire characterization process in Python to greatly increase measurement throughput.</p>
+      <p>This work contributed to two manuscripts in preparation, on which I'm a co-author.</p>
+      <div class="techniques" aria-label="Techniques used at Harvard">
+        <span>Metasurfaces</span><span>Wavefront engineering</span><span>Guided-mode resonances</span><span>Nonlinear optical materials</span><span>FDTD (Lumerical)</span><span>MATLAB · GDS generation</span><span>Automated optical characterization</span><span>Python</span>
+      </div>
+    </section>
+
+    <section id="strickland" class="block" aria-labelledby="strickland-h">
+      <h2 id="strickland-h">University of Waterloo — Strickland Lab</h2>
+      <p class="lab-meta">
+        <strong>Research internship</strong> · January – May 2024 · Department of Physics and Astronomy ·
+        co-supervised by Nobel laureate Dr. Donna Strickland
+      </p>
+      <p>Back at Waterloo, I continued the thread of <span class="term">nonlinear optical materials</span> I had picked up at Harvard, now in the Strickland Lab. The focus shifted toward modelling and characterizing how light behaves in <span class="term">multilayer optical structures</span>.</p>
+      <h3>What I worked on</h3>
+      <ul>
+        <li>Optical data analysis of experimental measurements</li>
+        <li>Nonlinear optical materials and their wavelength-dependent behavior</li>
+        <li>Multilayer thin-film modelling using <span class="term">transfer-matrix methods</span></li>
+        <li>Comparing simulated spectral responses against experimental characterization</li>
+      </ul>
+      <p>This built directly on the optical-materials work from Harvard, deepening my experience with simulation and data analysis for real optical devices.</p>
+      <div class="techniques" aria-label="Techniques used at Waterloo">
+        <span>Nonlinear optical materials</span><span>Transfer-matrix modelling</span><span>Multilayer thin films</span><span>Optical data analysis</span><span>Experimental characterization</span>
+      </div>
+    </section>
+
+    <section id="progression" class="block" aria-labelledby="progression-h">
+      <h2 id="progression-h">How this led to quantum photonics</h2>
+      <p>My research interests evolved rather than jumped. Working on metasurfaces and nanophotonics taught me to design and simulate how nanostructures control light; the nonlinear-optics projects moved me toward optical devices and materials; and that combination of simulation, fabrication, and experiment is exactly what I now apply to quantum photonics in my master's. I don't want to overstate the connection — these were distinct projects — but together they built the technical foundation and drew my interest toward building quantum light sources and, eventually, integrated quantum photonic systems.</p>
+      <div class="progression" aria-label="Research progression">
+        <span class="step">Metasurfaces / nanophotonics</span>
+        <span class="arrow" aria-hidden="true">&rarr;</span>
+        <span class="step">Nonlinear optics / optical devices</span>
+        <span class="arrow" aria-hidden="true">&rarr;</span>
+        <span class="step">Quantum photonics</span>
+        <span class="arrow" aria-hidden="true">&rarr;</span>
+        <span class="step now">Integrated quantum photonic systems</span>
+      </div>
+      <p style="margin-top:1.25rem;">See where it's headed next in my <a href="masters-research.html">master's research</a>.</p>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="content">
       <p class="footer-name">Michael Domm</p>
-      <nav class="footer-links" aria-label="Contact and social links">
+      <nav class="footer-links" aria-label="Contact and site links">
         <a href="mailto:mdomm@uwaterloo.ca">Email</a>
-        <a href="index.html">Home</a>
-        <a href="research.html">Research</a>
+        <a href="research.html">Research overview</a>
+        <a href="masters-research.html">Master&rsquo;s research</a>
         <a href="Michael_Domm_Resume_2026.pdf" target="_blank" rel="noopener">Resume</a>
         <a href="https://scholar.google.ca/citations?user=C4fVWxsAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
         <a href="https://www.linkedin.com/in/mike-domm" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://mrdomm.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
       </nav>
       <p class="footer-note">Quantum photonics · metasurfaces · nanofabrication</p>
     </div>
   </footer>
+
+  <script>
+  (function () {
+    document.querySelectorAll("[data-navdrop]").forEach(function (drop) {
+      const toggle = drop.querySelector(".navdrop-toggle");
+      const menu = drop.querySelector(".navdrop-menu");
+      if (!toggle || !menu) return;
+      function open() { menu.classList.add("open"); toggle.setAttribute("aria-expanded", "true"); }
+      function close() { menu.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); }
+      function isOpen() { return menu.classList.contains("open"); }
+      toggle.addEventListener("click", function (e) { e.preventDefault(); isOpen() ? close() : open(); });
+      toggle.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+          e.preventDefault(); open();
+          const first = menu.querySelector("a"); if (first) first.focus();
+        }
+      });
+      menu.addEventListener("keydown", function (e) {
+        const items = Array.prototype.slice.call(menu.querySelectorAll("a"));
+        const idx = items.indexOf(document.activeElement);
+        if (e.key === "Escape") { close(); toggle.focus(); }
+        else if (e.key === "ArrowDown") { e.preventDefault(); items[(idx + 1) % items.length].focus(); }
+        else if (e.key === "ArrowUp") { e.preventDefault(); items[(idx - 1 + items.length) % items.length].focus(); }
+      });
+      drop.addEventListener("focusout", function (e) { if (!drop.contains(e.relatedTarget)) close(); });
+      document.addEventListener("click", function (e) { if (!drop.contains(e.target)) close(); });
+    });
+  })();
+  </script>
 </body>
 </html>

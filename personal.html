@@ -30,13 +30,25 @@
     html { scroll-behavior: smooth; }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: linear-gradient(165deg, var(--bg) 0%, var(--bg-deep) 100%); line-height: 1.5; font-size: 15px; min-height: 100vh; }
+    body.no-scroll { overflow: hidden; }
     a { color: inherit; text-underline-offset: 3px; }
     a:hover { color: var(--leather); }
+    :focus-visible { outline: 2px solid var(--leather); outline-offset: 2px; border-radius: .2rem; }
 
-    header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.85rem 1.5rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(255,255,255,.55); backdrop-filter: blur(8px); z-index: 2; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.85rem 1.5rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(255,255,255,.55); backdrop-filter: blur(8px); z-index: 20; }
     header nav { display: flex; gap: 1.15rem; flex-wrap: wrap; align-items: center; }
     header a { font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; color: var(--muted); opacity: .9; }
     header a:hover { opacity: 1; color: var(--leather); }
+    .navdrop { position: relative; display: inline-flex; align-items: center; }
+    .navdrop > .navdrop-toggle { display: inline-flex; align-items: center; gap: .3rem; background: none; border: 0; cursor: pointer; font: inherit; font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); opacity: .9; padding: 0; }
+    .navdrop > .navdrop-toggle:hover, .navdrop > .navdrop-toggle[aria-expanded="true"] { opacity: 1; color: var(--leather); }
+    .navdrop-toggle .caret { width: .5rem; height: .5rem; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-1px); transition: transform .15s ease; }
+    .navdrop-toggle[aria-expanded="true"] .caret { transform: rotate(-135deg) translateY(-1px); }
+    .navdrop-menu { position: absolute; top: calc(100% + .5rem); right: 0; min-width: 12.5rem; background: #fbf7ef; border: 1px solid var(--line); border-radius: .5rem; box-shadow: 0 10px 30px rgba(92,64,51,.16); padding: .35rem; display: none; flex-direction: column; z-index: 30; }
+    .navdrop-menu.open { display: flex; }
+    .navdrop-menu a { display: block; padding: .5rem .65rem; border-radius: .35rem; font-size: .78rem; letter-spacing: .03em; text-transform: none; opacity: .95; white-space: nowrap; }
+    .navdrop-menu a:hover, .navdrop-menu a:focus-visible { background: var(--khaki); color: var(--leather); }
+    @media (hover: hover) { .navdrop:hover .navdrop-menu { display: flex; } }
 
     .section-nav { position: sticky; top: 2.9rem; z-index: 1; background: rgba(255,255,255,.35); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
     .section-nav-inner { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; justify-content: center; padding-top: .55rem; padding-bottom: .55rem; }
@@ -44,31 +56,69 @@
     .section-nav a:hover { opacity: 1; color: var(--leather); text-decoration: underline; }
 
     .content { max-width: var(--content); margin: 0 auto; padding: 0 1.25rem; }
+    .wide { max-width: 64rem; }
 
     main { padding: 3rem 0 1rem; }
+    .intro { text-align: center; }
     .intro h1 { font-size: clamp(1.65rem, 4.5vw, 2rem); font-weight: 650; letter-spacing: -.02em; margin-bottom: .5rem; }
     .intro .role-line { font-size: 1.02rem; font-weight: 500; opacity: .95; margin-bottom: 1rem; }
-    .intro .bio { font-size: 1rem; opacity: .92; max-width: 40rem; }
+    .intro .bio { font-size: 1rem; opacity: .92; max-width: 40rem; margin: 0 auto; }
     .intro .bio p + p { margin-top: .85rem; }
 
     .divider { text-align: center; margin: 2.5rem 0; color: var(--muted); opacity: .55; letter-spacing: .35em; font-size: .75rem; }
 
-    .section-title { font-size: 1.5rem; font-weight: 650; letter-spacing: .02em; text-transform: uppercase; margin-bottom: .4rem; color: var(--text); scroll-margin-top: 6.5rem; }
+    /* Category row: gallery on the left, description on the right (desktop) */
     .gallery-section { scroll-margin-top: 6.5rem; margin-top: 2.75rem; }
     .gallery-section:first-of-type { margin-top: 0; }
-    .gallery-blurb { font-size: .95rem; opacity: .85; margin-bottom: 1.1rem; }
+    .gallery-row { display: grid; grid-template-columns: 1fr; gap: 1.25rem 2rem; align-items: start; }
+    @media (min-width: 50em) {
+      .gallery-row { grid-template-columns: minmax(0, 1.5fr) minmax(14rem, 1fr); }
+      .gallery-row .cat-desc { order: 2; position: sticky; top: 6.5rem; }
+      .gallery-row .gallery { order: 1; }
+    }
 
-    .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; }
-    @media (min-width: 34em) { .gallery { grid-template-columns: repeat(3, 1fr); gap: .7rem; } }
-    @media (min-width: 52em) { .gallery { grid-template-columns: repeat(4, 1fr); } }
-    .gallery-item { display: block; overflow: hidden; border-radius: .5rem; border: 1px solid var(--line); background: #fff; aspect-ratio: 1 / 1; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s ease; }
-    .gallery-item:hover img { transform: scale(1.05); }
+    .cat-desc .section-title { font-size: 1.5rem; font-weight: 650; letter-spacing: .02em; text-transform: uppercase; margin-bottom: .55rem; color: var(--text); }
+    .cat-desc p { font-size: .95rem; opacity: .9; }
+    .cat-desc p + p { margin-top: .6rem; }
+    .cat-desc .cat-extra { font-size: .82rem; opacity: .7; margin-top: .7rem; }
+    .cat-desc .cat-count { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); opacity: .65; margin-top: .8rem; }
+
+    /* 3x3 preview grid */
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+    @media (max-width: 30em) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+    .tile { position: relative; display: block; overflow: hidden; border-radius: .5rem; border: 1px solid var(--line); background: #fff; aspect-ratio: 1 / 1; cursor: pointer; padding: 0; width: 100%; }
+    .tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s ease; }
+    .tile:hover img, .tile:focus-visible img { transform: scale(1.05); }
+    .tile.more { display: grid; place-items: center; text-align: center; background: #6b5f52; border-color: #6b5f52; color: #fff; cursor: pointer; }
+    .tile.more .more-inner { padding: .5rem; }
+    .tile.more .more-plus { font-size: 2.2rem; font-weight: 400; line-height: 1; margin-bottom: .2rem; }
+    .tile.more .more-text { font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; line-height: 1.3; opacity: .85; }
+    .tile.more:hover, .tile.more:focus-visible { background: #5c4033; border-color: #5c4033; }
 
     footer { border-top: 1px solid var(--line); background: rgba(255,255,255,.4); padding: 2rem 0 2.5rem; text-align: center; margin-top: 3rem; }
     footer .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem 1.35rem; font-size: .92rem; }
     footer a { text-decoration: none; opacity: .9; }
     footer a:hover { opacity: 1; text-decoration: underline; }
+
+    /* Lightbox */
+    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; background: rgba(20, 16, 12, .92); padding: clamp(.75rem, 3vw, 2.5rem); }
+    .lightbox.open { display: flex; }
+    .lb-stage { position: relative; max-width: 100%; max-height: 100%; display: flex; flex-direction: column; align-items: center; gap: .6rem; }
+    .lb-img { max-width: min(92vw, 1100px); max-height: 82vh; width: auto; height: auto; object-fit: contain; border-radius: .35rem; box-shadow: 0 10px 40px rgba(0,0,0,.5); background: #100c08; }
+    .lb-caption { color: #f2ece1; font-size: .85rem; opacity: .85; text-align: center; min-height: 1rem; max-width: 60ch; }
+    .lb-btn { position: absolute; background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; cursor: pointer; display: grid; place-items: center; transition: background .15s ease; -webkit-tap-highlight-color: transparent; }
+    .lb-btn:hover, .lb-btn:focus-visible { background: rgba(255,255,255,.28); }
+    .lb-close { top: -3.1rem; right: 0; width: 2.6rem; height: 2.6rem; font-size: 1.35rem; }
+    @media (max-width: 40em) { .lb-close { top: -3rem; } }
+    .lb-prev, .lb-next { top: 50%; transform: translateY(-50%); width: 3rem; height: 3rem; font-size: 1.5rem; }
+    .lb-prev { left: -3.75rem; }
+    .lb-next { right: -3.75rem; }
+    @media (max-width: 60em) {
+      .lb-prev { left: .35rem; }
+      .lb-next { right: .35rem; }
+      .lb-prev, .lb-next { background: rgba(0,0,0,.45); }
+    }
+    .lb-counter { position: absolute; top: -3rem; left: 0; color: #f2ece1; font-size: .8rem; letter-spacing: .06em; opacity: .8; }
   </style>
 </head>
 <body id="top">
@@ -78,15 +128,22 @@
       <a href="https://www.linkedin.com/in/mike-domm" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://mrdomm.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
-    <nav>
+    <nav aria-label="Primary">
       <a href="index.html">Home</a>
-      <a href="research.html">research</a>
+      <span class="navdrop" data-navdrop>
+        <button type="button" class="navdrop-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="research-menu">Research <span class="caret" aria-hidden="true"></span></button>
+        <span class="navdrop-menu" id="research-menu" role="menu">
+          <a href="research.html" role="menuitem">Research Overview</a>
+          <a href="masters-research.html" role="menuitem">Master&rsquo;s Research</a>
+          <a href="undergraduate-research.html" role="menuitem">Undergraduate Research</a>
+        </span>
+      </span>
       <a href="personal.html">personal</a>
     </nav>
   </header>
 
   <nav class="section-nav" aria-label="Jump to section">
-    <div class="content section-nav-inner">
+    <div class="content wide section-nav-inner">
       <a href="#rocky-mountains">Rocky Mountains</a>
       <a href="#the-great-lakes">The Great Lakes</a>
       <a href="#the-northeast">The Northeast</a>
@@ -96,127 +153,33 @@
     </div>
   </nav>
 
-  <main class="content">
+  <main class="content wide">
     <section class="intro">
       <h1>Beyond the lab</h1>
       <p class="role-line">Traveler · outdoors · dog person</p>
       <div class="bio">
         <p>Physics is what I do, but it isn't the whole story. Away from the cleanroom I'm usually outside — chasing mountains, lakes, and open road — or spending time with the dogs.</p>
-        <p>A few photos from along the way, grouped by where I've been and what I get up to.</p>
+        <p>A few photos from along the way, grouped by where I've been and what I get up to. Click any photo to view it larger.</p>
       </div>
     </section>
 
     <div class="divider" aria-hidden="true">⸻</div>
 
-    <section id="rocky-mountains" class="gallery-section" aria-labelledby="rocky-mountains-h">
-      <h2 id="rocky-mountains-h" class="section-title">Rocky Mountains</h2>
-      <p class="gallery-blurb">Peaks, trails, and big skies out west.</p>
-      <div class="gallery">
-        <a class="gallery-item" href="assets/personal/Rockey%20mountian/20220825_120103.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/20220825_120103.png" alt="Rocky Mountains photo"></a>
-        <a class="gallery-item" href="assets/personal/Rockey%20mountian/20220825_120128.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/20220825_120128.png" alt="Rocky Mountains photo"></a>
-        <a class="gallery-item" href="assets/personal/Rockey%20mountian/20220826_124510.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/20220826_124510.png" alt="Rocky Mountains photo"></a>
-        <a class="gallery-item" href="assets/personal/Rockey%20mountian/20220826_134032.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/20220826_134032.png" alt="Rocky Mountains photo"></a>
-        <a class="gallery-item" href="assets/personal/Rockey%20mountian/20220826_141253.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/20220826_141253.png" alt="Rocky Mountains photo"></a>
-        <a class="gallery-item" href="assets/personal/Rockey%20mountian/20220829_130601.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/20220829_130601.png" alt="Rocky Mountains photo"></a>
-        <a class="gallery-item" href="assets/personal/Rockey%20mountian/20220829_154353.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/20220829_154353.png" alt="Rocky Mountains photo"></a>
-        <a class="gallery-item" href="assets/personal/Rockey%20mountian/IMG_7866.jpeg" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/IMG_7866.jpeg" alt="Rocky Mountains photo"></a>
-        <a class="gallery-item" href="assets/personal/Rockey%20mountian/IMG_8231.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/IMG_8231.png" alt="Rocky Mountains photo"></a>
-        <a class="gallery-item" href="assets/personal/Rockey%20mountian/IMG_8633.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/IMG_8633.png" alt="Rocky Mountains photo"></a>
-        <a class="gallery-item" href="assets/personal/Rockey%20mountian/IMG_8836.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/IMG_8836.png" alt="Rocky Mountains photo"></a>
-      </div>
-    </section>
-
-    <section id="the-great-lakes" class="gallery-section" aria-labelledby="the-great-lakes-h">
-      <h2 id="the-great-lakes-h" class="section-title">The Great Lakes</h2>
-      <p class="gallery-blurb">Shorelines and water close to home.</p>
-      <div class="gallery">
-        <a class="gallery-item" href="assets/personal/Great%20lakes/20180317_120647.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20180317_120647.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/20181229_154323.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20181229_154323.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/20190502_114546.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20190502_114546.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/20191014_162247.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20191014_162247.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/20200817_162229.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20200817_162229.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/20200825_141532.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20200825_141532.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/20200828_065227.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20200828_065227.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/20210818_172318.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20210818_172318.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/20210818_172325.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20210818_172325.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/20210927_190803.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20210927_190803.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/20211212_154910.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20211212_154910.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/20211212_161557.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20211212_161557.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/20220629_085027.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20220629_085027.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/20220702_203456.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20220702_203456.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/IMG_0263.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/IMG_0263.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/IMG_6107.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/IMG_6107.png" alt="The Great Lakes photo"></a>
-        <a class="gallery-item" href="assets/personal/Great%20lakes/IMG_6113.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/IMG_6113.png" alt="The Great Lakes photo"></a>
-      </div>
-    </section>
-
-    <section id="the-northeast" class="gallery-section" aria-labelledby="the-northeast-h">
-      <h2 id="the-northeast-h" class="section-title">The Northeast</h2>
-      <p class="gallery-blurb">Trips through the northeastern United States.</p>
-      <div class="gallery">
-        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_3977.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_3977.png" alt="The Northeast photo"></a>
-        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_5901.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_5901.png" alt="The Northeast photo"></a>
-        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_6326.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_6326.png" alt="The Northeast photo"></a>
-        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_6336.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_6336.png" alt="The Northeast photo"></a>
-        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_6701.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_6701.png" alt="The Northeast photo"></a>
-        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_6777.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_6777.png" alt="The Northeast photo"></a>
-        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_6808.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_6808.png" alt="The Northeast photo"></a>
-        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_6826.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_6826.png" alt="The Northeast photo"></a>
-        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_6857.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_6857.png" alt="The Northeast photo"></a>
-        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_7219.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_7219.png" alt="The Northeast photo"></a>
-      </div>
-    </section>
-
-    <section id="the-prairies" class="gallery-section" aria-labelledby="the-prairies-h">
-      <h2 id="the-prairies-h" class="section-title">The Prairies</h2>
-      <p class="gallery-blurb">Wide-open prairie landscapes.</p>
-      <div class="gallery">
-        <a class="gallery-item" href="assets/personal/praries/20190519_200314.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/20190519_200314.png" alt="The Prairies photo"></a>
-        <a class="gallery-item" href="assets/personal/praries/20210901_105514.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/20210901_105514.png" alt="The Prairies photo"></a>
-        <a class="gallery-item" href="assets/personal/praries/20220409_190412.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/20220409_190412.png" alt="The Prairies photo"></a>
-        <a class="gallery-item" href="assets/personal/praries/20220410_195547.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/20220410_195547.png" alt="The Prairies photo"></a>
-        <a class="gallery-item" href="assets/personal/praries/IMG_7793.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/IMG_7793.png" alt="The Prairies photo"></a>
-        <a class="gallery-item" href="assets/personal/praries/IMG_7837.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/IMG_7837.png" alt="The Prairies photo"></a>
-        <a class="gallery-item" href="assets/personal/praries/IMG_7847.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/IMG_7847.png" alt="The Prairies photo"></a>
-        <a class="gallery-item" href="assets/personal/praries/IMG_8189.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/IMG_8189.png" alt="The Prairies photo"></a>
-        <a class="gallery-item" href="assets/personal/praries/Image%201.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/Image%201.png" alt="The Prairies photo"></a>
-        <a class="gallery-item" href="assets/personal/praries/Image%202.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/Image%202.png" alt="The Prairies photo"></a>
-      </div>
-    </section>
-
-    <section id="dogs" class="gallery-section" aria-labelledby="dogs-h">
-      <h2 id="dogs-h" class="section-title">Dogs</h2>
-      <p class="gallery-blurb">The good boys and girls.</p>
-      <div class="gallery">
-        <a class="gallery-item" href="assets/personal/Dogs/20190713_211531.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/20190713_211531.png" alt="Dogs photo"></a>
-        <a class="gallery-item" href="assets/personal/Dogs/20220704_210233.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/20220704_210233.png" alt="Dogs photo"></a>
-        <a class="gallery-item" href="assets/personal/Dogs/20220922_085254.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/20220922_085254.png" alt="Dogs photo"></a>
-        <a class="gallery-item" href="assets/personal/Dogs/69913018221__33709BAF-369A-406C-A857-3544F815E78E.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/69913018221__33709BAF-369A-406C-A857-3544F815E78E.png" alt="Dogs photo"></a>
-        <a class="gallery-item" href="assets/personal/Dogs/IMG_20220921_212338_670.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/IMG_20220921_212338_670.png" alt="Dogs photo"></a>
-        <a class="gallery-item" href="assets/personal/Dogs/IMG_4880.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/IMG_4880.png" alt="Dogs photo"></a>
-        <a class="gallery-item" href="assets/personal/Dogs/IMG_5763.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/IMG_5763.png" alt="Dogs photo"></a>
-        <a class="gallery-item" href="assets/personal/Dogs/IMG_6077.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/IMG_6077.png" alt="Dogs photo"></a>
-        <a class="gallery-item" href="assets/personal/Dogs/received_410629091253276.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/received_410629091253276.png" alt="Dogs photo"></a>
-      </div>
-    </section>
-
-    <section id="hobbies" class="gallery-section" aria-labelledby="hobbies-h">
-      <h2 id="hobbies-h" class="section-title">Hobbies</h2>
-      <p class="gallery-blurb">A few of the things I get up to.</p>
-      <div class="gallery">
-        <a class="gallery-item" href="assets/personal/Hobbies/20191014_124921.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/20191014_124921.png" alt="Hobbies photo"></a>
-        <a class="gallery-item" href="assets/personal/Hobbies/20210818_172318.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/20210818_172318.png" alt="Hobbies photo"></a>
-        <a class="gallery-item" href="assets/personal/Hobbies/20220427_084547.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/20220427_084547.png" alt="Hobbies photo"></a>
-        <a class="gallery-item" href="assets/personal/Hobbies/20220628_063646.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/20220628_063646.png" alt="Hobbies photo"></a>
-        <a class="gallery-item" href="assets/personal/Hobbies/20220703_101323.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/20220703_101323.png" alt="Hobbies photo"></a>
-        <a class="gallery-item" href="assets/personal/Hobbies/20220704_120323.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/20220704_120323.png" alt="Hobbies photo"></a>
-        <a class="gallery-item" href="assets/personal/Hobbies/26_Original.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/26_Original.png" alt="Hobbies photo"></a>
-        <a class="gallery-item" href="assets/personal/Hobbies/IMG_2049.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/IMG_2049.png" alt="Hobbies photo"></a>
-        <a class="gallery-item" href="assets/personal/Hobbies/IMG_6107.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/IMG_6107.png" alt="Hobbies photo"></a>
-        <a class="gallery-item" href="assets/personal/Hobbies/IMG_7890_Original.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/IMG_7890_Original.png" alt="Hobbies photo"></a>
-      </div>
-    </section>
+    <!-- Galleries render here from the GALLERIES data below -->
+    <div id="galleries"></div>
   </main>
+
+  <!-- Lightbox (single instance, reused by all categories) -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
+    <div class="lb-stage">
+      <span class="lb-counter" id="lbCounter" aria-hidden="true"></span>
+      <button class="lb-btn lb-close" id="lbClose" type="button" aria-label="Close photo viewer">&times;</button>
+      <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="Previous photo">&#8249;</button>
+      <img class="lb-img" id="lbImg" src="" alt="">
+      <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="Next photo">&#8250;</button>
+      <p class="lb-caption" id="lbCaption"></p>
+    </div>
+  </div>
 
   <footer>
     <nav class="footer-links" aria-label="Contact and social links">
@@ -226,5 +189,277 @@
       <a href="https://mrdomm.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
   </footer>
+
+  <script>
+  /* ============================================================
+     PHOTO DATA
+     To add a photo: drop the file in the folder and add its
+     filename to that category's `images` array. Optionally give
+     it a caption via the `captions` map (keyed by filename).
+     No HTML edits needed — the gallery re-generates on load.
+     ============================================================ */
+  const GALLERIES = [
+    {
+      id: "rocky-mountains",
+      name: "Rocky Mountains",
+      description: "Peaks, trails, and big skies out west.",
+      extra: "",
+      folder: "assets/personal/Rockey mountian",
+      images: [
+        "20220825_120103.png", "20220825_120128.png", "20220826_124510.png",
+        "20220826_134032.png", "20220826_141253.png", "20220829_130601.png",
+        "20220829_154353.png", "IMG_7866.jpeg", "IMG_8231.png",
+        "IMG_8633.png", "IMG_8836.png"
+      ],
+      captions: {}
+    },
+    {
+      id: "the-great-lakes",
+      name: "The Great Lakes",
+      description: "Shorelines and water close to home.",
+      extra: "",
+      folder: "assets/personal/Great lakes",
+      images: [
+        "20180317_120647.png", "20181229_154323.png", "20190502_114546.png",
+        "20191014_162247.png", "20200817_162229.png", "20200825_141532.png",
+        "20200828_065227.png", "20210818_172318.png", "20210818_172325.png",
+        "20210927_190803.png", "20211212_154910.png", "20211212_161557.png",
+        "20220629_085027.png", "20220702_203456.png", "IMG_0263.png",
+        "IMG_6107.png", "IMG_6113.png"
+      ],
+      captions: {}
+    },
+    {
+      id: "the-northeast",
+      name: "The Northeast",
+      description: "Trips through the northeastern United States.",
+      extra: "",
+      folder: "assets/personal/North east United states",
+      images: [
+        "IMG_3977.png", "IMG_5901.png", "IMG_6326.png", "IMG_6336.png",
+        "IMG_6701.png", "IMG_6777.png", "IMG_6808.png", "IMG_6826.png",
+        "IMG_6857.png", "IMG_7219.png"
+      ],
+      captions: {}
+    },
+    {
+      id: "the-prairies",
+      name: "The Prairies",
+      description: "Wide-open prairie landscapes.",
+      extra: "",
+      folder: "assets/personal/praries",
+      images: [
+        "20190519_200314.png", "20210901_105514.png", "20220409_190412.png",
+        "20220410_195547.png", "IMG_7793.png", "IMG_7837.png",
+        "IMG_7847.png", "IMG_8189.png", "Image 1.png", "Image 2.png"
+      ],
+      captions: {}
+    },
+    {
+      id: "dogs",
+      name: "Dogs",
+      description: "The good boys and girls.",
+      extra: "",
+      folder: "assets/personal/Dogs",
+      images: [
+        "20190713_211531.png", "20220704_210233.png", "20220922_085254.png",
+        "69913018221__33709BAF-369A-406C-A857-3544F815E78E.png",
+        "IMG_20220921_212338_670.png", "IMG_4880.png", "IMG_5763.png",
+        "IMG_6077.png", "received_410629091253276.png"
+      ],
+      captions: {}
+    },
+    {
+      id: "hobbies",
+      name: "Hobbies",
+      description: "A few of the things I get up to.",
+      extra: "",
+      folder: "assets/personal/Hobbies",
+      images: [
+        "20191014_124921.png", "20210818_172318.png", "20220427_084547.png",
+        "20220628_063646.png", "20220703_101323.png", "20220704_120323.png",
+        "26_Original.png", "IMG_2049.png", "IMG_6107.png", "IMG_7890_Original.png"
+      ],
+      captions: {}
+    }
+  ];
+
+  const PREVIEW_COUNT = 8; // 8 photos + 1 "more" tile = 9 tiles
+
+  // Build a full URL-encoded src for an image in a category.
+  function srcFor(cat, filename) {
+    return cat.folder.split("/").map(encodeURIComponent).join("/") + "/" + encodeURIComponent(filename);
+  }
+  function captionFor(cat, filename) {
+    return (cat.captions && cat.captions[filename]) || "";
+  }
+
+  /* ---------------- Render galleries ---------------- */
+  (function renderGalleries() {
+    const root = document.getElementById("galleries");
+    const frag = document.createDocumentFragment();
+
+    GALLERIES.forEach(function (cat, catIndex) {
+      const section = document.createElement("section");
+      section.className = "gallery-section";
+      section.id = cat.id;
+      section.setAttribute("aria-labelledby", cat.id + "-h");
+
+      const row = document.createElement("div");
+      row.className = "gallery-row";
+
+      // Description column
+      const desc = document.createElement("div");
+      desc.className = "cat-desc";
+      const h2 = document.createElement("h2");
+      h2.className = "section-title";
+      h2.id = cat.id + "-h";
+      h2.textContent = cat.name;
+      desc.appendChild(h2);
+      const p = document.createElement("p");
+      p.textContent = cat.description;
+      desc.appendChild(p);
+      if (cat.extra) {
+        const pe = document.createElement("p");
+        pe.className = "cat-extra";
+        pe.textContent = cat.extra;
+        desc.appendChild(pe);
+      }
+      const count = document.createElement("p");
+      count.className = "cat-count";
+      count.textContent = cat.images.length + (cat.images.length === 1 ? " photo" : " photos");
+      desc.appendChild(count);
+
+      // Gallery column
+      const gal = document.createElement("div");
+      gal.className = "gallery";
+
+      const total = cat.images.length;
+      const hasMore = total > PREVIEW_COUNT;
+      // If there are more than we can preview, show 8 photos + more tile.
+      // Otherwise show all photos (up to 9) with no more tile.
+      const previewN = hasMore ? PREVIEW_COUNT : Math.min(total, 9);
+
+      for (let i = 0; i < previewN; i++) {
+        const filename = cat.images[i];
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "tile";
+        btn.setAttribute("aria-label", "View " + cat.name + " photo " + (i + 1) + " of " + total);
+        const img = document.createElement("img");
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.src = srcFor(cat, filename);
+        img.alt = captionFor(cat, filename) || (cat.name + " photo " + (i + 1));
+        btn.appendChild(img);
+        btn.addEventListener("click", function () { openLightbox(catIndex, i); });
+        gal.appendChild(btn);
+      }
+
+      if (hasMore) {
+        const more = document.createElement("button");
+        more.type = "button";
+        more.className = "tile more";
+        more.setAttribute("aria-label", "See all " + total + " " + cat.name + " photos");
+        more.innerHTML = '<span class="more-inner"><span class="more-plus" aria-hidden="true">+' + (total - PREVIEW_COUNT) + '</span>' +
+                         '<span class="more-text">more</span></span>';
+        // Open lightbox starting at the first not-yet-previewed photo.
+        more.addEventListener("click", function () { openLightbox(catIndex, PREVIEW_COUNT); });
+        gal.appendChild(more);
+      }
+
+      row.appendChild(gal);
+      row.appendChild(desc);
+      section.appendChild(row);
+      frag.appendChild(section);
+    });
+
+    root.appendChild(frag);
+  })();
+
+  /* ---------------- Lightbox ---------------- */
+  const lb = document.getElementById("lightbox");
+  const lbImg = document.getElementById("lbImg");
+  const lbCaption = document.getElementById("lbCaption");
+  const lbCounter = document.getElementById("lbCounter");
+  const lbClose = document.getElementById("lbClose");
+  const lbPrev = document.getElementById("lbPrev");
+  const lbNext = document.getElementById("lbNext");
+
+  let activeCat = null;   // current category index
+  let activeIdx = 0;      // current photo index within category
+  let lastFocused = null; // element to restore focus to on close
+
+  function showPhoto() {
+    const cat = GALLERIES[activeCat];
+    const filename = cat.images[activeIdx];
+    lbImg.src = srcFor(cat, filename);
+    const cap = captionFor(cat, filename);
+    lbImg.alt = cap || (cat.name + " photo " + (activeIdx + 1));
+    lbCaption.textContent = cap;
+    lbCounter.textContent = cat.name + " · " + (activeIdx + 1) + " / " + cat.images.length;
+  }
+
+  function openLightbox(catIndex, photoIndex) {
+    activeCat = catIndex;
+    activeIdx = Math.min(photoIndex, GALLERIES[catIndex].images.length - 1);
+    lastFocused = document.activeElement;
+    showPhoto();
+    lb.classList.add("open");
+    lb.setAttribute("aria-hidden", "false");
+    document.body.classList.add("no-scroll");
+    lbClose.focus();
+  }
+
+  function closeLightbox() {
+    lb.classList.remove("open");
+    lb.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("no-scroll");
+    lbImg.src = "";
+    if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+  }
+
+  function step(delta) {
+    const n = GALLERIES[activeCat].images.length;
+    activeIdx = (activeIdx + delta + n) % n; // wrap around
+    showPhoto();
+  }
+
+  lbClose.addEventListener("click", closeLightbox);
+  lbNext.addEventListener("click", function () { step(1); });
+  lbPrev.addEventListener("click", function () { step(-1); });
+
+  // Click outside the image (on the backdrop) closes the viewer.
+  lb.addEventListener("click", function (e) {
+    if (e.target === lb || e.target.classList.contains("lb-stage")) closeLightbox();
+  });
+
+  // Keyboard: Escape closes, arrows navigate. Keep focus trapped simply.
+  document.addEventListener("keydown", function (e) {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") { closeLightbox(); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
+    else if (e.key === "Tab") {
+      // Minimal focus trap across the three controls.
+      const focusables = [lbClose, lbPrev, lbNext];
+      const idx = focusables.indexOf(document.activeElement);
+      if (idx === -1) { e.preventDefault(); lbClose.focus(); return; }
+      e.preventDefault();
+      const dir = e.shiftKey ? -1 : 1;
+      focusables[(idx + dir + focusables.length) % focusables.length].focus();
+    }
+  });
+
+  // Basic touch swipe on the image for mobile.
+  let touchStartX = null;
+  lbImg.addEventListener("touchstart", function (e) { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+  lbImg.addEventListener("touchend", function (e) {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+    touchStartX = null;
+  }, { passive: true });
+  </script>
 </body>
 </html>
