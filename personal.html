@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Personal — Michael Domm</title>
-  <meta name="description" content="A more personal look at Michael Domm — rowing, building things, community, and the interests outside the lab.">
+  <meta name="description" content="A more personal look at Michael Domm — travels through the Rockies, Great Lakes, the Northeast and Prairies, plus dogs and hobbies outside the lab.">
   <meta name="author" content="Michael Domm">
 
   <!-- Open Graph / social sharing -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Personal — Michael Domm">
-  <meta property="og:description" content="Life outside the lab: rowing, building things, and community.">
+  <meta property="og:description" content="Life outside the lab: travels, the outdoors, dogs, and hobbies.">
   <meta property="og:image" content="assets/profile.jpg">
 
   <!-- Favicon: inline SVG, no extra file needed -->
@@ -38,9 +38,14 @@
     header a { font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; color: var(--muted); opacity: .9; }
     header a:hover { opacity: 1; color: var(--leather); }
 
+    .section-nav { position: sticky; top: 2.9rem; z-index: 1; background: rgba(255,255,255,.35); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+    .section-nav-inner { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; justify-content: center; padding-top: .55rem; padding-bottom: .55rem; }
+    .section-nav a { font-size: .74rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-decoration: none; opacity: .85; }
+    .section-nav a:hover { opacity: 1; color: var(--leather); text-decoration: underline; }
+
     .content { max-width: var(--content); margin: 0 auto; padding: 0 1.25rem; }
 
-    main { padding: 3.25rem 0 1rem; }
+    main { padding: 3rem 0 1rem; }
     .intro h1 { font-size: clamp(1.65rem, 4.5vw, 2rem); font-weight: 650; letter-spacing: -.02em; margin-bottom: .5rem; }
     .intro .role-line { font-size: 1.02rem; font-weight: 500; opacity: .95; margin-bottom: 1rem; }
     .intro .bio { font-size: 1rem; opacity: .92; max-width: 40rem; }
@@ -48,21 +53,19 @@
 
     .divider { text-align: center; margin: 2.5rem 0; color: var(--muted); opacity: .55; letter-spacing: .35em; font-size: .75rem; }
 
-    .section-title { font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1.15rem; color: var(--muted); }
+    .section-title { font-size: 1.5rem; font-weight: 650; letter-spacing: .02em; text-transform: uppercase; margin-bottom: .4rem; color: var(--text); scroll-margin-top: 6.5rem; }
+    .gallery-section { scroll-margin-top: 6.5rem; margin-top: 2.75rem; }
+    .gallery-section:first-of-type { margin-top: 0; }
+    .gallery-blurb { font-size: .95rem; opacity: .85; margin-bottom: 1.1rem; }
 
-    .cards { display: grid; gap: 1.1rem; grid-template-columns: 1fr; }
-    @media (min-width: 34em) { .cards { grid-template-columns: 1fr 1fr; } }
-    .card { padding: 1.15rem 1.2rem; border: 1px solid var(--line); border-radius: .6rem; background: rgba(255,255,255,.5); box-shadow: 0 2px 10px rgba(92, 64, 51, .06); transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(92, 64, 51, .12); border-color: var(--leather); }
-    .card h3 { font-size: 1rem; font-weight: 650; margin-bottom: .4rem; }
-    .card p { font-size: .92rem; opacity: .9; }
-    .card .card-tag { display: inline-block; font-size: .68rem; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; color: var(--leather); margin-bottom: .5rem; }
+    .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; }
+    @media (min-width: 34em) { .gallery { grid-template-columns: repeat(3, 1fr); gap: .7rem; } }
+    @media (min-width: 52em) { .gallery { grid-template-columns: repeat(4, 1fr); } }
+    .gallery-item { display: block; overflow: hidden; border-radius: .5rem; border: 1px solid var(--line); background: #fff; aspect-ratio: 1 / 1; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s ease; }
+    .gallery-item:hover img { transform: scale(1.05); }
 
-    .now-box { padding: 1.1rem 1.25rem; border: 1px solid var(--line); border-radius: .6rem; background: rgba(255,255,255,.5); }
-    .now-box p { font-size: .95rem; opacity: .92; }
-    .now-box p + p { margin-top: .55rem; }
-
-    footer { border-top: 1px solid var(--line); background: rgba(255,255,255,.4); padding: 2rem 0 2.5rem; text-align: center; margin-top: 2.5rem; }
+    footer { border-top: 1px solid var(--line); background: rgba(255,255,255,.4); padding: 2rem 0 2.5rem; text-align: center; margin-top: 3rem; }
     footer .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem 1.35rem; font-size: .92rem; }
     footer a { text-decoration: none; opacity: .9; }
     footer a:hover { opacity: 1; text-decoration: underline; }
@@ -82,51 +85,135 @@
     </nav>
   </header>
 
+  <nav class="section-nav" aria-label="Jump to section">
+    <div class="content section-nav-inner">
+      <a href="#rocky-mountains">Rocky Mountains</a>
+      <a href="#the-great-lakes">The Great Lakes</a>
+      <a href="#the-northeast">The Northeast</a>
+      <a href="#the-prairies">The Prairies</a>
+      <a href="#dogs">Dogs</a>
+      <a href="#hobbies">Hobbies</a>
+    </div>
+  </nav>
+
   <main class="content">
     <section class="intro">
       <h1>Beyond the lab</h1>
-      <p class="role-line">Rower · builder · community organizer</p>
+      <p class="role-line">Traveler · outdoors · dog person</p>
       <div class="bio">
-        <p>Physics is what I do, but it isn't the whole story. Away from the cleanroom I'm usually on the water, tinkering with a side project, or helping run something that matters to the people around me.</p>
-        <p>This page is a slower, more personal look at the things I care about outside of research. It's a work in progress, much like everything worth doing.</p>
+        <p>Physics is what I do, but it isn't the whole story. Away from the cleanroom I'm usually outside — chasing mountains, lakes, and open road — or spending time with the dogs.</p>
+        <p>A few photos from along the way, grouped by where I've been and what I get up to.</p>
       </div>
     </section>
 
     <div class="divider" aria-hidden="true">⸻</div>
 
-    <section aria-labelledby="interests-heading">
-      <h2 id="interests-heading" class="section-title">What I get up to</h2>
-      <div class="cards">
-        <div class="card">
-          <span class="card-tag">On the water</span>
-          <h3>Rowing</h3>
-          <p>Varsity rower with several years of national-level competition. Early mornings, hard intervals, and the kind of team trust that only comes from suffering together in a boat.</p>
-        </div>
-        <div class="card">
-          <span class="card-tag">Building</span>
-          <h3>Side projects</h3>
-          <p>I like making things — hardware, small tools, and the occasional over-engineered solution to a very minor problem. Curiosity first, polish second.</p>
-        </div>
-        <div class="card">
-          <span class="card-tag">Community</span>
-          <h3>Leadership &amp; service</h3>
-          <p>Board Chair of the Graduate Student Association and involved in the quantum startup community. I care about leaving the rooms I'm in a little better than I found them.</p>
-        </div>
-        <div class="card">
-          <span class="card-tag">Always learning</span>
-          <h3>Reading &amp; ideas</h3>
-          <p>A steady diet of physics, engineering, and the odd detour into economics or design. I enjoy first-principles thinking and figuring out how things really work.</p>
-        </div>
+    <section id="rocky-mountains" class="gallery-section" aria-labelledby="rocky-mountains-h">
+      <h2 id="rocky-mountains-h" class="section-title">Rocky Mountains</h2>
+      <p class="gallery-blurb">Peaks, trails, and big skies out west.</p>
+      <div class="gallery">
+        <a class="gallery-item" href="assets/personal/Rockey%20mountian/20220825_120103.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/20220825_120103.png" alt="Rocky Mountains photo"></a>
+        <a class="gallery-item" href="assets/personal/Rockey%20mountian/20220825_120128.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/20220825_120128.png" alt="Rocky Mountains photo"></a>
+        <a class="gallery-item" href="assets/personal/Rockey%20mountian/20220826_124510.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/20220826_124510.png" alt="Rocky Mountains photo"></a>
+        <a class="gallery-item" href="assets/personal/Rockey%20mountian/20220826_134032.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/20220826_134032.png" alt="Rocky Mountains photo"></a>
+        <a class="gallery-item" href="assets/personal/Rockey%20mountian/20220826_141253.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/20220826_141253.png" alt="Rocky Mountains photo"></a>
+        <a class="gallery-item" href="assets/personal/Rockey%20mountian/20220829_130601.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/20220829_130601.png" alt="Rocky Mountains photo"></a>
+        <a class="gallery-item" href="assets/personal/Rockey%20mountian/20220829_154353.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/20220829_154353.png" alt="Rocky Mountains photo"></a>
+        <a class="gallery-item" href="assets/personal/Rockey%20mountian/IMG_7866.jpeg" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/IMG_7866.jpeg" alt="Rocky Mountains photo"></a>
+        <a class="gallery-item" href="assets/personal/Rockey%20mountian/IMG_8231.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/IMG_8231.png" alt="Rocky Mountains photo"></a>
+        <a class="gallery-item" href="assets/personal/Rockey%20mountian/IMG_8633.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/IMG_8633.png" alt="Rocky Mountains photo"></a>
+        <a class="gallery-item" href="assets/personal/Rockey%20mountian/IMG_8836.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Rockey%20mountian/IMG_8836.png" alt="Rocky Mountains photo"></a>
       </div>
     </section>
 
-    <div class="divider" aria-hidden="true">⸻</div>
+    <section id="the-great-lakes" class="gallery-section" aria-labelledby="the-great-lakes-h">
+      <h2 id="the-great-lakes-h" class="section-title">The Great Lakes</h2>
+      <p class="gallery-blurb">Shorelines and water close to home.</p>
+      <div class="gallery">
+        <a class="gallery-item" href="assets/personal/Great%20lakes/20180317_120647.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20180317_120647.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/20181229_154323.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20181229_154323.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/20190502_114546.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20190502_114546.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/20191014_162247.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20191014_162247.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/20200817_162229.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20200817_162229.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/20200825_141532.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20200825_141532.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/20200828_065227.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20200828_065227.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/20210818_172318.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20210818_172318.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/20210818_172325.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20210818_172325.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/20210927_190803.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20210927_190803.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/20211212_154910.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20211212_154910.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/20211212_161557.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20211212_161557.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/20220629_085027.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20220629_085027.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/20220702_203456.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/20220702_203456.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/IMG_0263.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/IMG_0263.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/IMG_6107.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/IMG_6107.png" alt="The Great Lakes photo"></a>
+        <a class="gallery-item" href="assets/personal/Great%20lakes/IMG_6113.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Great%20lakes/IMG_6113.png" alt="The Great Lakes photo"></a>
+      </div>
+    </section>
 
-    <section aria-labelledby="now-heading">
-      <h2 id="now-heading" class="section-title">Right now</h2>
-      <div class="now-box">
-        <p>Based in Waterloo, wrapping up an M.Sc. in Physics at the Institute for Quantum Computing.</p>
-        <p>Training, building, and always up for a good conversation about photonics, startups, or what to row next.</p>
+    <section id="the-northeast" class="gallery-section" aria-labelledby="the-northeast-h">
+      <h2 id="the-northeast-h" class="section-title">The Northeast</h2>
+      <p class="gallery-blurb">Trips through the northeastern United States.</p>
+      <div class="gallery">
+        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_3977.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_3977.png" alt="The Northeast photo"></a>
+        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_5901.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_5901.png" alt="The Northeast photo"></a>
+        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_6326.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_6326.png" alt="The Northeast photo"></a>
+        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_6336.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_6336.png" alt="The Northeast photo"></a>
+        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_6701.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_6701.png" alt="The Northeast photo"></a>
+        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_6777.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_6777.png" alt="The Northeast photo"></a>
+        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_6808.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_6808.png" alt="The Northeast photo"></a>
+        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_6826.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_6826.png" alt="The Northeast photo"></a>
+        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_6857.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_6857.png" alt="The Northeast photo"></a>
+        <a class="gallery-item" href="assets/personal/North%20east%20United%20states/IMG_7219.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/North%20east%20United%20states/IMG_7219.png" alt="The Northeast photo"></a>
+      </div>
+    </section>
+
+    <section id="the-prairies" class="gallery-section" aria-labelledby="the-prairies-h">
+      <h2 id="the-prairies-h" class="section-title">The Prairies</h2>
+      <p class="gallery-blurb">Wide-open prairie landscapes.</p>
+      <div class="gallery">
+        <a class="gallery-item" href="assets/personal/praries/20190519_200314.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/20190519_200314.png" alt="The Prairies photo"></a>
+        <a class="gallery-item" href="assets/personal/praries/20210901_105514.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/20210901_105514.png" alt="The Prairies photo"></a>
+        <a class="gallery-item" href="assets/personal/praries/20220409_190412.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/20220409_190412.png" alt="The Prairies photo"></a>
+        <a class="gallery-item" href="assets/personal/praries/20220410_195547.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/20220410_195547.png" alt="The Prairies photo"></a>
+        <a class="gallery-item" href="assets/personal/praries/IMG_7793.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/IMG_7793.png" alt="The Prairies photo"></a>
+        <a class="gallery-item" href="assets/personal/praries/IMG_7837.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/IMG_7837.png" alt="The Prairies photo"></a>
+        <a class="gallery-item" href="assets/personal/praries/IMG_7847.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/IMG_7847.png" alt="The Prairies photo"></a>
+        <a class="gallery-item" href="assets/personal/praries/IMG_8189.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/IMG_8189.png" alt="The Prairies photo"></a>
+        <a class="gallery-item" href="assets/personal/praries/Image%201.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/Image%201.png" alt="The Prairies photo"></a>
+        <a class="gallery-item" href="assets/personal/praries/Image%202.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/praries/Image%202.png" alt="The Prairies photo"></a>
+      </div>
+    </section>
+
+    <section id="dogs" class="gallery-section" aria-labelledby="dogs-h">
+      <h2 id="dogs-h" class="section-title">Dogs</h2>
+      <p class="gallery-blurb">The good boys and girls.</p>
+      <div class="gallery">
+        <a class="gallery-item" href="assets/personal/Dogs/20190713_211531.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/20190713_211531.png" alt="Dogs photo"></a>
+        <a class="gallery-item" href="assets/personal/Dogs/20220704_210233.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/20220704_210233.png" alt="Dogs photo"></a>
+        <a class="gallery-item" href="assets/personal/Dogs/20220922_085254.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/20220922_085254.png" alt="Dogs photo"></a>
+        <a class="gallery-item" href="assets/personal/Dogs/69913018221__33709BAF-369A-406C-A857-3544F815E78E.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/69913018221__33709BAF-369A-406C-A857-3544F815E78E.png" alt="Dogs photo"></a>
+        <a class="gallery-item" href="assets/personal/Dogs/IMG_20220921_212338_670.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/IMG_20220921_212338_670.png" alt="Dogs photo"></a>
+        <a class="gallery-item" href="assets/personal/Dogs/IMG_4880.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/IMG_4880.png" alt="Dogs photo"></a>
+        <a class="gallery-item" href="assets/personal/Dogs/IMG_5763.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/IMG_5763.png" alt="Dogs photo"></a>
+        <a class="gallery-item" href="assets/personal/Dogs/IMG_6077.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/IMG_6077.png" alt="Dogs photo"></a>
+        <a class="gallery-item" href="assets/personal/Dogs/received_410629091253276.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Dogs/received_410629091253276.png" alt="Dogs photo"></a>
+      </div>
+    </section>
+
+    <section id="hobbies" class="gallery-section" aria-labelledby="hobbies-h">
+      <h2 id="hobbies-h" class="section-title">Hobbies</h2>
+      <p class="gallery-blurb">A few of the things I get up to.</p>
+      <div class="gallery">
+        <a class="gallery-item" href="assets/personal/Hobbies/20191014_124921.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/20191014_124921.png" alt="Hobbies photo"></a>
+        <a class="gallery-item" href="assets/personal/Hobbies/20210818_172318.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/20210818_172318.png" alt="Hobbies photo"></a>
+        <a class="gallery-item" href="assets/personal/Hobbies/20220427_084547.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/20220427_084547.png" alt="Hobbies photo"></a>
+        <a class="gallery-item" href="assets/personal/Hobbies/20220628_063646.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/20220628_063646.png" alt="Hobbies photo"></a>
+        <a class="gallery-item" href="assets/personal/Hobbies/20220703_101323.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/20220703_101323.png" alt="Hobbies photo"></a>
+        <a class="gallery-item" href="assets/personal/Hobbies/20220704_120323.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/20220704_120323.png" alt="Hobbies photo"></a>
+        <a class="gallery-item" href="assets/personal/Hobbies/26_Original.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/26_Original.png" alt="Hobbies photo"></a>
+        <a class="gallery-item" href="assets/personal/Hobbies/IMG_2049.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/IMG_2049.png" alt="Hobbies photo"></a>
+        <a class="gallery-item" href="assets/personal/Hobbies/IMG_6107.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/IMG_6107.png" alt="Hobbies photo"></a>
+        <a class="gallery-item" href="assets/personal/Hobbies/IMG_7890_Original.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/personal/Hobbies/IMG_7890_Original.png" alt="Hobbies photo"></a>
       </div>
     </section>
   </main>
