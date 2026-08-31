@@ -97,6 +97,7 @@
     .cat-desc p + p { margin-top: .6rem; }
     .cat-desc .cat-extra { font-size: .82rem; opacity: .7; margin-top: .7rem; }
     .cat-desc .cat-count { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); opacity: .65; margin-top: .8rem; }
+    .cat-desc .cat-icon { display: block; width: auto; height: 8rem; max-width: 100%; margin-top: 1rem; opacity: .85; object-fit: contain; object-position: left center; }
 
     /* 3x3 preview grid */
     .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
@@ -171,22 +172,21 @@
   <nav class="section-nav" aria-label="Jump to section">
     <div class="content wide section-nav-inner">
       <a href="#hobbies">Hobbies</a>
-      <a href="#dogs">Dogs</a>
       <a href="#adventures">Adventures</a>
       <a href="#rocky-mountains">Rocky Mountains</a>
       <a href="#the-great-lakes">The Great Lakes</a>
       <a href="#the-northeast">The Northeast</a>
       <a href="#the-prairies">The Prairies</a>
+      <a href="#dogs">Dogs</a>
     </div>
   </nav>
 
   <main class="content wide">
     <section class="intro">
       <h1>Life outside the lab</h1>
-      <p class="role-line">Outdoors · road trips · dog person</p>
+      <p class="role-line">Outdoors · road trips</p>
       <div class="bio">
-        <p>Physics grad student by day, but that's not the whole story. Most of my free time goes to being outside — hiking, fishing, camping, and finding excuses for the next road trip. I'd rather be out doing something with friends than stuck inside, usually with a dog along for the ride.</p>
-        <p>When I'm home you'll probably find me cooking something or planning the next trip. Here's a bit of what that looks like.</p>
+        <p>Physics grad student by day, but that's not the whole story. Most of my free time goes to being outside; hiking, fishing, camping, and finding excuses for the next road trip. I'd rather be out doing something with friends than stuck inside.</p>
       </div>
     </section>
 
@@ -204,12 +204,12 @@
         <h2>I like</h2>
         <ul class="chips">
           <li>Hiking</li><li>Fishing</li><li>Camping</li><li>Road trips</li>
-          <li>Dogs</li><li>Cooking</li><li>Being outside</li>
+          <li>Dogs</li><li>Cooking</li><li>Landscaping</li><li>Being outside</li>
         </ul>
       </div>
       <div class="snap-card">
         <h2>A good weekend</h2>
-        <p>A trail or a lake, a campfire, good people, and a dog nearby.</p>
+        <p>A trail or a lake, a campfire, good people.</p>
       </div>
     </section>
 
@@ -240,7 +240,7 @@
   <footer class="site-footer">
     <div class="content">
       <p class="footer-name">Michael Domm</p>
-      <p class="footer-note">Hobbies · Dogs · Adventures</p>
+      <p class="footer-note">Hobbies · Adventures</p>
     </div>
   </footer>
 
@@ -269,27 +269,13 @@
       captions: {}
     },
     {
-      id: "dogs",
-      name: "Dogs",
-      description: "Best trail partners and camp companions a person could ask for.",
-      extra: "",
-      folder: "assets/personal/dogs",
-      images: [
-        "20190713_211531.png", "20220704_210233.png", "20220922_085254.png",
-        "69913018221__33709BAF-369A-406C-A857-3544F815E78E.png",
-        "IMG_0595.jpg", "IMG_1212.jpg", "IMG_1867.jpg",
-        "IMG_20220921_212338_670.png", "IMG_4880.png", "IMG_5763.png",
-        "IMG_6077.png", "received_410629091253276.png"
-      ],
-      captions: {}
-    },
-    {
       // groupStart adds a heading above this category in the rendered page.
       groupStart: { name: "Adventures", blurb: "Where the trips and trails have taken me — mountains, lakes, coastlines, and open plains." },
       id: "rocky-mountains",
       name: "Rocky Mountains",
       description: "Peaks, trails, and big skies out west.",
       extra: "",
+      icon: "region-icon.png",
       folder: "assets/personal/rocky-mountains",
       images: [
         "20220825_094327.JPG", "20220825_095352.JPG", "20220825_120103.png",
@@ -303,8 +289,9 @@
     {
       id: "the-great-lakes",
       name: "The Great Lakes",
-      description: "Shorelines and water close to home.",
+      description: "Shorelines, water, and trails close to home.",
       extra: "",
+      icon: "region-icon.png",
       folder: "assets/personal/great-lakes",
       images: [
         "20180317_120647.png", "20181229_154323.png", "20190502_114546.png",
@@ -322,8 +309,9 @@
     {
       id: "the-northeast",
       name: "The Northeast",
-      description: "Trips through the northeastern United States.",
+      description: "Trips from the time I lived in the northeastern United States.",
       extra: "",
+      icon: "region-icon.png",
       folder: "assets/personal/northeast",
       images: [
         "IMG_3977.png", "IMG_5901.png", "IMG_5927.JPG", "IMG_5980.jpg",
@@ -339,11 +327,28 @@
       name: "The Prairies",
       description: "Wide-open prairie landscapes.",
       extra: "",
+      icon: "region-icon.png",
       folder: "assets/personal/prairies",
       images: [
         "20190519_200314.png", "20210901_105514.png", "20220409_190412.png",
         "20220410_195547.png", "IMG_7793.png", "IMG_7837.png",
         "IMG_7847.png", "IMG_8189.png", "Image 1.png", "Image 2.png"
+      ],
+      captions: {}
+    },
+    {
+      dividerBefore: true,
+      id: "dogs",
+      name: "Dogs",
+      description: "The good boys and girls throughout my life.",
+      extra: "",
+      folder: "assets/personal/dogs",
+      images: [
+        "20190713_211531.png", "20220704_210233.png", "20220922_085254.png",
+        "69913018221__33709BAF-369A-406C-A857-3544F815E78E.png",
+        "IMG_0595.jpg", "IMG_1212.jpg", "IMG_1867.jpg",
+        "IMG_20220921_212338_670.png", "IMG_4880.png", "IMG_5763.png",
+        "IMG_6077.png", "received_410629091253276.png"
       ],
       captions: {}
     }
@@ -365,6 +370,15 @@
     const frag = document.createDocumentFragment();
 
     GALLERIES.forEach(function (cat, catIndex) {
+      // Optional plain divider line above this category.
+      if (cat.dividerBefore) {
+        const dv = document.createElement("div");
+        dv.className = "divider";
+        dv.setAttribute("aria-hidden", "true");
+        dv.textContent = "⸻";
+        frag.appendChild(dv);
+      }
+
       // Optional group heading above this category.
       if (cat.groupStart) {
         const gh = document.createElement("div");
@@ -406,6 +420,15 @@
         pe.className = "cat-extra";
         pe.textContent = cat.extra;
         desc.appendChild(pe);
+      }
+      if (cat.icon) {
+        const icon = document.createElement("img");
+        icon.className = "cat-icon";
+        icon.loading = "lazy";
+        icon.src = cat.folder.split("/").map(encodeURIComponent).join("/") + "/" + encodeURIComponent(cat.icon);
+        icon.alt = "";
+        icon.setAttribute("aria-hidden", "true");
+        desc.appendChild(icon);
       }
       const count = document.createElement("p");
       count.className = "cat-count";

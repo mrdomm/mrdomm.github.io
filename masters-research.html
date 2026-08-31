@@ -69,8 +69,17 @@
     .meta-line { font-size: .82rem; color: var(--muted); margin-top: 1rem; }
     .meta-line strong { font-weight: 650; }
 
-    section.block { padding: 2.1rem 0; border-top: 1px solid var(--line); scroll-margin-top: 5.5rem; }
+    section.block { padding: 1.4rem 0; scroll-margin-top: 5.5rem; }
+    #group { border-top: 1px solid var(--line); padding-top: 2.1rem; margin-top: .7rem; }
     .block h2 { font-size: 1.4rem; font-weight: 650; letter-spacing: .01em; margin-bottom: .9rem; }
+    /* Major part divider ("What the group works on" / "What I do") */
+    .major-heading { scroll-margin-top: 5.5rem; margin-top: 2.75rem; padding-top: 1.6rem; border-top: 2px solid var(--leather); }
+    .major-heading:first-of-type { margin-top: 1.5rem; }
+    .major-heading .major-eyebrow { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--leather); }
+    .major-heading h2 { font-size: 1.9rem; font-weight: 650; letter-spacing: -.01em; margin: .2rem 0 .35rem; }
+    .major-heading p { font-size: .98rem; opacity: .9; max-width: 44rem; }
+    /* Sections that follow a major heading shouldn't add their own top rule right under it. */
+    .major-heading + section.block { border-top: none; padding-top: 1rem; }
     .block h3 { font-size: 1rem; font-weight: 650; margin: 1.1rem 0 .35rem; }
     .block p { font-size: .96rem; opacity: .92; max-width: 44rem; }
     .block p + p { margin-top: .7rem; }
@@ -94,11 +103,15 @@
     /* Supervisor / group */
     .person { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem 1.1rem; border: 1px solid var(--line); border-radius: .6rem; background: rgba(255,255,255,.5); max-width: 44rem; }
     .person img { width: 5rem; height: 7rem; border-radius: .45rem; object-fit: cover; object-position: center top; flex-shrink: 0; border: 1px solid var(--line); background: #fff; }
+    .person img.face-top { object-position: center 18%; }
     .person .person-body h3 { margin: 0 0 .15rem; font-size: 1.02rem; }
     .person .role { font-size: .78rem; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; color: var(--leather); margin-bottom: .35rem; }
     .person .person-body p { font-size: .88rem; }
     .person a { text-decoration: none; }
     .person a:hover { text-decoration: underline; }
+    .people { display: grid; gap: .9rem; margin-top: .5rem; max-width: 44rem; }
+    .person-initials { width: 5rem; height: 7rem; border-radius: .45rem; flex-shrink: 0; display: grid; place-items: center; background: var(--khaki); border: 1px solid var(--line); font-weight: 700; font-size: 1.15rem; color: var(--leather); }
+    .committee-lede { font-size: .95rem; opacity: .92; max-width: 44rem; margin-bottom: 1rem; }
 
     .status-tag { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--leather); border: 1px solid var(--line); border-radius: 1rem; padding: .15rem .6rem; margin-bottom: .7rem; }
 
@@ -112,14 +125,7 @@
 </head>
 <body id="top">
   <header>
-    <nav>
-      <a href="Michael_Domm_Resume_2026.pdf" target="_blank" rel="noopener">resume</a>
-      <a href="mailto:mdomm@uwaterloo.ca">email me</a>
-      <a href="https://scholar.google.ca/citations?user=C4fVWxsAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
-      <a href="https://www.linkedin.com/in/mike-domm" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://mrdomm.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
-    </nav>
-    <nav aria-label="Primary">
+    <nav aria-label="Primary" style="margin-left:auto;">
       <a href="index.html">Home</a>
       <span class="navdrop" data-navdrop>
         <button type="button" class="navdrop-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="research-menu">Research <span class="caret" aria-hidden="true"></span></button>
@@ -135,14 +141,8 @@
 
   <nav class="section-nav" aria-label="Jump to section">
     <div class="content wide section-nav-inner">
-      <a href="#question">Research Question</a>
-      <a href="#why">Why Entangled Photons</a>
-      <a href="#sources">Quantum-Dot Sources</a>
-      <a href="#device">Device Engineering</a>
-      <a href="#integration">Integration</a>
-      <a href="#methods">Methods</a>
-      <a href="#group">Group</a>
-      <a href="#status">Status</a>
+      <a href="#group-work">What the group works on</a>
+      <a href="#my-work">What I do</a>
     </div>
   </nav>
 
@@ -160,6 +160,12 @@
         Supervisor: <a href="https://uwaterloo.ca/electrical-computer-engineering/profile/mreimer" target="_blank" rel="noopener noreferrer">Prof. Michael E. Reimer</a> · 2025 – present
       </p>
     </section>
+
+    <div class="major-heading" id="group-work">
+      <p class="major-eyebrow">Part 1</p>
+      <h2>What the group works on</h2>
+      <p>The bigger scientific picture my lab pursues: building bright, high-quality entangled-photon sources and the path toward scalable quantum photonic systems.</p>
+    </div>
 
     <section id="question" class="block" aria-labelledby="question-h">
       <h2 id="question-h">The research question</h2>
@@ -213,9 +219,15 @@
       <p>Making the source bright, spectrally tunable, and reproducible is a deliberate step in that direction: those are exactly the properties that let independent devices be matched and combined. Integration into scalable photonic platforms is the longer-term goal that motivates the device work rather than a task I have completed, and it's the direction I'm building toward.</p>
     </section>
 
+    <div class="major-heading" id="my-work">
+      <p class="major-eyebrow">Part 2</p>
+      <h2>What I do</h2>
+      <p>My specific contribution within that effort — the hands-on fabrication, testing, and characterization, plus who I work with and where things stand.</p>
+    </div>
+
     <section id="methods" class="block" aria-labelledby="methods-h">
       <h2 id="methods-h">How I do the work</h2>
-      <p>The project spans the full arc from making devices to measuring quantum light. My hands-on contribution is the nanofabrication and testing of the electrode nanostructures. The quantum dots themselves are grown by collaborators at the National Research Council (NRC), and an established deterministic transfer process places them at the University of Waterloo's Quantum-Nano Fabrication and Characterization Facility (QNFCF).</p>
+      <p>The project spans the full arc from making devices to measuring quantum light. My hands-on contribution is the nanofabrication and testing of the electrode nanostructures. The quantum dots themselves are grown by collaborators at the National Research Council (NRC), and an established deterministic transfer process places them at the University of Waterloo's <a href="https://qnfcf.uwaterloo.ca" target="_blank" rel="noopener noreferrer">Quantum-Nano Fabrication and Characterization Facility (QNFCF)</a>.</p>
 
       <h3>Fabrication</h3>
       <p>I'm certified on the cleanroom nanofabrication tools at QNFCF and use them to build the electrode structures. Techniques include:</p>
@@ -228,49 +240,55 @@
 
       <h3>Simulation &amp; modelling</h3>
       <p>I draw on electromagnetic and optical modelling to inform device design and interpret measurements. My simulation toolkit includes FDTD (finite-difference time-domain) electromagnetic simulation and transfer-matrix methods, along with Python for data analysis.</p>
-
-      <h3>Experimental characterization</h3>
-      <p>On the measurement side, characterizing single and entangled photons from these sources involves cryogenic optical setups (the dots are cooled to very low temperatures), laser excitation and careful optical alignment, single-photon detection, and photon-correlation measurements to assess indistinguishability, pair-extraction efficiency, and entanglement quality.</p>
     </section>
 
     <section id="group" class="block" aria-labelledby="group-h">
-      <h2 id="group-h">Supervisor &amp; group</h2>
-      <p>I work in the Quantum Photonic Devices Lab at the Institute for Quantum Computing, University of Waterloo.</p>
-      <div class="person">
-        <img src="assets/committee/mreimer.png" alt="Prof. Michael E. Reimer">
-        <div class="person-body">
-          <h3><a href="https://uwaterloo.ca/electrical-computer-engineering/profile/mreimer" target="_blank" rel="noopener noreferrer">Prof. Michael E. Reimer</a></h3>
-          <p class="role">M.Sc. Supervisor</p>
-          <p>Leads the <a href="https://www.qpdlab.com" target="_blank" rel="noopener noreferrer">Quantum Photonic Devices Lab</a>. The electrically tunable nanowire quantum-dot device I'm building is based on a scheme he proposed and simulated. For details on my full advisory committee, see the <a href="research.html">research overview</a>.</p>
+      <h2 id="group-h">Supervision &amp; committee</h2>
+      <p class="committee-lede">My M.Sc. advisory committee consists of my supervisor, one faculty member from the Department of Physics and Astronomy, and one faculty member from another University of Waterloo department. I also work day to day with a postdoctoral researcher in the group.</p>
+      <div class="people">
+        <div class="person">
+          <img src="assets/committee/mreimer.png" alt="Prof. Michael E. Reimer">
+          <div class="person-body">
+            <h3><a href="https://uwaterloo.ca/electrical-computer-engineering/profile/mreimer" target="_blank" rel="noopener noreferrer">Prof. Michael E. Reimer</a></h3>
+            <p class="role">Supervisor</p>
+            <p>Leads the Quantum Photonic Devices Lab. The electrically tunable nanowire quantum-dot device I'm building is based on a scheme he proposed and simulated.</p>
+          </div>
+        </div>
+        <div class="person">
+          <img class="face-top" src="assets/committee/Stephen-Harrigan.png" alt="Stephen Harrigan">
+          <div class="person-body">
+            <h3>Dr. Stephen Harrigan</h3>
+            <p class="role">Postdoctoral researcher · day-to-day mentor</p>
+            <p>A postdoctoral researcher in the group I work closely with day to day. He earned his PhD in this group in 2026.</p>
+          </div>
+        </div>
+        <div class="person">
+          <img src="assets/committee/francois-sfigakis.jpg" alt="Prof. François Sfigakis">
+          <div class="person-body">
+            <h3><a href="https://uwaterloo.ca/institute-for-quantum-computing/profiles/francois-sfigakis" target="_blank" rel="noopener noreferrer">Prof. François Sfigakis</a></h3>
+            <p class="role">Committee member · University of Waterloo</p>
+            <p>A member of my advisory committee and a faculty member at the University of Waterloo, based at the Institute for Quantum Computing.</p>
+          </div>
+        </div>
+        <div class="person">
+          <img src="assets/committee/kazi-rajibul-islam.jpg" alt="Prof. Kazi Rajibul Islam">
+          <div class="person-body">
+            <h3><a href="https://uwaterloo.ca/institute-for-quantum-computing/profiles/kazi-rajibul-islam" target="_blank" rel="noopener noreferrer">Prof. Kazi Rajibul Islam</a></h3>
+            <p class="role">Committee member · Physics &amp; Astronomy</p>
+            <p>A member of my advisory committee and a faculty member in the Department of Physics and Astronomy, leading the <a href="https://qiti.iqc.uwaterloo.ca" target="_blank" rel="noopener noreferrer">QITI Lab</a>.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="status" class="block" aria-labelledby="status-h">
-      <h2 id="status-h">Current status &amp; where it's heading</h2>
-      <span class="status-tag">Ongoing research</span>
-      <p>My master's research is in progress. I'm focused on fabricating the electrode nanostructures and testing whether electrical control can improve entanglement fidelity and single-photon indistinguishability while keeping photon-pair extraction high.</p>
-      <p>Looking ahead, demonstrating these improvements would be a meaningful step toward matching two independent quantum-dot sources — a prerequisite for entanglement swapping, and in turn for scalable quantum repeaters and future quantum networks. As the work evolves through my degree, I'll update this page to reflect where the research actually stands.</p>
-      <div class="goal-list-wrap">
-        <ol class="goal-list">
-          <li>Fabricate and characterize the electrode nanostructures around nanowire quantum dots.</li>
-          <li>Use electrical control (Stark tuning + charge stabilization) to improve photon quality and enable spectral matching.</li>
-          <li>Keep photon-pair extraction high while doing so — the combination needed for entanglement swapping.</li>
-        </ol>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
     <div class="content">
       <p class="footer-name">Michael Domm</p>
-      <nav class="footer-links" aria-label="Contact and site links">
-        <a href="mailto:mdomm@uwaterloo.ca">Email</a>
+      <nav class="footer-links" aria-label="Site links">
         <a href="research.html">Research overview</a>
         <a href="undergraduate-research.html">Undergraduate research</a>
-        <a href="Michael_Domm_Resume_2026.pdf" target="_blank" rel="noopener">Resume</a>
-        <a href="https://scholar.google.ca/citations?user=C4fVWxsAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
-        <a href="https://www.linkedin.com/in/mike-domm" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </nav>
       <p class="footer-note">Quantum photonics · metasurfaces · nanofabrication</p>
     </div>

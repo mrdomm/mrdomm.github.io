@@ -25,14 +25,24 @@
       --content: 46rem;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; background: var(--bg); }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-    body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: linear-gradient(165deg, var(--bg) 0%, var(--bg-deep) 100%); line-height: 1.5; font-size: 15px; min-height: 100vh; }
+    body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: transparent; line-height: 1.5; font-size: 15px; min-height: 100vh; }
+
+    /* Fixed, constantly-blurred hero photo behind the whole page.
+       The blur is a little larger than the visible area so the blurred edges
+       don't reveal the page background at the borders. */
+    .hero-bg { position: fixed; inset: -20px; z-index: -2; background-image: url("assets/hero/research-hero.jpg"); background-size: cover; background-position: center 38%; background-repeat: no-repeat; filter: blur(9px); }
+    /* Constant, light colour wash over the photo so text stays readable. */
+    .hero-wash { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: rgba(237,228,211,.45); }
+    /* Solid base colour behind the photo (fallback). */
+    .page-bg { position: fixed; inset: 0; z-index: -3; background: linear-gradient(165deg, var(--bg) 0%, var(--bg-deep) 100%); }
+
     a { color: inherit; text-underline-offset: 3px; }
     a:hover { color: var(--leather); }
     :focus-visible { outline: 2px solid var(--leather); outline-offset: 2px; border-radius: .2rem; }
 
-    header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.85rem 1.5rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(255,255,255,.55); backdrop-filter: blur(8px); z-index: 20; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.85rem 1.5rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: #faf7f1; z-index: 20; }
     header nav { display: flex; gap: 1.15rem; flex-wrap: wrap; align-items: center; }
     header a { font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; color: var(--muted); opacity: .9; }
     header a:hover { opacity: 1; color: var(--leather); }
@@ -56,11 +66,13 @@
     .content { max-width: var(--content); margin: 0 auto; padding: 0 1.25rem; }
     .wide { max-width: 60rem; }
 
-    .intro { padding: 3rem 0 1.5rem; }
+    .intro { padding: 4rem 0 2rem; }
+    .intro-box { border: 1px solid var(--line); border-radius: .7rem; background: rgba(251,247,239,.82); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); padding: 1.5rem 1.6rem; box-shadow: 0 6px 24px rgba(48,32,22,.18); text-align: center; }
+    .section-box { border: 1px solid var(--line); border-radius: .7rem; background: rgba(251,247,239,.82); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); padding: 1.6rem 1.7rem; box-shadow: 0 6px 24px rgba(48,32,22,.14); }
     .intro h1 { font-size: clamp(1.7rem, 5vw, 2.1rem); font-weight: 650; letter-spacing: -.02em; margin-bottom: .55rem; }
-    .intro .lede { font-size: 1.05rem; opacity: .92; max-width: 44rem; }
+    .intro .lede { font-size: 1.05rem; opacity: .92; max-width: 44rem; margin: 0 auto; }
     .intro .lede p + p { margin-top: .7rem; }
-    .focus-tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.25rem; }
+    .focus-tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.25rem; justify-content: center; }
     .focus-tags span { font-size: .74rem; font-weight: 600; letter-spacing: .03em; padding: .3rem .7rem; border: 1px solid var(--line); border-radius: 1rem; background: rgba(255,255,255,.5); color: var(--muted); }
 
     section.block { padding: 2.25rem 0; border-top: 1px solid var(--line); scroll-margin-top: 5rem; }
@@ -83,7 +95,7 @@
     .rcard-cta:hover .arrow { transform: translateX(3px); }
 
     /* Timeline */
-    .timeline { margin-top: .5rem; position: relative; }
+    .timeline { margin: .5rem auto 0; position: relative; max-width: 32rem; }
     .tl-item { position: relative; padding: 0 0 1.6rem 2.1rem; border-left: 2px solid var(--line); }
     .tl-item:last-child { border-left-color: transparent; padding-bottom: 0; }
     .tl-item::before { content: ""; position: absolute; left: -0.5rem; top: .15rem; width: .85rem; height: .85rem; border-radius: 50%; background: var(--leather); border: 2px solid var(--bg); }
@@ -95,18 +107,17 @@
     .tl-item a.tl-link:hover { text-decoration: underline; }
 
     /* Compact skills */
-    .skills-grid { display: grid; gap: 1rem 1.5rem; grid-template-columns: 1fr; margin-top: .5rem; }
-    @media (min-width: 40em) { .skills-grid { grid-template-columns: repeat(3, 1fr); } }
-    .skill-block h3 { font-size: .8rem; font-weight: 650; margin-bottom: .45rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-    .skill-block ul { list-style: none; }
-    .skill-block li { font-size: .88rem; opacity: .9; padding: .12rem 0; }
 
+    .pub-group { border: 1px solid var(--line); border-radius: .55rem; background: rgba(255,255,255,.6); padding: 1rem 1.15rem; margin-top: 1rem; }
+    .pub-subhead { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--leather); margin: 1.4rem 0 .35rem; }
+    .pub-subhead.divided { border-top: 1px solid rgba(74,67,58,.2); padding-top: 1.4rem; margin-top: 1.5rem; }
     .pub-list { list-style: none; margin-top: .25rem; }
-    .pub-list li { padding: .7rem 0; border-bottom: 1px solid rgba(74,67,58,.15); font-size: .92rem; }
-    .pub-list li:last-child { border-bottom: none; }
-    .pub-list .pub-venue { color: var(--muted); font-size: .82rem; }
+    .pub-list li { padding: .55rem 0; font-size: .92rem; }
+    .pub-list .pub-title { font-weight: 600; }
+    .pub-list .pub-venue { color: var(--muted); font-size: .82rem; margin-top: .2rem; }
+    .pub-scholar { margin-top: 1.1rem; font-size: .92rem; }
 
-    .site-footer { border-top: 1px solid var(--line); background: rgba(255,255,255,.4); padding: 2.25rem 0 2.5rem; text-align: center; margin-top: 1rem; }
+    .site-footer { border-top: 1px solid var(--line); background: var(--bg-deep); padding: 2.25rem 0 2.5rem; text-align: center; margin-top: 1rem; position: relative; z-index: 1; }
     .site-footer .footer-name { font-size: 1rem; font-weight: 650; letter-spacing: -.01em; margin-bottom: .85rem; }
     .site-footer .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem 1.35rem; margin-bottom: .95rem; font-size: .92rem; }
     .site-footer .footer-links a { text-decoration: none; opacity: .9; }
@@ -115,13 +126,16 @@
   </style>
 </head>
 <body id="top">
+  <!-- Hero background layers: solid page bg, photo, then a colour wash that dissolves the photo into the page -->
+  <div class="page-bg" aria-hidden="true"></div>
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-wash" aria-hidden="true"></div>
+
   <header>
     <nav>
-      <a href="Michael_Domm_Resume_2026.pdf" target="_blank" rel="noopener">resume</a>
-      <a href="mailto:mdomm@uwaterloo.ca">email me</a>
+      <a href="masters-research.html">Master&rsquo;s Research</a>
+      <a href="undergraduate-research.html">Undergraduate Research</a>
       <a href="https://scholar.google.ca/citations?user=C4fVWxsAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
-      <a href="https://www.linkedin.com/in/mike-domm" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://mrdomm.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
     <nav aria-label="Primary">
       <a href="index.html">Home</a>
@@ -139,25 +153,27 @@
 
   <main class="content wide">
     <section class="intro">
-      <h1>Research</h1>
-      <div class="lede">
-        <p>I'm an experimental physicist working at the intersection of light and nanoscale devices. My research spans quantum photonics, integrated photonics, nanophotonics, metasurfaces, nonlinear optics, experimental optical systems, and nanofabrication.</p>
-        <p>Over time my focus has evolved from shaping light with nanostructures toward building the devices that generate and control quantum light. Below is a quick tour — dive into the detailed pages for the full story.</p>
-      </div>
-      <div class="focus-tags" aria-label="Research areas">
-        <span>Quantum photonics</span>
-        <span>Integrated photonics</span>
-        <span>Nanophotonics</span>
-        <span>Metasurfaces</span>
-        <span>Nonlinear optics</span>
-        <span>Experimental optical systems</span>
-        <span>Nanofabrication</span>
+      <div class="intro-box">
+        <h1>Research</h1>
+        <div class="lede">
+          <p>I'm an experimental physicist working at the intersection of light and nanoscale devices. My research spans quantum photonics, integrated photonics, nanophotonics, metasurfaces, nonlinear optics, experimental optical systems, and nanofabrication.</p>
+          <p>Over time my focus has evolved from shaping light with nanostructures toward building the devices that generate and control quantum light. Below is a quick tour — dive into the detailed pages for the full story.</p>
+        </div>
+        <div class="focus-tags" aria-label="Research areas">
+          <span>Quantum photonics</span>
+          <span>Integrated photonics</span>
+          <span>Nanophotonics</span>
+          <span>Metasurfaces</span>
+          <span>Nonlinear optics</span>
+          <span>Experimental optical systems</span>
+          <span>Nanofabrication</span>
+        </div>
       </div>
     </section>
 
     <section class="block" aria-labelledby="explore-h">
-      <h2 id="explore-h">Where I've worked</h2>
-      <p class="section-lede">Two chapters of research: my current master's in quantum photonics, and the undergraduate work in nanophotonics and nonlinear optics that led me there.</p>
+      <div class="section-box">
+      <h2 id="explore-h">Chapters of my research</h2>
       <div class="research-cards">
         <article class="rcard">
           <span class="rcard-tag">Current · 2025 – present</span>
@@ -174,11 +190,12 @@
           <a class="rcard-cta" href="undergraduate-research.html">Explore Undergraduate Research <span class="arrow" aria-hidden="true">&rarr;</span></a>
         </article>
       </div>
+      </div>
     </section>
 
     <section class="block" aria-labelledby="timeline-h">
+      <div class="section-box">
       <h2 id="timeline-h">Research timeline</h2>
-      <p class="section-lede">How my research interests developed toward quantum photonics and integrated photonic systems.</p>
       <div class="timeline">
         <div class="tl-item">
           <div class="tl-year">2023</div>
@@ -199,70 +216,47 @@
           <a class="tl-link" href="masters-research.html">See the work &rarr;</a>
         </div>
       </div>
-    </section>
-
-    <section class="block" aria-labelledby="skills-h">
-      <h2 id="skills-h">Techniques</h2>
-      <p class="section-lede">A compact view of what I work with. The detailed pages describe how these were actually used.</p>
-      <div class="skills-grid">
-        <div class="skill-block">
-          <h3>Quantum &amp; optical</h3>
-          <ul>
-            <li>Quantum optics</li>
-            <li>Single-photon detection</li>
-            <li>Cryogenic optics</li>
-            <li>Optical characterization</li>
-          </ul>
-        </div>
-        <div class="skill-block">
-          <h3>Nanofabrication</h3>
-          <ul>
-            <li>E-beam &amp; UV lithography</li>
-            <li>RIE (reactive-ion etching)</li>
-            <li>PECVD · EBPVD</li>
-            <li>SEM · wet processing</li>
-          </ul>
-        </div>
-        <div class="skill-block">
-          <h3>Simulation &amp; computing</h3>
-          <ul>
-            <li>FDTD (Lumerical)</li>
-            <li>Transfer-matrix methods</li>
-            <li>Python</li>
-            <li>MATLAB</li>
-          </ul>
-        </div>
       </div>
     </section>
 
     <section class="block" aria-labelledby="pubs-h">
+      <div class="section-box">
       <h2 id="pubs-h">Publications &amp; talks</h2>
-      <ul class="pub-list">
-        <li>
-          Two manuscripts in preparation (co-author), from metasurface research in the Capasso Lab at Harvard.
-          <div class="pub-venue">In preparation</div>
-        </li>
-        <li>
-          Conference presentation, CLEO 2025.
-          <div class="pub-venue">Conference on Lasers and Electro-Optics</div>
-        </li>
-      </ul>
-      <p style="margin-top:1rem; font-size:.92rem;">Full list on my <a href="https://scholar.google.ca/citations?user=C4fVWxsAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>.</p>
+      <p class="pub-scholar" style="margin-top:0; margin-bottom:1.25rem;">Full and updated list on my <a href="https://scholar.google.ca/citations?user=C4fVWxsAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>.</p>
+
+      <div class="pub-group">
+        <h3 class="pub-subhead" style="margin-top:0;">Manuscripts in preparation</h3>
+        <ul class="pub-list">
+          <li>
+            <span class="pub-title">Expanding the Capacity Limit of Metasurface Zero-Order Jones Matrices</span>
+            <div class="pub-venue">Co-author · in preparation</div>
+          </li>
+          <li>
+            <span class="pub-title">Nonlinear Tuning and Coupling of Metasurface Resonances</span>
+            <div class="pub-venue">Co-author · in preparation</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="pub-group">
+        <h3 class="pub-subhead" style="margin-top:0;">Conference presentations</h3>
+        <ul class="pub-list">
+          <li>
+            <span class="pub-title">BaTiO<sub>3</sub>/TiO<sub>2</sub> Hybrid Metasurface for Free-Space Electro-Optic Modulators</span>
+            <div class="pub-venue">CLEO 2025 · Conference on Lasers and Electro-Optics</div>
+          </li>
+        </ul>
+      </div>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="content">
       <p class="footer-name">Michael Domm</p>
-      <nav class="footer-links" aria-label="Contact and site links">
-        <a href="mailto:mdomm@uwaterloo.ca">Email</a>
-        <a href="index.html">Home</a>
+      <nav class="footer-links" aria-label="Site links">
         <a href="masters-research.html">Master&rsquo;s research</a>
         <a href="undergraduate-research.html">Undergraduate research</a>
-        <a href="Michael_Domm_Resume_2026.pdf" target="_blank" rel="noopener">Resume</a>
-        <a href="https://scholar.google.ca/citations?user=C4fVWxsAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
-        <a href="https://www.linkedin.com/in/mike-domm" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://mrdomm.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
       </nav>
       <p class="footer-note">Quantum photonics · metasurfaces · nanofabrication</p>
     </div>
