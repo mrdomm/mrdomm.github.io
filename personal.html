@@ -64,6 +64,18 @@
     .intro .role-line { font-size: 1.02rem; font-weight: 500; opacity: .95; margin-bottom: 1rem; }
     .intro .bio { font-size: 1rem; opacity: .92; max-width: 40rem; margin: 0 auto; text-align: left; border: 1px solid var(--line); border-radius: .6rem; background: rgba(255,255,255,.5); padding: 1.15rem 1.35rem; box-shadow: 0 2px 10px rgba(92,64,51,.06); }
     .intro .bio p + p { margin-top: .85rem; }
+
+    /* Casual "about me" snapshot cards */
+    .about-snapshot { display: grid; gap: 1rem; grid-template-columns: 1fr; margin-top: 1.75rem; }
+    @media (min-width: 46em) { .about-snapshot { grid-template-columns: repeat(3, 1fr); } }
+    .snap-card { border: 1px solid var(--line); border-radius: .6rem; background: rgba(255,255,255,.5); padding: 1rem 1.15rem; box-shadow: 0 2px 10px rgba(92,64,51,.06); }
+    .snap-card h2 { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--leather); margin-bottom: .6rem; }
+    .snap-card ul { list-style: none; }
+    .snap-card li { font-size: .92rem; opacity: .92; padding: .12rem 0; }
+    .snap-card p { font-size: .92rem; opacity: .92; }
+    .snap-card .chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .snap-card .chips li { font-size: .78rem; font-weight: 600; padding: .28rem .6rem; border: 1px solid var(--line); border-radius: 1rem; background: rgba(255,255,255,.6); color: var(--muted); }
+
     .group-heading { max-width: 60rem; margin: 2.75rem auto .25rem; padding: 0 1.25rem; scroll-margin-top: 6.5rem; }
     .group-heading h2 { font-size: 1.65rem; font-weight: 650; letter-spacing: .02em; text-transform: uppercase; color: var(--text); }
     .group-heading p { font-size: .92rem; opacity: .82; margin-top: .3rem; }
@@ -106,24 +118,38 @@
     .site-footer .footer-note { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); opacity: .7; }
 
     /* Lightbox */
-    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; background: rgba(20, 16, 12, .92); padding: clamp(.75rem, 3vw, 2.5rem); }
+    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; background: rgba(20, 16, 12, .93); padding: clamp(.75rem, 3vw, 2.5rem); }
     .lightbox.open { display: flex; }
-    .lb-stage { position: relative; max-width: 100%; max-height: 100%; display: flex; flex-direction: column; align-items: center; gap: .6rem; }
-    .lb-img { max-width: min(92vw, 1100px); max-height: 82vh; width: auto; height: auto; object-fit: contain; border-radius: .35rem; box-shadow: 0 10px 40px rgba(0,0,0,.5); background: #100c08; }
-    .lb-caption { color: #f2ece1; font-size: .85rem; opacity: .85; text-align: center; min-height: 1rem; max-width: 60ch; }
-    .lb-btn { position: absolute; background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; cursor: pointer; display: grid; place-items: center; transition: background .15s ease; -webkit-tap-highlight-color: transparent; }
-    .lb-btn:hover, .lb-btn:focus-visible { background: rgba(255,255,255,.28); }
-    .lb-close { top: -3.1rem; right: 0; width: 2.6rem; height: 2.6rem; font-size: 1.35rem; }
-    @media (max-width: 40em) { .lb-close { top: -3rem; } }
-    .lb-prev, .lb-next { top: 50%; transform: translateY(-50%); width: 3rem; height: 3rem; font-size: 1.5rem; }
-    .lb-prev { left: -3.75rem; }
-    .lb-next { right: -3.75rem; }
-    @media (max-width: 60em) {
-      .lb-prev { left: .35rem; }
-      .lb-next { right: .35rem; }
-      .lb-prev, .lb-next { background: rgba(0,0,0,.45); }
+    /* Stage: image + side info panel on desktop; stacked on mobile */
+    .lb-stage { display: flex; flex-direction: column; align-items: stretch; gap: 1rem; max-width: 100%; max-height: 100%; width: auto; }
+    .lb-imgwrap { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 0; }
+    .lb-img { max-width: min(90vw, 1000px); max-height: 82vh; width: auto; height: auto; object-fit: contain; border-radius: .35rem; box-shadow: 0 10px 40px rgba(0,0,0,.5); background: #100c08; }
+    .lb-info { color: #f2ece1; text-align: center; }
+    .lb-info .lb-title { font-size: 1.05rem; font-weight: 650; margin-bottom: .2rem; }
+    .lb-info .lb-title:empty { display: none; }
+    .lb-info .lb-meta { font-size: .84rem; opacity: .8; }
+    .lb-info .lb-meta:empty { display: none; }
+    .lb-info .lb-text { font-size: .88rem; opacity: .9; margin-top: .5rem; }
+    .lb-info .lb-text:empty { display: none; }
+    .lb-info .lb-counter { font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; opacity: .6; margin-top: .75rem; }
+
+    @media (min-width: 56em) {
+      .lb-stage { flex-direction: row; align-items: center; gap: 1.5rem; }
+      .lb-img { max-width: min(66vw, 900px); max-height: 84vh; }
+      .lb-info { text-align: left; width: 17rem; flex-shrink: 0; align-self: center; border-left: 1px solid rgba(255,255,255,.18); padding-left: 1.5rem; }
+      .lb-info .lb-counter { margin-top: 1.1rem; }
     }
-    .lb-counter { position: absolute; top: -3rem; left: 0; color: #f2ece1; font-size: .8rem; letter-spacing: .06em; opacity: .8; }
+
+    .lb-btn { position: fixed; background: rgba(255,255,255,.14); color: #fff; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; cursor: pointer; display: grid; place-items: center; transition: background .15s ease; -webkit-tap-highlight-color: transparent; z-index: 2; }
+    .lb-btn:hover, .lb-btn:focus-visible { background: rgba(255,255,255,.3); }
+    .lb-close { top: 1rem; right: 1rem; width: 2.75rem; height: 2.75rem; font-size: 1.5rem; }
+    .lb-prev, .lb-next { top: 50%; transform: translateY(-50%); width: 3rem; height: 3rem; font-size: 1.6rem; }
+    .lb-prev { left: 1rem; }
+    .lb-next { right: 1rem; }
+    @media (min-width: 56em) {
+      .lb-prev { left: 1.5rem; }
+      .lb-next { right: 1.5rem; }
+    }
   </style>
 </head>
 <body id="top">
@@ -156,11 +182,34 @@
 
   <main class="content wide">
     <section class="intro">
-      <h1>Beyond the lab</h1>
-      <p class="role-line">Traveler · outdoors · dog person</p>
+      <h1>Life outside the lab</h1>
+      <p class="role-line">Outdoors · road trips · dog person</p>
       <div class="bio">
-        <p>Physics is what I do, but it isn't the whole story. Away from the cleanroom I'm usually outside — chasing mountains, lakes, and open road — or spending time with the dogs.</p>
-        <p>A few photos from along the way, grouped by where I've been and what I get up to. Click any photo to view it larger.</p>
+        <p>Physics grad student by day, but that's not the whole story. Most of my free time goes to being outside — hiking, fishing, camping, and finding excuses for the next road trip. I'd rather be out doing something with friends than stuck inside, usually with a dog along for the ride.</p>
+        <p>When I'm home you'll probably find me cooking something or planning the next trip. Here's a bit of what that looks like.</p>
+      </div>
+    </section>
+
+    <!-- Quick "about me" snapshot -->
+    <section class="about-snapshot" aria-label="About me">
+      <div class="snap-card">
+        <h2>Currently</h2>
+        <ul>
+          <li>Waterloo, Ontario</li>
+          <li>Physics graduate student</li>
+          <li>Usually planning the next trip</li>
+        </ul>
+      </div>
+      <div class="snap-card">
+        <h2>I like</h2>
+        <ul class="chips">
+          <li>Hiking</li><li>Fishing</li><li>Camping</li><li>Road trips</li>
+          <li>Dogs</li><li>Cooking</li><li>Being outside</li>
+        </ul>
+      </div>
+      <div class="snap-card">
+        <h2>A good weekend</h2>
+        <p>A trail or a lake, a campfire, good people, and a dog nearby.</p>
       </div>
     </section>
 
@@ -172,13 +221,19 @@
 
   <!-- Lightbox (single instance, reused by all categories) -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
-    <div class="lb-stage">
-      <span class="lb-counter" id="lbCounter" aria-hidden="true"></span>
-      <button class="lb-btn lb-close" id="lbClose" type="button" aria-label="Close photo viewer">&times;</button>
-      <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="Previous photo">&#8249;</button>
-      <img class="lb-img" id="lbImg" src="" alt="">
-      <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="Next photo">&#8250;</button>
-      <p class="lb-caption" id="lbCaption"></p>
+    <button class="lb-btn lb-close" id="lbClose" type="button" aria-label="Close photo viewer">&times;</button>
+    <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="Previous photo">&#8249;</button>
+    <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="Next photo">&#8250;</button>
+    <div class="lb-stage" id="lbStage">
+      <div class="lb-imgwrap" id="lbImgwrap">
+        <img class="lb-img" id="lbImg" src="" alt="">
+      </div>
+      <aside class="lb-info" id="lbInfo">
+        <h3 class="lb-title" id="lbTitle"></h3>
+        <p class="lb-meta" id="lbMeta"></p>
+        <p class="lb-text" id="lbText"></p>
+        <p class="lb-counter" id="lbCounter" aria-hidden="true"></p>
+      </aside>
     </div>
   </div>
 
@@ -201,25 +256,28 @@
     {
       id: "hobbies",
       name: "Hobbies",
-      description: "A few of the things I get up to.",
+      description: "The stuff that fills my free time — from projects to the little things I'm into.",
       extra: "",
       folder: "assets/personal/hobbies",
       images: [
         "20191014_124921.png", "20210818_172318.png", "20220427_084547.png",
-        "20220628_063646.png", "20220703_101323.png", "20220704_120323.png",
-        "26_Original.png", "IMG_2049.png", "IMG_6107.png", "IMG_7890_Original.png"
+        "20220628_063646.png", "20220703_101323.png", "20220827_211207.JPG",
+        "26_Original.png", "IMG_0710.jpg", "IMG_2049.png", "IMG_2550.jpg",
+        "IMG_2670.jpg", "IMG_6107.png", "IMG_6717.JPEG", "IMG_7521.jpg",
+        "IMG_7890_Original.png", "IMG_8115.JPG", "IMG_9432.jpg", "Image.JPG"
       ],
       captions: {}
     },
     {
       id: "dogs",
       name: "Dogs",
-      description: "The good boys and girls.",
+      description: "Best trail partners and camp companions a person could ask for.",
       extra: "",
       folder: "assets/personal/dogs",
       images: [
         "20190713_211531.png", "20220704_210233.png", "20220922_085254.png",
         "69913018221__33709BAF-369A-406C-A857-3544F815E78E.png",
+        "IMG_0595.jpg", "IMG_1212.jpg", "IMG_1867.jpg",
         "IMG_20220921_212338_670.png", "IMG_4880.png", "IMG_5763.png",
         "IMG_6077.png", "received_410629091253276.png"
       ],
@@ -227,17 +285,18 @@
     },
     {
       // groupStart adds a heading above this category in the rendered page.
-      groupStart: { name: "Adventures", blurb: "Places I've explored — mountains, lakes, coastlines, and open plains." },
+      groupStart: { name: "Adventures", blurb: "Where the trips and trails have taken me — mountains, lakes, coastlines, and open plains." },
       id: "rocky-mountains",
       name: "Rocky Mountains",
       description: "Peaks, trails, and big skies out west.",
       extra: "",
       folder: "assets/personal/rocky-mountains",
       images: [
-        "20220825_120103.png", "20220825_120128.png", "20220826_124510.png",
-        "20220826_134032.png", "20220826_141253.png", "20220829_130601.png",
-        "20220829_154353.png", "IMG_7866.jpeg", "IMG_8231.png",
-        "IMG_8633.png", "IMG_8836.png"
+        "20220825_094327.JPG", "20220825_095352.JPG", "20220825_120103.png",
+        "20220825_120128.png", "20220826_124510.png", "20220826_134032.png",
+        "20220826_134316.JPG", "20220826_141253.png", "20220829_130601.png",
+        "20220829_154353.png", "IMG_0618.jpg", "IMG_1206.jpg", "IMG_8231.png",
+        "IMG_8633.png", "IMG_8781.jpg", "IMG_8836.png", "IMG_9799.jpg"
       ],
       captions: {}
     },
@@ -251,9 +310,12 @@
         "20180317_120647.png", "20181229_154323.png", "20190502_114546.png",
         "20191014_162247.png", "20200817_162229.png", "20200825_141532.png",
         "20200828_065227.png", "20210818_172318.png", "20210818_172325.png",
-        "20210927_190803.png", "20211212_154910.png", "20211212_161557.png",
-        "20220629_085027.png", "20220702_203456.png", "IMG_0263.png",
-        "IMG_6107.png", "IMG_6113.png"
+        "20210825_070726.JPG", "20210927_190803.png", "20211212_154910.png",
+        "20211212_161557.png", "20220629_085027.png", "20220702_203456.png",
+        "20220813_164838.JPG", "IMG_0263.png", "IMG_0318.jpg", "IMG_0434.jpg",
+        "IMG_0709.jpg", "IMG_1388.jpg", "IMG_1392.jpg", "IMG_2577.jpg",
+        "IMG_6107.png", "IMG_6113.png", "IMG_7866.jpeg",
+        "att.tyTKhFUw-UqO4GAokMeP1SLflzQUxyZJObWFwrMHKcs.JPG"
       ],
       captions: {}
     },
@@ -264,9 +326,11 @@
       extra: "",
       folder: "assets/personal/northeast",
       images: [
-        "IMG_3977.png", "IMG_5901.png", "IMG_6326.png", "IMG_6336.png",
+        "IMG_3977.png", "IMG_5901.png", "IMG_5927.JPG", "IMG_5980.jpg",
+        "IMG_6326.png", "IMG_6336.png", "IMG_6401.jpg", "IMG_6641.jpg",
         "IMG_6701.png", "IMG_6777.png", "IMG_6808.png", "IMG_6826.png",
-        "IMG_6857.png", "IMG_7219.png"
+        "IMG_6857.png", "IMG_6861.jpg", "IMG_6896.jpg", "IMG_6923.jpg",
+        "IMG_6925.jpg", "IMG_7128.jpg", "IMG_7219.png"
       ],
       captions: {}
     },
@@ -398,7 +462,9 @@
   /* ---------------- Lightbox ---------------- */
   const lb = document.getElementById("lightbox");
   const lbImg = document.getElementById("lbImg");
-  const lbCaption = document.getElementById("lbCaption");
+  const lbTitle = document.getElementById("lbTitle");
+  const lbMeta = document.getElementById("lbMeta");
+  const lbText = document.getElementById("lbText");
   const lbCounter = document.getElementById("lbCounter");
   const lbClose = document.getElementById("lbClose");
   const lbPrev = document.getElementById("lbPrev");
@@ -408,13 +474,33 @@
   let activeIdx = 0;      // current photo index within category
   let lastFocused = null; // element to restore focus to on close
 
+  // Normalize a caption entry. A caption can be a plain string (used as text)
+  // or an object { title, location, date, text }. Missing fields fall back to
+  // the category info — no fabricated details.
+  function photoInfo(cat, filename, idx) {
+    const raw = cat.captions && cat.captions[filename];
+    const info = (typeof raw === "string") ? { text: raw } : (raw || {});
+    const title = info.title || cat.name;
+    const metaParts = [];
+    if (info.location) metaParts.push(info.location);
+    if (info.date) metaParts.push(info.date);
+    return {
+      title: title,
+      meta: metaParts.join(" · "),
+      text: info.text || "",
+      alt: info.text || info.title || (cat.name + " photo " + (idx + 1))
+    };
+  }
+
   function showPhoto() {
     const cat = GALLERIES[activeCat];
     const filename = cat.images[activeIdx];
+    const info = photoInfo(cat, filename, activeIdx);
     lbImg.src = srcFor(cat, filename);
-    const cap = captionFor(cat, filename);
-    lbImg.alt = cap || (cat.name + " photo " + (activeIdx + 1));
-    lbCaption.textContent = cap;
+    lbImg.alt = info.alt;
+    lbTitle.textContent = info.title;
+    lbMeta.textContent = info.meta;
+    lbText.textContent = info.text;
     lbCounter.textContent = cat.name + " · " + (activeIdx + 1) + " / " + cat.images.length;
   }
 
@@ -447,9 +533,9 @@
   lbNext.addEventListener("click", function () { step(1); });
   lbPrev.addEventListener("click", function () { step(-1); });
 
-  // Click outside the image (on the backdrop) closes the viewer.
+  // Click outside the image/info (on the backdrop or empty stage area) closes the viewer.
   lb.addEventListener("click", function (e) {
-    if (e.target === lb || e.target.classList.contains("lb-stage")) closeLightbox();
+    if (e.target === lb || e.target.id === "lbStage" || e.target.id === "lbImgwrap") closeLightbox();
   });
 
   // Keyboard: Escape closes, arrows navigate. Keep focus trapped simply.
